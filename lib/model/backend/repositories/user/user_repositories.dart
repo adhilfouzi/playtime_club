@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../data_model/user_model.dart';
+import '../../../data_model/user_request_model.dart';
 import '../authentication/firebase_exceptionhandler.dart';
 
 class UserRepository {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../model/controller/validator.dart';
-import '../../../model/data_model/user_model.dart';
+import '../../../model/data_model/user_request_model.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/snackbar.dart';

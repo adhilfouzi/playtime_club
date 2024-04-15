@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../../model/backend/repositories/user/user_repositories.dart';
-import '../../../model/data_model/user_model.dart';
+import '../../../model/data_model/user_request_model.dart';
 import '../../../utils/portion/loadingpopup.dart';
 
 part 'signup_event.dart';
