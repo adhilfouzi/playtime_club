@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'model/backend/firebase_options.dart';
 import 'view/onboarding/boarding/splash_screen.dart';
-import 'view_model/bloc/emailverification/emailverification_bloc.dart';
 import 'view_model/bloc/signin_bloc/signin_bloc.dart';
 import 'view_model/bloc/signup_bloc/signup_bloc.dart';
 import 'view_model/checkbox_cubit.dart';
@@ -28,7 +27,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SigninBloc()),
         BlocProvider(create: (context) => CheckboxCubit()),
         BlocProvider(create: (context) => SignupBloc()),
-        BlocProvider(create: (context) => EmailVerificationBloc()),
         // Add more Bloc providers if needed
       ],
       child: MaterialApp(

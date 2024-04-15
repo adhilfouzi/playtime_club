@@ -7,9 +7,11 @@ class UserRequestModel {
   final String courtName;
   final String location;
   final String description;
+  final bool isOwner;
 
   UserRequestModel(
-      {required this.userName,
+      {required this.isOwner,
+      required this.userName,
       required this.number,
       required this.email,
       required this.courtName,
@@ -24,7 +26,21 @@ class UserRequestModel {
       'courtName': courtName,
       'location': location,
       'description': description,
+      'isOwner': isOwner,
     };
+  }
+
+  // Factory constructor to create UserModel from JSON data
+  factory UserRequestModel.fromJson(Map<String, dynamic> json) {
+    return UserRequestModel(
+      userName: json['userName'],
+      number: json['number'],
+      email: json['email'],
+      courtName: json['courtName'],
+      location: json['location'],
+      description: json['description'],
+      isOwner: json['isOwner'],
+    );
   }
 
   // helper function to fotmat phone number

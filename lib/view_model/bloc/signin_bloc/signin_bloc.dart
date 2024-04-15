@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,17 +18,16 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
     try {
       Navigator.of(event.context)
           .push(MaterialPageRoute(builder: (context) => const LoadingPopup()));
-      User? user = await AuthenticationRepository()
+      bool user = await AuthenticationRepository()
           .signInWithEmailAndPassword(event.email, event.password);
 
-      if (user != null) {
+      if (user) {
         emit(SigninSuccess());
       } else {
         log("Some error happened");
       }
     } catch (e) {
-      emit(SigninError(
-          error: "Something went wrong. Please try again.\n ${e.toString()}"));
+      emit(SigninError(error: e.toString()));
     }
   }
 }

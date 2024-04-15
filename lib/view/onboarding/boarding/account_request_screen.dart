@@ -49,7 +49,7 @@ class AccountRequestScreen extends StatelessWidget {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                   CustomSnackBar.showSuccess(context,
-                      "You have successfully registered with PlaySpots. Our representative will contact soon! ");
+                      "You have successfully registered with PlaySpots. Our representative will contact soon!");
                 }
               },
               child: Column(
@@ -148,6 +148,7 @@ class AccountRequestScreen extends StatelessWidget {
               courtName: courtNameTextEditingController.text.trim(),
               location: locationTextEditingController.text,
               description: descriptionTextEditingController.text,
+              isOwner: true,
             );
             context
                 .read<SignupBloc>()

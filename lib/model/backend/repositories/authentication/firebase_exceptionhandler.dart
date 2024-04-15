@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
 class ExceptionHandler {
   static String handleException(dynamic e) {
+    log(e.toString());
     if (e is FirebaseAuthException) {
+      log(e.toString());
       return _handleFirebaseAuthException(e);
     } else if (e is FirebaseException) {
       return 'Firebase Exception: ${e.message}';
@@ -18,7 +22,7 @@ class ExceptionHandler {
 
   static String _handleFirebaseAuthException(FirebaseAuthException e) {
     switch (e.code) {
-      case 'invalid-email':
+      case 'invalid-credential':
         return 'The email address is not valid.';
       case 'user-disabled':
         return 'The user account has been disabled.';

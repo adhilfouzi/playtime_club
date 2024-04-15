@@ -6,18 +6,20 @@ import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
 import '../../../view_model/bloc/signin_bloc/signin_bloc.dart';
 import '../../course/bottom_navigationbar_widget.dart';
-import '../forget/forgetpassword/emailverification.dart';
 import 'account_request_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
+
   final emailTextEditingController = TextEditingController();
   final passwordTextEditingController = TextEditingController();
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -60,11 +62,45 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: height * 0.15),
                   TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EmailVerificationScreen()));
-                      },
-                      child: const Text("Forget password")),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Forgot Password?'),
+                            content: const Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Please contact the authority to recover your password:',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Contact No: 9596939298',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'Email: support@sportme.com',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Close'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: const Text("Forget password"),
+                  ),
                   Button().mainButton('Log in', context, () {
                     if (!loginKey.currentState!.validate()) return;
                     final email = emailTextEditingController.text;
@@ -80,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: const Text('Don’t have an account? '),
                   ),
-                  SizedBox(height: height * 0.04),
+                  // SizedBox(height: height * 0.04),
                 ],
               ),
             ),
