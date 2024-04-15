@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
 import '../../utils/const/icons_image.dart';
-import 'all_turf_list_screen.dart';
-import 'home_screen.dart';
-import 'mybooking_screen.dart';
-import 'userprofle_screen.dart';
+import 'bank/transaction.dart';
+import 'home/home_screen.dart';
+import 'reserve/mybooking_screen.dart';
+import 'profile/userprofle_screen.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({super.key});
 
   @override
-  _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
+  State<MyBottomNavigationBar> createState() => _MyBottomNavigationBarState();
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
@@ -20,7 +19,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const AllTrufList(),
+    const Transaction(),
     const MyBooking(),
     const UserProfile(),
   ];
@@ -50,25 +49,25 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                   index: 0,
                   selectedIcon: AppIcons.home,
                   nonSelectedIcon: AppIcons.homeOutlined,
-                  label: 'Home',
+                  label: '',
                 ),
                 _buildGButton(
                   index: 1,
-                  selectedIcon: AppIcons.football,
-                  nonSelectedIcon: AppIcons.footballOutlined,
-                  label: 'Spot',
+                  selectedIcon: AppIcons.bank,
+                  nonSelectedIcon: AppIcons.bankOutlined,
+                  label: '',
                 ),
                 _buildGButton(
                   index: 2,
                   selectedIcon: AppIcons.newspaper,
                   nonSelectedIcon: AppIcons.newspaperOutlined,
-                  label: 'My Slot',
+                  label: '',
                 ),
                 _buildGButton(
                   index: 3,
                   selectedIcon: AppIcons.user,
                   nonSelectedIcon: AppIcons.userOutlined,
-                  label: 'Profile',
+                  label: '',
                 ),
               ],
               gap: 4,
@@ -107,9 +106,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       backgroundColor: Colors.transparent,
       hoverColor: Colors.transparent,
       rippleColor: Colors.transparent,
-      border: isSelected
-          ? Border.all(color: Colors.black, width: 2)
-          : Border.all(color: Colors.transparent),
+      // border: isSelected
+      //     ? Border.all(color: Colors.black, width: 2)
+      //     : Border.all(color: Colors.transparent),
       onPressed: isSelected ? null : () => _onItemTapped(index),
     );
   }

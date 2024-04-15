@@ -102,11 +102,13 @@ class LoginScreen extends StatelessWidget {
                     child: const Text("Forget password"),
                   ),
                   Button().mainButton('Log in', context, () {
-                    if (!loginKey.currentState!.validate()) return;
-                    final email = emailTextEditingController.text;
-                    final password = passwordTextEditingController.text;
-                    context.read<SigninBloc>().add(SigninRequested(
-                        email: email, password: password, context: context));
+                    // if (!loginKey.currentState!.validate()) return;
+                    // final email = emailTextEditingController.text;
+                    // final password = passwordTextEditingController.text;
+                    // context.read<SigninBloc>().add(SigninRequested(
+                    //     email: email, password: password, context: context));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const MyBottomNavigationBar()));
                   }),
                   SizedBox(height: height * 0.1),
                   TextButton(

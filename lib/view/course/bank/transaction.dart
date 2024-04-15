@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AllTrufList extends StatelessWidget {
-  const AllTrufList({super.key});
+class Transaction extends StatelessWidget {
+  const Transaction({super.key});
 
   @override
   Widget build(BuildContext context) {
