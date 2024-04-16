@@ -22,33 +22,24 @@ class A01SignupScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.02, vertical: height * 0.025),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: height * 0.2),
-              // MyTextField(
-              //   hintText: 'Business Owner’s Name',
-              //   controller: ownersNameTextEditingController,
-              //   keyboardType: TextInputType.name,
-              //   textInputAction: TextInputAction.next,
-              // ),
-              // SizedBox(height: 16.0),
               MyTextField(
-                hintText: 'Business Name',
+                hintText: 'Court Name',
                 controller: businessNameTextEditingController,
                 keyboardType: TextInputType.name,
                 textInputAction: TextInputAction.next,
               ),
               // SizedBox(height: 16.0),
               MyTextField(
-                hintText: 'Business Contact Number',
+                hintText: 'Court Contact Number',
                 controller: businessNumberTextEditingController,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
               ),
               // SizedBox(height: 16.0),
               MyTextField(
-                hintText: 'Email Address',
+                hintText: 'Court Email Address',
                 controller: businessMailTextEditingController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,

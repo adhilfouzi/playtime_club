@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:owners_side_of_turf_booking/utils/const/colors.dart';
+import 'package:owners_side_of_turf_booking/view/onboarding/signup/a01_signup_screen.dart';
 import '../../../utils/const/icons_image.dart';
 import '../../../utils/const/image_name.dart';
 import '../portion/home_appbar.dart';
@@ -138,15 +139,18 @@ class HomeScreen extends StatelessWidget {
                 width: width * 1,
                 height: height * 0.05,
                 child: InkWell(
-                  onTap: () {},
-                  child: Row(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => A01SignupScreen()));
+                  },
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text("Slot Allotting"),
                       ),
-                      const Icon(Icons.arrow_forward_ios),
+                      Icon(Icons.arrow_forward_ios),
                       // SizedBox(width: width * 0.002),
                     ],
                   ),

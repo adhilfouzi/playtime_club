@@ -11,8 +11,6 @@ class A02SignupScreen extends StatelessWidget {
   A02SignupScreen({super.key});
   final ownersNameTextEditingController = TextEditingController();
   final businessNameTextEditingController = TextEditingController();
-  final businessNumberTextEditingController = TextEditingController();
-  final businessMailTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +22,7 @@ class A02SignupScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: height * 0.2),
             MyTextField(
               maxLines: 4,
               minLines: 4,
@@ -45,23 +44,10 @@ class A02SignupScreen extends StatelessWidget {
                   ),
                 );
               },
-              hintText: 'About Business',
+              hintText: 'About Court',
               controller: ownersNameTextEditingController,
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
-            ),
-            MyTextField(
-              maxLines: 3,
-              hintText: 'Business Address',
-              controller: businessNumberTextEditingController,
-              keyboardType: TextInputType.streetAddress,
-              textInputAction: TextInputAction.next,
-            ),
-            MyTextField(
-              hintText: 'Email Address',
-              controller: businessMailTextEditingController,
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.done,
             ),
             TimePicker(
               onTimeSelected: (openingTime, closingTime) {

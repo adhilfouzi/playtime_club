@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:owners_side_of_turf_booking/view/course/bottom_navigationbar_widget.dart';
 import '../../../utils/const/image_name.dart';
 import 'utils/appbar.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
 import '../../../view_model/checkbox_cubit.dart';
-import 'a08_signup_screen.dart';
 
 class A07SignupScreen extends StatelessWidget {
   A07SignupScreen({super.key});
@@ -74,7 +73,7 @@ class A07SignupScreen extends StatelessWidget {
               textInputAction: TextInputAction.next,
             ),
             MyTextField(
-              labelText: "Contact Phone Number",
+              labelText: "Owner Phone Number",
               hintText: 'Phone Number',
               controller: phoneNumberTextEditingController,
               keyboardType: TextInputType.number,
@@ -119,9 +118,9 @@ class A07SignupScreen extends StatelessWidget {
         color: Colors.white,
         padding: EdgeInsets.symmetric(
             horizontal: width * 0.05, vertical: height * 0.02),
-        child: Button().mainButton('Sign up', context, () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => A08SignupScreen()));
+        child: Button().mainButton('Submit', context, () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const MyBottomNavigationBar()));
         }),
       ),
     ));

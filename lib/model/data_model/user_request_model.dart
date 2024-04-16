@@ -1,50 +1,74 @@
 import '../controller/formater.dart';
 
 class UserRequestModel {
-  final String userName;
-  final String number;
-  final String email;
   final String courtName;
-  final String location;
-  final String description;
+  final String courtPhoneNumber;
+  final String courtEmailAddress;
+  final String courtDescription;
+  final String openingTime;
+  final String closingTime;
+  final String courtLocation;
+  final String images;
+  final String ownerPhoto;
+  final String ownerFullName;
+  final String ownerPhoneNumber;
+  final String ownerEmailAddress;
   final bool isOwner;
 
-  UserRequestModel(
-      {required this.isOwner,
-      required this.userName,
-      required this.number,
-      required this.email,
-      required this.courtName,
-      required this.location,
-      required this.description});
+  UserRequestModel({
+    required this.courtName,
+    required this.courtPhoneNumber,
+    required this.courtEmailAddress,
+    required this.courtDescription,
+    required this.openingTime,
+    required this.closingTime,
+    required this.courtLocation,
+    required this.images,
+    required this.ownerPhoto,
+    required this.ownerFullName,
+    required this.ownerPhoneNumber,
+    required this.ownerEmailAddress,
+    required this.isOwner,
+  });
 
   Map<String, dynamic> toJson() {
     return {
-      'userName': userName,
-      'number': number,
-      'email': email,
       'courtName': courtName,
-      'location': location,
-      'description': description,
+      'courtPhoneNumber': courtPhoneNumber,
+      'courtEmailAddress': courtEmailAddress,
+      'courtDescription': courtDescription,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
+      'courtLocation': courtLocation,
+      'images': images,
+      'ownerPhoto': ownerPhoto,
+      'ownerFullName': ownerFullName,
+      'ownerPhoneNumber': ownerPhoneNumber,
+      'ownerEmailAddress': ownerEmailAddress,
       'isOwner': isOwner,
     };
   }
 
-  // Factory constructor to create UserModel from JSON data
   factory UserRequestModel.fromJson(Map<String, dynamic> json) {
     return UserRequestModel(
-      userName: json['userName'],
-      number: json['number'],
-      email: json['email'],
-      courtName: json['courtName'],
-      location: json['location'],
-      description: json['description'],
-      isOwner: json['isOwner'],
+      courtName: json['courtName'] ?? '',
+      courtPhoneNumber: json['courtPhoneNumber'] ?? '',
+      courtEmailAddress: json['courtEmailAddress'] ?? '',
+      courtDescription: json['courtDescription'] ?? '',
+      openingTime: json['openingTime'] ?? '',
+      closingTime: json['closingTime'] ?? '',
+      courtLocation: json['courtLocation'] ?? '',
+      images: json['images'] ?? '',
+      ownerPhoto: json['ownerPhoto'] ?? '',
+      ownerFullName: json['ownerFullName'] ?? '',
+      ownerPhoneNumber: json['ownerPhoneNumber'] ?? '',
+      ownerEmailAddress: json['ownerEmailAddress'] ?? '',
+      isOwner: json['isOwner'] ?? false,
     );
   }
 
-  // helper function to fotmat phone number
-  String get formattedPhoneNo => Formatter.formatPhoneNumber(number);
-  // static function to split full userName into first and last Name
-  static List<String> userNameParts(userName) => userName.split('');
+  String get formattedOwnerPhoneNumber =>
+      Formatter.formatPhoneNumber(ownerPhoneNumber);
+
+  static List<String> splitFullName(String fullName) => fullName.split(' ');
 }

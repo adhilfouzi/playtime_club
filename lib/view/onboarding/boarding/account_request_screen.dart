@@ -70,14 +70,14 @@ class AccountRequestScreen extends StatelessWidget {
                         InputValidators.validatePhoneNumber(value),
                     textInputAction: TextInputAction.next,
                     controller: phoneNumberTextEditingController,
-                    labelText: 'Phone Number',
+                    labelText: 'Court Phone Number',
                     hintText: "Eg: 9876543210",
                     keyboardType: TextInputType.emailAddress,
                   ),
                   MyTextField(
                     textInputAction: TextInputAction.next,
                     controller: emailTextEditingController,
-                    labelText: 'Email Address',
+                    labelText: 'Court Email Address',
                     validator: (value) => InputValidators.validateEmail(value),
                     hintText: "Eg: name@gmail.com",
                     keyboardType: TextInputType.emailAddress,
@@ -94,7 +94,7 @@ class AccountRequestScreen extends StatelessWidget {
                   MyTextField(
                     textInputAction: TextInputAction.next,
                     controller: locationTextEditingController,
-                    labelText: 'Location',
+                    labelText: 'Court Location',
                     validator: (value) =>
                         InputValidators.validateEmpty('Location', value),
                     hintText: "Eg:  Malaparamba, Kozhikode, Kerala",
@@ -142,14 +142,21 @@ class AccountRequestScreen extends StatelessWidget {
           child: Button().mainButton('Register', context, () {
             if (!signupFormKey.currentState!.validate()) return;
             UserRequestModel user = UserRequestModel(
-              userName: nameOfUserTextEditingController.text.trim(),
-              number: phoneNumberTextEditingController.text.trim(),
-              email: emailTextEditingController.text.trim(),
               courtName: courtNameTextEditingController.text.trim(),
-              location: locationTextEditingController.text,
-              description: descriptionTextEditingController.text,
+              courtPhoneNumber: phoneNumberTextEditingController.text.trim(),
+              courtEmailAddress: emailTextEditingController.text.trim(),
+              courtDescription: descriptionTextEditingController.text.trim(),
+              openingTime: '', // Example value,
+              closingTime: '', // Example value,
+              courtLocation: locationTextEditingController.text.trim(),
+              images: '', // Example value,
+              ownerPhoto: '', // Example value,
+              ownerFullName: nameOfUserTextEditingController.text.trim(),
+              ownerPhoneNumber: phoneNumberTextEditingController.text.trim(),
+              ownerEmailAddress: "",
               isOwner: true,
             );
+
             context
                 .read<SignupBloc>()
                 .add(SignupRequested(user: user, context: context));

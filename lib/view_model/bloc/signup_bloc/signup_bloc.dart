@@ -22,17 +22,25 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       // Register user in the firebase Authentication & save user data in the firebase
 
       final userCredential = await AuthenticationRepository()
-          .registerWithEmailAndPassword(event.user.email);
+          .registerWithEmailAndPassword(event.user.courtEmailAddress);
 
       // Save authenticated user data in the firebase firestore
       final newUser = UserRequestModel(
-          isOwner: event.user.isOwner,
-          userName: event.user.userName.trim(),
-          number: event.user.number.trim(),
-          email: event.user.email.trim(),
-          courtName: event.user.courtName.trim(),
-          location: event.user.location,
-          description: event.user.description);
+        courtName: event.user.courtName.trim(),
+        courtPhoneNumber: event.user.courtPhoneNumber.trim(),
+        courtEmailAddress: event.user.courtEmailAddress.trim(),
+        courtDescription: event.user.courtDescription.trim(),
+        openingTime: '', // Add the opening time
+        closingTime: '', // Add the closing time
+        courtLocation: event.user.courtLocation.trim(),
+        images: '', // Add the path to images
+        ownerPhoto: '', // Add the path to owner's photo
+        ownerFullName: event.user.ownerFullName.trim(),
+        ownerPhoneNumber: event.user.ownerPhoneNumber.trim(),
+        ownerEmailAddress: '', // Add the owner's email address
+        isOwner: event.user.isOwner,
+      );
+
       await UserRepository().saveUserRecord(newUser, userCredential.user!.uid);
       emit(SignupSuccess()); // Emit SignupSuccess state after successful signup
     } catch (e) {

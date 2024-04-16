@@ -10,7 +10,9 @@ class AuthenticationRepository {
   Future<UserCredential> registerWithEmailAndPassword(String email) async {
     try {
       return await _auth.createUserWithEmailAndPassword(
-          email: email, password: DateTime.now().toString());
+          email: email, password: "123456"
+          //  DateTime.now().toString()
+          );
     } catch (e) {
       throw ExceptionHandler.handleException(e);
     }
