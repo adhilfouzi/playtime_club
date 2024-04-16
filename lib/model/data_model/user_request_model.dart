@@ -1,6 +1,6 @@
 import '../controller/formater.dart';
 
-class UserRequestModel {
+class UserModel {
   final String courtName;
   final String courtPhoneNumber;
   final String courtEmailAddress;
@@ -15,7 +15,7 @@ class UserRequestModel {
   final String ownerEmailAddress;
   final bool isOwner;
 
-  UserRequestModel({
+  UserModel({
     required this.courtName,
     required this.courtPhoneNumber,
     required this.courtEmailAddress,
@@ -49,8 +49,8 @@ class UserRequestModel {
     };
   }
 
-  factory UserRequestModel.fromJson(Map<String, dynamic> json) {
-    return UserRequestModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
       courtName: json['courtName'] ?? '',
       courtPhoneNumber: json['courtPhoneNumber'] ?? '',
       courtEmailAddress: json['courtEmailAddress'] ?? '',

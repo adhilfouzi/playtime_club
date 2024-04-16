@@ -6,7 +6,7 @@ class UserRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   ///  function to save user data to Firestore
-  Future<void> saveUserRecord(UserRequestModel user, id) async {
+  Future<void> saveUserRecord(UserModel user, id) async {
     try {
       await _db.collection("Owner").doc(id).set(user.toJson());
     } catch (e) {
@@ -15,7 +15,7 @@ class UserRepository {
   }
 
   /// Function to fetch user data from Firestore by user ID
-  Future<UserRequestModel> getUserById(String userId) async {
+  Future<UserModel> getUserById(String userId) async {
     try {
       DocumentSnapshot userSnapshot =
           await _db.collection("Owner").doc(userId).get();
@@ -24,7 +24,7 @@ class UserRepository {
         Map<String, dynamic> userData =
             userSnapshot.data() as Map<String, dynamic>;
 
-        return UserRequestModel.fromJson(userData);
+        return UserModel.fromJson(userData);
       } else {
         throw Exception('User not found');
       }

@@ -141,7 +141,7 @@ class AccountRequestScreen extends StatelessWidget {
               horizontal: width * 0.05, vertical: height * 0.02),
           child: Button().mainButton('Register', context, () {
             if (!signupFormKey.currentState!.validate()) return;
-            UserRequestModel user = UserRequestModel(
+            UserModel user = UserModel(
               courtName: courtNameTextEditingController.text.trim(),
               courtPhoneNumber: phoneNumberTextEditingController.text.trim(),
               courtEmailAddress: emailTextEditingController.text.trim(),

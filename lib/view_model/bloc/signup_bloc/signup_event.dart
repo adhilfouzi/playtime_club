@@ -4,7 +4,7 @@ part of 'signup_bloc.dart';
 sealed class SignupEvent {}
 
 final class SignupRequested extends SignupEvent {
-  final UserRequestModel user;
+  final UserModel user;
   final BuildContext context;
 
   SignupRequested({

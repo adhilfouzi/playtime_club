@@ -25,7 +25,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           .registerWithEmailAndPassword(event.user.courtEmailAddress);
 
       // Save authenticated user data in the firebase firestore
-      final newUser = UserRequestModel(
+      final newUser = UserModel(
         courtName: event.user.courtName.trim(),
         courtPhoneNumber: event.user.courtPhoneNumber.trim(),
         courtEmailAddress: event.user.courtEmailAddress.trim(),
