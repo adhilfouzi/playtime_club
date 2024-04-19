@@ -1,19 +1,55 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart'; // Import GetX package
+import 'package:owners_side_of_turf_booking/utils/portion/snackbar.dart';
+import 'package:owners_side_of_turf_booking/view/onboarding/boarding/account_request_screen.dart';
+
+import '../../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../../model/controller/validator.dart';
 import '../../../utils/const/image_name.dart';
 import '../../../utils/portion/button.dart';
+import '../../../utils/portion/loadingpopup.dart';
 import '../../../utils/portion/textfield.dart';
-import '../../../view_model/bloc/signin_bloc/signin_bloc.dart';
 import '../../course/bottom_navigationbar_widget.dart';
-import 'account_request_screen.dart';
+
+class SigninController extends GetxController {
+  var isLoading = false.obs;
+
+  void signin(String email, String password, BuildContext context) async {
+    isLoading.value = true;
+    try {
+      Get.to(() => const LoadingPopup()); // Using Get.to to navigate
+      bool user = await AuthenticationRepository()
+          .signInWithEmailAndPassword(email, password);
+
+      if (user) {
+        Get.offAll(() =>
+            const MyBottomNavigationBar()); // Using Get.offAll to replace the current screen
+      } else {
+        // Handle error
+        log("Some error happened");
+      }
+    } catch (e) {
+      // Handle error
+      log(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+}
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+  final SigninController signinController =
+      Get.put(SigninController()); // Instantiate the controller
 
-  final emailTextEditingController = TextEditingController();
-  final passwordTextEditingController = TextEditingController();
+  final TextEditingController emailTextEditingController =
+      TextEditingController();
+  final TextEditingController passwordTextEditingController =
+      TextEditingController();
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,104 +59,51 @@ class LoginScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: BlocListener<SigninBloc, SigninState>(
-            listener: (context, state) {
-              if (state is SigninSuccess) {
-                // Navigate to home screen on success
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const MyBottomNavigationBar()));
-              } else if (state is SigninError) {
-                // Show error message
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(content: Text(state.error)));
-                Navigator.of(context).pop();
-              }
-            },
-            child: Form(
-              key: loginKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: height * 0.3,
-                    width: width,
-                    child: Image.asset(logo),
-                  ),
-                  SizedBox(height: height * 0.05),
-                  MyTextField(
-                    textInputAction: TextInputAction.next,
-                    controller: emailTextEditingController,
-                    hintText: 'Email',
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) => InputValidators.validateEmail(value),
-                  ),
-                  PasswordTextField(
-                    textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.visiblePassword,
-                    controller: passwordTextEditingController,
-                  ),
-                  SizedBox(height: height * 0.15),
-                  TextButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Forgot Password?'),
-                            content: const Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Please contact the authority to recover your password:',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'Contact No: 9596939298',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'Email: support@sportme.com',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Close'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    child: const Text("Forget password"),
-                  ),
-                  Button().mainButton('Log in', context, () {
-                    // if (!loginKey.currentState!.validate()) return;
-                    // final email = emailTextEditingController.text;
-                    // final password = passwordTextEditingController.text;
-                    // context.read<SigninBloc>().add(SigninRequested(
-                    //     email: email, password: password, context: context));
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const MyBottomNavigationBar()));
-                  }),
-                  SizedBox(height: height * 0.1),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AccountRequestScreen()));
-                    },
-                    child: const Text('Don’t have an account? '),
-                  ),
-                  // SizedBox(height: height * 0.04),
-                ],
-              ),
+          child: Form(
+            key: loginKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  height: height * 0.3,
+                  width: width,
+                  child: Image.asset(logo),
+                ),
+                SizedBox(height: height * 0.05),
+                MyTextField(
+                  textInputAction: TextInputAction.next,
+                  controller: emailTextEditingController,
+                  hintText: 'Email',
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) => InputValidators.validateEmail(value),
+                ),
+                PasswordTextField(
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: passwordTextEditingController,
+                ),
+                SizedBox(height: height * 0.1),
+                TextButton(
+                  onPressed: () {
+                    CustomSnackbar.showForgotPasswordDialog();
+                  },
+                  child: const Text("Forget password"),
+                ),
+                Button().mainButton('Log in', context, () {
+                  if (loginKey.currentState!.validate()) {
+                    final email = emailTextEditingController.text;
+                    final password = passwordTextEditingController.text;
+                    signinController.signin(email, password, context);
+                  }
+                }),
+                SizedBox(height: height * 0.1),
+                TextButton(
+                  onPressed: () {
+                    Get.to(AccountRequestScreen());
+                  },
+                  child: const Text('Don’t have an account? '),
+                ),
+              ],
             ),
           ),
         ),

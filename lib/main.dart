@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'model/backend/firebase_options.dart';
 import 'view/onboarding/boarding/splash_screen.dart';
 import 'view_model/bloc/signin_bloc/signin_bloc.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SignupBloc()),
         // Add more Bloc providers if needed
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Turf Booking Application For Owners',
         theme: ThemeData(

@@ -105,8 +105,7 @@ class A02SignupScreen extends StatelessWidget {
                 ),
               );
             } else {
-              CustomSnackBar.showError(
-                  context, 'Please fill in all required fields.');
+              CustomSnackbar.showError('Please fill in all required fields.');
             }
           }),
         ),

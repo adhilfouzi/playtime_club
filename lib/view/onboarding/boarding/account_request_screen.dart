@@ -43,12 +43,12 @@ class AccountRequestScreen extends StatelessWidget {
             child: BlocListener<SignupBloc, SignupState>(
               listener: (context, state) {
                 if (state is SignupError) {
-                  CustomSnackBar.showError(context, state.error);
+                  CustomSnackbar.showError(state.error);
                   Navigator.of(context).pop();
                 } else if (state is SignupSuccess) {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => LoginScreen()));
-                  CustomSnackBar.showSuccess(context,
+                  CustomSnackbar.showSuccess(
                       "You have successfully registered with PlaySpots. Our representative will contact soon!");
                 }
               },
