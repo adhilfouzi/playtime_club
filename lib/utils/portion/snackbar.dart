@@ -9,6 +9,7 @@ class CustomSnackBar {
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -28,6 +29,7 @@ class CustomSnackBar {
         ),
         backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -44,6 +46,7 @@ class CustomSnackBar {
           message,
           style: const TextStyle(color: Colors.white),
         ),
+        duration: const Duration(seconds: 2),
         backgroundColor: Colors.blue,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(

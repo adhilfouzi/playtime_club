@@ -1,72 +1,76 @@
-// import 'package:flutter/material.dart';
-// import '../../model/controller/appbar.dart';
-// import '../../model/controller/button.dart';
-// import '../../model/controller/textfield.dart';
-// import 'a07_signup_screen.dart';
+import 'package:flutter/material.dart';
+import '../../../utils/const/colors.dart';
+import '../../../utils/const/image_name.dart';
 
-// class A06SignupScreen extends StatelessWidget {
-//   A06SignupScreen({super.key});
-//   final bankNameTextEditingController = TextEditingController();
-//   final accountNumberTextEditingController = TextEditingController();
-//   final reAccountNumberTextEditingController = TextEditingController();
-//   final holderNameTextEditingController = TextEditingController();
-//   final ifscCodeTextEditingController = TextEditingController();
+class SubmissionSuccessful extends StatelessWidget {
+  const SubmissionSuccessful({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final height = MediaQuery.of(context).size.height;
-//     // final width = MediaQuery.of(context).size.width;
-//     return SafeArea(
-//         child: Scaffold(
-//       appBar: const CustomBottomAppBar(),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           children: [
-//             SizedBox(height: height * 0.045),
-//             const Text(
-//               'Upload minimum 3 images of your Business',
-//               style: TextStyle(fontSize: 15),
-//             ),
-//             SizedBox(height: height * 0.045),
-//             MyTextField(
-//               hintText: 'Bank Name',
-//               controller: bankNameTextEditingController,
-//               keyboardType: TextInputType.name,
-//               textInputAction: TextInputAction.next,
-//             ),
-//             MyTextField(
-//               hintText: 'Account Number',
-//               controller: accountNumberTextEditingController,
-//               keyboardType: TextInputType.number,
-//               textInputAction: TextInputAction.next,
-//             ),
-//             MyTextField(
-//               hintText: 'Re Enter Account Number',
-//               controller: reAccountNumberTextEditingController,
-//               keyboardType: TextInputType.number,
-//               textInputAction: TextInputAction.next,
-//             ),
-//             MyTextField(
-//               hintText: 'Holder Name',
-//               controller: holderNameTextEditingController,
-//               keyboardType: TextInputType.name,
-//               textInputAction: TextInputAction.next,
-//             ),
-//             MyTextField(
-//               hintText: 'IFSC Code',
-//               controller: ifscCodeTextEditingController,
-//               keyboardType: TextInputType.streetAddress,
-//               textInputAction: TextInputAction.done,
-//             ),
-//             SizedBox(height: height * 0.14),
-//             Button().mainButton('Next', context, () {
-//               Navigator.of(context).push(
-//                   MaterialPageRoute(builder: (context) => A07SignupScreen()));
-//             }),
-//             SizedBox(height: height * 0.04),
-//           ],
-//         ),
-//       ),
-//     ));
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                height: height * 0.25,
+                width: width,
+                child: Image.asset(logo),
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'BUSINESS ',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                      color: CustomColor.mainColor,
+                    ),
+                  ),
+                  Text(
+                    'Registration',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                      color: CustomColor.mainColor,
+                    ),
+                  ),
+                ],
+              ),
+              const Text(
+                'Submission Successful',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+              ),
+              const Text(
+                'Request ID : SM184006022024',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+              ),
+              SizedBox(height: height * 0.05),
+              SizedBox(
+                width: width * 0.8,
+                child: const Text(
+                  '''All of the details you have submitted have been received by us. We will check and update you once we have reviewed your profile. This process may take around 3 to 4 business days.
+              
+              Please feel free to contact us using the details below if you have any questions or queries.''',
+                  style: TextStyle(),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+              SizedBox(height: height * 0.05),
+              const Text(
+                'info@spotme.in',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'utils/appbar.dart';
 import '../../../utils/portion/button.dart';
-import 'a07_signup_screen.dart';
+import 'a04_signup_screen.dart';
 
 class A03SignupScreen extends StatelessWidget {
-  const A03SignupScreen({super.key});
+  final String courtName;
+  final String courtPhoneNumber;
+  final String courtEmailAddress;
+  final String courtDescription;
+  final TimeOfDay openingTime;
+  final TimeOfDay closingTime;
+  final String courtLocation;
+  const A03SignupScreen(
+      {super.key,
+      required this.courtName,
+      required this.courtPhoneNumber,
+      required this.courtEmailAddress,
+      required this.courtDescription,
+      required this.openingTime,
+      required this.closingTime,
+      required this.courtLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +60,7 @@ class A03SignupScreen extends StatelessWidget {
               horizontal: width * 0.05, vertical: height * 0.02),
           child: Button().withAdd('Next', context, () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => A07SignupScreen()));
+                MaterialPageRoute(builder: (context) => A04SignupScreen()));
           }, () {}),
         ),
       ),

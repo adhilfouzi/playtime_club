@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../model/controller/validator.dart';
 import 'utils/appbar.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
@@ -6,10 +7,9 @@ import 'a02_signup_screen.dart';
 
 class A01SignupScreen extends StatelessWidget {
   A01SignupScreen({super.key});
-  final ownersNameTextEditingController = TextEditingController();
-  final businessNameTextEditingController = TextEditingController();
-  final businessNumberTextEditingController = TextEditingController();
-  final businessMailTextEditingController = TextEditingController();
+  final courtNameTextEditingController = TextEditingController();
+  final courtPhoneNumberTextEditingController = TextEditingController();
+  final courtEmailAddressTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +25,28 @@ class A01SignupScreen extends StatelessWidget {
             children: [
               SizedBox(height: height * 0.2),
               MyTextField(
-                hintText: 'Court Name',
-                controller: businessNameTextEditingController,
+                hintText: "Eg: Lions Turf",
+                labelText: 'Court Name',
+                controller: courtNameTextEditingController,
+                validator: (value) =>
+                    InputValidators.validateEmpty('Court Name', value),
                 keyboardType: TextInputType.name,
                 textInputAction: TextInputAction.next,
               ),
-              // SizedBox(height: 16.0),
               MyTextField(
-                hintText: 'Court Contact Number',
-                controller: businessNumberTextEditingController,
+                hintText: 'Eg: 9865327412',
+                labelText: 'Court Contact Number',
+                validator: (value) =>
+                    InputValidators.validatePhoneNumber(value),
+                controller: courtPhoneNumberTextEditingController,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
               ),
-              // SizedBox(height: 16.0),
               MyTextField(
-                hintText: 'Court Email Address',
-                controller: businessMailTextEditingController,
+                hintText: 'Eg: lionsturf@gmail.com',
+                labelText: 'Court Email Address',
+                validator: (value) => InputValidators.validateEmail(value),
+                controller: courtEmailAddressTextEditingController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
               ),
@@ -53,7 +59,14 @@ class A01SignupScreen extends StatelessWidget {
               horizontal: width * 0.05, vertical: height * 0.025),
           child: Button().mainButton('Next', context, () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => A02SignupScreen()),
+              MaterialPageRoute(
+                  builder: (context) => A02SignupScreen(
+                        courtEmailAddress:
+                            courtEmailAddressTextEditingController.text,
+                        courtName: courtNameTextEditingController.text,
+                        courtPhoneNumber:
+                            courtPhoneNumberTextEditingController.text,
+                      )),
             );
           }),
         ),

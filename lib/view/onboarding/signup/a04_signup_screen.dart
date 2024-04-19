@@ -7,8 +7,8 @@ import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
 import '../../../view_model/checkbox_cubit.dart';
 
-class A07SignupScreen extends StatelessWidget {
-  A07SignupScreen({super.key});
+class A04SignupScreen extends StatelessWidget {
+  A04SignupScreen({super.key});
   final fullNameTextEditingController = TextEditingController();
   final phoneNumberTextEditingController = TextEditingController();
   final emailTextEditingController = TextEditingController();

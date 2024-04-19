@@ -1,71 +1,72 @@
-import 'package:flutter/material.dart';
-import '../../../utils/const/image_name.dart';
-import 'utils/appbar.dart';
-import '../../../utils/portion/button.dart';
-import '../../../utils/portion/textfield.dart';
-import 'a09_signup_screen.dart';
+// import 'package:flutter/material.dart';
+// import '../../model/controller/appbar.dart';
+// import '../../model/controller/button.dart';
+// import '../../model/controller/textfield.dart';
+// import 'a07_signup_screen.dart';
 
-class A08SignupScreen extends StatelessWidget {
-  A08SignupScreen({super.key});
-  final passwordTextEditingController = TextEditingController();
-  final rePasswordTextEditingController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+// class A06SignupScreen extends StatelessWidget {
+//   A06SignupScreen({super.key});
+//   final bankNameTextEditingController = TextEditingController();
+//   final accountNumberTextEditingController = TextEditingController();
+//   final reAccountNumberTextEditingController = TextEditingController();
+//   final holderNameTextEditingController = TextEditingController();
+//   final ifscCodeTextEditingController = TextEditingController();
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: const IntroAppbar(
-          needLeading: true,
-          actions: [],
-          titleText: 'Create Password',
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                height: height * 0.25,
-                width: width,
-                child: Image.asset(logo),
-              ),
-              const Text('Create Password'),
-              SizedBox(height: height * 0.05),
-              PasswordTextField(
-                textInputAction: TextInputAction.next,
-                hintText: 'Enter Password',
-                keyboardType: TextInputType.visiblePassword,
-                controller: passwordTextEditingController,
-              ),
-              PasswordTextField(
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.visiblePassword,
-                controller: rePasswordTextEditingController,
-                hintText: 'Confirm Password',
-              ),
-              SizedBox(
-                width: width * 0.9,
-                child: const Text(
-                  "Password must be at least 8 character long and include 1 capital letter and 1 symbol",
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-              SizedBox(height: height * 0.2),
-              SizedBox(height: height * 0.04),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Container(
-          color: Colors.white,
-          padding: EdgeInsets.symmetric(
-              horizontal: width * 0.05, vertical: height * 0.02),
-          child: Button().mainButton('Verify', context, () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const SubmissionSuccessful()));
-          }),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final height = MediaQuery.of(context).size.height;
+//     // final width = MediaQuery.of(context).size.width;
+//     return SafeArea(
+//         child: Scaffold(
+//       appBar: const CustomBottomAppBar(),
+//       body: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             SizedBox(height: height * 0.045),
+//             const Text(
+//               'Upload minimum 3 images of your Business',
+//               style: TextStyle(fontSize: 15),
+//             ),
+//             SizedBox(height: height * 0.045),
+//             MyTextField(
+//               hintText: 'Bank Name',
+//               controller: bankNameTextEditingController,
+//               keyboardType: TextInputType.name,
+//               textInputAction: TextInputAction.next,
+//             ),
+//             MyTextField(
+//               hintText: 'Account Number',
+//               controller: accountNumberTextEditingController,
+//               keyboardType: TextInputType.number,
+//               textInputAction: TextInputAction.next,
+//             ),
+//             MyTextField(
+//               hintText: 'Re Enter Account Number',
+//               controller: reAccountNumberTextEditingController,
+//               keyboardType: TextInputType.number,
+//               textInputAction: TextInputAction.next,
+//             ),
+//             MyTextField(
+//               hintText: 'Holder Name',
+//               controller: holderNameTextEditingController,
+//               keyboardType: TextInputType.name,
+//               textInputAction: TextInputAction.next,
+//             ),
+//             MyTextField(
+//               hintText: 'IFSC Code',
+//               controller: ifscCodeTextEditingController,
+//               keyboardType: TextInputType.streetAddress,
+//               textInputAction: TextInputAction.done,
+//             ),
+//             SizedBox(height: height * 0.14),
+//             Button().mainButton('Next', context, () {
+//               Navigator.of(context).push(
+//                   MaterialPageRoute(builder: (context) => A07SignupScreen()));
+//             }),
+//             SizedBox(height: height * 0.04),
+//           ],
+//         ),
+//       ),
+//     ));
+//   }
+// }
