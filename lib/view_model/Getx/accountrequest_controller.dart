@@ -25,20 +25,20 @@ class AccountRequestController extends GetxController {
       if (!signupFormKey.currentState!.validate()) return;
       Get.to(() => const LoadingPopup());
       UserModel user = UserModel(
-        courtName: courtNameTextEditingController.text.trim(),
-        courtPhoneNumber: phoneNumberTextEditingController.text.trim(),
-        courtEmailAddress: emailTextEditingController.text.trim(),
-        courtDescription: descriptionTextEditingController.text.trim(),
-        openingTime: '',
-        closingTime: '',
-        courtLocation: locationTextEditingController.text.trim(),
-        images: '', // Implement image handling
-        ownerPhoto: '', // Implement owner photo handling
-        ownerFullName: nameOfUserTextEditingController.text.trim(),
-        ownerPhoneNumber: phoneNumberTextEditingController.text.trim(),
-        ownerEmailAddress: "",
-        isOwner: true,
-      );
+          courtName: courtNameTextEditingController.text.trim(),
+          courtPhoneNumber: phoneNumberTextEditingController.text.trim(),
+          courtEmailAddress: emailTextEditingController.text.trim(),
+          courtDescription: descriptionTextEditingController.text.trim(),
+          openingTime: '',
+          closingTime: '',
+          courtLocation: locationTextEditingController.text.trim(),
+          images: '', // Implement image handling
+          ownerPhoto: '', // Implement owner photo handling
+          ownerFullName: nameOfUserTextEditingController.text.trim(),
+          ownerPhoneNumber: phoneNumberTextEditingController.text.trim(),
+          ownerEmailAddress: "",
+          isOwner: true,
+          isRegistered: false);
 
       // Implement signup logic here (using your preferred service layer)
       final userCredential = await AuthenticationRepository()

@@ -14,6 +14,7 @@ class UserModel {
   final String ownerPhoneNumber;
   final String ownerEmailAddress;
   final bool isOwner;
+  final bool isRegistered;
 
   UserModel({
     required this.courtName,
@@ -29,6 +30,7 @@ class UserModel {
     required this.ownerPhoneNumber,
     required this.ownerEmailAddress,
     required this.isOwner,
+    required this.isRegistered,
   });
 
   Map<String, dynamic> toJson() {
@@ -46,6 +48,7 @@ class UserModel {
       'ownerPhoneNumber': ownerPhoneNumber,
       'ownerEmailAddress': ownerEmailAddress,
       'isOwner': isOwner,
+      'isRegistered': isRegistered,
     };
   }
 
@@ -64,6 +67,7 @@ class UserModel {
       ownerPhoneNumber: json['ownerPhoneNumber'] ?? '',
       ownerEmailAddress: json['ownerEmailAddress'] ?? '',
       isOwner: json['isOwner'] ?? false,
+      isRegistered: json['isRegistered'] ?? false,
     );
   }
 
