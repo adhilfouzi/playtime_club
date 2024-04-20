@@ -1,82 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:get/get.dart';
 import '../../../model/controller/validator.dart';
-import '../../../model/data_model/user_request_model.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/portion/button.dart';
-import '../../../utils/portion/snackbar.dart';
 import '../../../utils/portion/textfield.dart';
-import '../../../view_model/bloc/signup_bloc/signup_bloc.dart';
-import 'login_screen.dart';
+import '../../../view_model/Getx/accountrequest_controller.dart';
 
 class AccountRequestScreen extends StatelessWidget {
   AccountRequestScreen({super.key});
 
-  final nameOfUserTextEditingController = TextEditingController();
-  final phoneNumberTextEditingController = TextEditingController();
-  final emailTextEditingController = TextEditingController();
-  final courtNameTextEditingController = TextEditingController();
-  final locationTextEditingController = TextEditingController();
-  final descriptionTextEditingController = TextEditingController();
-  final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
+  final controller = Get.put(AccountRequestController()); // Create an instance
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
             TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Dismiss'))
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Dismiss'),
+            ),
           ],
         ),
         body: SingleChildScrollView(
-          child: Form(
-            key: signupFormKey,
-            child: BlocListener<SignupBloc, SignupState>(
-              listener: (context, state) {
-                if (state is SignupError) {
-                  CustomSnackbar.showError(state.error);
-                  Navigator.of(context).pop();
-                } else if (state is SignupSuccess) {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
-                  CustomSnackbar.showSuccess(
-                      "You have successfully registered with PlaySpots. Our representative will contact soon!");
-                }
-              },
+          child: GetBuilder<AccountRequestController>(
+            builder: (_) => Form(
+              key: controller.signupFormKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   MyTextField(
                     textInputAction: TextInputAction.next,
-                    controller: nameOfUserTextEditingController,
+                    controller: controller.nameOfUserTextEditingController,
                     labelText: 'Name of User',
                     validator: (value) =>
                         InputValidators.validateEmpty("Name of User", value),
                     hintText: "Eg: Najil",
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.name,
                   ),
                   MyTextField(
                     validator: (value) =>
                         InputValidators.validatePhoneNumber(value),
                     textInputAction: TextInputAction.next,
-                    controller: phoneNumberTextEditingController,
+                    controller: controller.phoneNumberTextEditingController,
                     labelText: 'Court Phone Number',
                     hintText: "Eg: 9876543210",
                     keyboardType: TextInputType.emailAddress,
                   ),
                   MyTextField(
                     textInputAction: TextInputAction.next,
-                    controller: emailTextEditingController,
+                    controller: controller.emailTextEditingController,
                     labelText: 'Court Email Address',
                     validator: (value) => InputValidators.validateEmail(value),
                     hintText: "Eg: name@gmail.com",
@@ -84,7 +63,7 @@ class AccountRequestScreen extends StatelessWidget {
                   ),
                   MyTextField(
                     textInputAction: TextInputAction.next,
-                    controller: courtNameTextEditingController,
+                    controller: controller.courtNameTextEditingController,
                     validator: (value) =>
                         InputValidators.validateEmpty(' Turf Name', value),
                     labelText: 'Court Name',
@@ -93,7 +72,7 @@ class AccountRequestScreen extends StatelessWidget {
                   ),
                   MyTextField(
                     textInputAction: TextInputAction.next,
-                    controller: locationTextEditingController,
+                    controller: controller.locationTextEditingController,
                     labelText: 'Court Location',
                     validator: (value) =>
                         InputValidators.validateEmpty('Location', value),
@@ -124,7 +103,7 @@ class AccountRequestScreen extends StatelessWidget {
                     },
                     labelText: 'About Business',
                     hintText: "Describe about your court",
-                    controller: descriptionTextEditingController,
+                    controller: controller.descriptionTextEditingController,
                     validator: (value) =>
                         InputValidators.validateEmpty('description', value),
                     keyboardType: TextInputType.name,
@@ -140,26 +119,7 @@ class AccountRequestScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.05, vertical: height * 0.02),
           child: Button().mainButton('Register', context, () {
-            if (!signupFormKey.currentState!.validate()) return;
-            UserModel user = UserModel(
-              courtName: courtNameTextEditingController.text.trim(),
-              courtPhoneNumber: phoneNumberTextEditingController.text.trim(),
-              courtEmailAddress: emailTextEditingController.text.trim(),
-              courtDescription: descriptionTextEditingController.text.trim(),
-              openingTime: '', // Example value,
-              closingTime: '', // Example value,
-              courtLocation: locationTextEditingController.text.trim(),
-              images: '', // Example value,
-              ownerPhoto: '', // Example value,
-              ownerFullName: nameOfUserTextEditingController.text.trim(),
-              ownerPhoneNumber: phoneNumberTextEditingController.text.trim(),
-              ownerEmailAddress: "",
-              isOwner: true,
-            );
-
-            context
-                .read<SignupBloc>()
-                .add(SignupRequested(user: user, context: context));
+            controller.submitRequest();
           }),
         ),
       ),

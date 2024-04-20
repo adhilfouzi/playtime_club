@@ -9,7 +9,7 @@ class TimePicker extends StatefulWidget {
   const TimePicker({super.key, required this.onTimeSelected});
 
   @override
-  _TimePickerState createState() => _TimePickerState();
+  State<TimePicker> createState() => _TimePickerState();
 }
 
 class _TimePickerState extends State<TimePicker> {

@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 import '../user/user_repositories.dart';
 import 'firebase_exceptionhandler.dart';
 
 class AuthenticationRepository {
-  // static AuthenticationRepository get instance => Get.find();
+  static AuthenticationRepository get instance => Get.find();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<UserCredential> registerWithEmailAndPassword(String email) async {

@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'model/backend/firebase_options.dart';
 import 'view/onboarding/boarding/splash_screen.dart';
-import 'view_model/bloc/signin_bloc/signin_bloc.dart';
-import 'view_model/bloc/signup_bloc/signup_bloc.dart';
 import 'view_model/checkbox_cubit.dart';
 
 void main() async {
@@ -25,10 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SigninBloc()),
         BlocProvider(create: (context) => CheckboxCubit()),
-        BlocProvider(create: (context) => SignupBloc()),
-        // Add more Bloc providers if needed
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
