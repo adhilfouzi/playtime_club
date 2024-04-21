@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:owners_side_of_turf_booking/view_model/Getx/usermodel_controller.dart';
 
 import '../../../utils/const/icons_image.dart';
 
@@ -11,6 +13,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userController = Get.put(UserController());
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(
@@ -20,17 +23,19 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 30,
             width: 30,
           ),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hello Fola',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
+              Obx(
+                () => Text(
+                  'Hello ${userController.ownerFullName}',
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Text(
+              const Text(
                 'Be the best version of yourself',
                 style: TextStyle(
                   fontSize: 11.0,

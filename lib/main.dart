@@ -1,10 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'model/backend/firebase_options.dart';
 import 'view/onboarding/boarding/splash_screen.dart';
-import 'view_model/checkbox_cubit.dart';
+import 'view_model/Getx/usermodel_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  Get.put(UserController());
   runApp(const MyApp());
 }
 
@@ -21,21 +20,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => CheckboxCubit()),
-      ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Turf Booking Application For Owners',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true,
-          fontFamily: 'Poppins',
-        ),
-        home: const SplashScreen(),
-        // home: const MyBottomNavigationBar(),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Turf Booking Application For Owners',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+        fontFamily: 'Poppins',
       ),
+      home: const SplashScreen(),
+      // home: const MyBottomNavigationBar(),
     );
   }
 }

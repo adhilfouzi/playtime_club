@@ -33,25 +33,6 @@ class UserModel {
     required this.isRegistered,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      'courtName': courtName,
-      'courtPhoneNumber': courtPhoneNumber,
-      'courtEmailAddress': courtEmailAddress,
-      'courtDescription': courtDescription,
-      'openingTime': openingTime,
-      'closingTime': closingTime,
-      'courtLocation': courtLocation,
-      'images': images,
-      'ownerPhoto': ownerPhoto,
-      'ownerFullName': ownerFullName,
-      'ownerPhoneNumber': ownerPhoneNumber,
-      'ownerEmailAddress': ownerEmailAddress,
-      'isOwner': isOwner,
-      'isRegistered': isRegistered,
-    };
-  }
-
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       courtName: json['courtName'] ?? '',
@@ -71,8 +52,65 @@ class UserModel {
     );
   }
 
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      courtName: map['courtName'] ?? '',
+      courtPhoneNumber: map['courtPhoneNumber'] ?? '',
+      courtEmailAddress: map['courtEmailAddress'] ?? '',
+      courtDescription: map['courtDescription'] ?? '',
+      openingTime: map['openingTime'] ?? '',
+      closingTime: map['closingTime'] ?? '',
+      courtLocation: map['courtLocation'] ?? '',
+      images: map['images'] ?? '',
+      ownerPhoto: map['ownerPhoto'] ?? '',
+      ownerFullName: map['ownerFullName'] ?? '',
+      ownerPhoneNumber: map['ownerPhoneNumber'] ?? '',
+      ownerEmailAddress: map['ownerEmailAddress'] ?? '',
+      isOwner: map['isOwner'] ?? false,
+      isRegistered: map['isRegistered'] ?? false,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'courtName': courtName,
+      'courtPhoneNumber': courtPhoneNumber,
+      'courtEmailAddress': courtEmailAddress,
+      'courtDescription': courtDescription,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
+      'courtLocation': courtLocation,
+      'images': images,
+      'ownerPhoto': ownerPhoto,
+      'ownerFullName': ownerFullName,
+      'ownerPhoneNumber': ownerPhoneNumber,
+      'ownerEmailAddress': ownerEmailAddress,
+      'isOwner': isOwner,
+      'isRegistered': isRegistered,
+    };
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'courtName': courtName,
+      'courtPhoneNumber': courtPhoneNumber,
+      'courtEmailAddress': courtEmailAddress,
+      'courtDescription': courtDescription,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
+      'courtLocation': courtLocation,
+      'images': images,
+      'ownerPhoto': ownerPhoto,
+      'ownerFullName': ownerFullName,
+      'ownerPhoneNumber': ownerPhoneNumber,
+      'ownerEmailAddress': ownerEmailAddress,
+      'isOwner': isOwner,
+      'isRegistered': isRegistered,
+    };
+  }
+
   String get formattedOwnerPhoneNumber =>
       Formatter.formatPhoneNumber(ownerPhoneNumber);
 
-  static List<String> splitFullName(String fullName) => fullName.split(' ');
+  List<String> splitFullName(String fullName) => fullName.split(' ');
 }
