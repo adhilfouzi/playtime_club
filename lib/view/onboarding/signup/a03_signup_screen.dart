@@ -1,25 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../view_model/Getx/business_registration_controller.dart';
 import 'utils/appbar.dart';
 import '../../../utils/portion/button.dart';
-import 'a04_signup_screen.dart';
 
 class A03SignupScreen extends StatelessWidget {
-  final String courtName;
-  final String courtPhoneNumber;
-  final String courtEmailAddress;
-  final String courtDescription;
-  final TimeOfDay openingTime;
-  final TimeOfDay closingTime;
-  final String courtLocation;
-  const A03SignupScreen(
-      {super.key,
-      required this.courtName,
-      required this.courtPhoneNumber,
-      required this.courtEmailAddress,
-      required this.courtDescription,
-      required this.openingTime,
-      required this.closingTime,
-      required this.courtLocation});
+  A03SignupScreen({
+    super.key,
+  });
+  final controller = Get.put(BusinessRegistration());
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +48,7 @@ class A03SignupScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.05, vertical: height * 0.02),
           child: Button().withAdd('Next', context, () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => A04SignupScreen()));
+            controller.a03Submit();
           }, () {}),
         ),
       ),

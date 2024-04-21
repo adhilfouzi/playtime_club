@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'model/backend/firebase_options.dart';
-import 'view/onboarding/boarding/splash_screen.dart';
+import 'view/course/bottom_navigationbar_widget.dart';
 import 'view_model/Getx/usermodel_controller.dart';
 
 void main() async {
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Poppins',
       ),
-      home: const SplashScreen(),
-      // home: const MyBottomNavigationBar(),
+      // home: const SplashScreen(),
+      home: const MyBottomNavigationBar(),
     );
   }
 }
