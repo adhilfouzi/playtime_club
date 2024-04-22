@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:owners_side_of_turf_booking/utils/const/colors.dart';
-import 'package:owners_side_of_turf_booking/view/onboarding/signup/a01_signup_screen.dart';
+import 'package:owners_side_of_turf_booking/view/onboarding/signup/a01/a01_signup_screen.dart';
 import '../../../utils/const/icons_image.dart';
 import '../../../utils/const/image_name.dart';
 import '../portion/home_appbar.dart';

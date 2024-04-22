@@ -5,8 +5,9 @@ class CustomSnackbar {
   static void showSuccess(String message) {
     GetSnackBar(
       message: message,
+      borderRadius: 10,
       backgroundColor: Colors.green,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       snackPosition: SnackPosition.BOTTOM,
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
@@ -16,8 +17,13 @@ class CustomSnackbar {
   static void showError(String message) {
     GetSnackBar(
       message: message,
+      borderRadius: 10,
+      icon: const Icon(
+        Icons.warning_amber,
+        color: Colors.white,
+      ),
       backgroundColor: Colors.red,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       snackPosition: SnackPosition.BOTTOM,
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
@@ -27,8 +33,13 @@ class CustomSnackbar {
   static void showInfo(String message) {
     GetSnackBar(
       message: message,
+      borderRadius: 10,
+      icon: const Icon(
+        Icons.info_outline,
+        color: Colors.white,
+      ),
       backgroundColor: Colors.blue,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       snackPosition: SnackPosition.BOTTOM,
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
@@ -39,7 +50,7 @@ class CustomSnackbar {
     GetSnackBar(
       message: message,
       backgroundColor: Colors.orange,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       snackPosition: SnackPosition.BOTTOM,
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
