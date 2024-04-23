@@ -10,7 +10,7 @@ class AuthenticationRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? get authUser => _auth.currentUser;
 
-  var userController = UserController.instance;
+  // final userController = Get.put(UserController());
 
   Future<UserCredential> registerWithEmailAndPassword(String email) async {
     try {
@@ -30,23 +30,8 @@ class AuthenticationRepository {
         password: password,
       );
       final user = await UserRepository().getUserById(userCredential.user!.uid);
+      await UserController().getUserRecord();
 
-      userController.updateValues(
-          id: userCredential.user!.uid,
-          closingTime: user.closingTime,
-          courtDescription: user.courtDescription,
-          courtEmailAddress: user.courtEmailAddress,
-          courtLocation: user.courtLocation,
-          courtName: user.courtName,
-          courtPhoneNumber: user.courtPhoneNumber,
-          images: user.images,
-          isOwner: user.isOwner,
-          isRegistered: user.isRegistered,
-          openingTime: user.openingTime,
-          ownerEmailAddress: user.ownerEmailAddress,
-          ownerFullName: user.ownerFullName,
-          ownerPhoneNumber: user.ownerPhoneNumber,
-          ownerPhoto: user.ownerPhoto);
       return user.isOwner;
     } catch (e) {
       throw ExceptionHandler.handleException(e);

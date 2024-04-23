@@ -1,11 +1,19 @@
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:owners_side_of_turf_booking/model/backend/repositories/authentication/firebase_authentication.dart';
+import 'package:owners_side_of_turf_booking/model/data_model/user_request_model.dart';
 
 import '../../model/backend/repositories/user/user_repositories.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
+  UserController() {
+    authUser = AuthenticationRepository().authUser;
+    getUserRecord();
+  }
+
   final userRepository = Get.put(UserRepository());
 
   //variable
@@ -22,38 +30,86 @@ class UserController extends GetxController {
   final RxString ownerFullName = ''.obs;
   final RxString ownerPhoneNumber = ''.obs;
   final RxString ownerEmailAddress = ''.obs;
-  final RxBool isOwner = false.obs;
+  final RxBool isOwner = true.obs;
   final RxBool isRegistered = false.obs;
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   getUserRecord();
-  // }
+  late User? authUser; // Initialize as null
+
+  @override
+  void onInit() {
+    super.onInit();
+    authUser = AuthenticationRepository().authUser;
+    if (authUser != null) {
+      getUserRecord();
+    } else {
+      print("User not authenticated.");
+    }
+  }
+
+  Future<void> updataUser() async {
+    UserModel user = UserModel(
+        courtName: courtName.value,
+        courtPhoneNumber: courtPhoneNumber.value,
+        courtEmailAddress: courtEmailAddress.value,
+        courtDescription: courtDescription.value,
+        openingTime: openingTime.value,
+        closingTime: closingTime.value,
+        courtLocation: courtLocation.value,
+        images: images.value,
+        ownerPhoto: ownerPhoto.value,
+        ownerFullName: ownerFullName.value,
+        ownerPhoneNumber: ownerPhoneNumber.value,
+        ownerEmailAddress: ownerEmailAddress.value,
+        isOwner: isOwner.value,
+        isRegistered: isRegistered.value);
+
+    await userRepository.saveUserRecord(user, authUser!.uid);
+    log("updataUser ${courtName.value}");
+  }
 
   Future<void> getUserRecord() async {
     try {
-      final authUser = AuthenticationRepository().authUser;
+      if (authUser != null) {
+        final user = await userRepository.getUserById((authUser!.uid));
+        TimeOfDay? openingTime;
+        TimeOfDay? closingTime;
+        // Convert string representations of time to TimeOfDay objects
+        if (user.openingTime != "") {
+          final openingTimeParts = user.openingTime.split(':');
+          final closingTimeParts = user.closingTime.split(':');
 
-      final user = await userRepository.getUserById((authUser!.uid));
+          openingTime = TimeOfDay(
+            hour: int.parse(openingTimeParts[0]),
+            minute: int.parse(openingTimeParts[1]),
+          );
 
-      updateValues(
-        id: AuthenticationRepository().authUser!.uid,
-        courtName: user.courtName,
-        courtPhoneNumber: user.courtPhoneNumber,
-        courtEmailAddress: user.courtEmailAddress,
-        courtDescription: user.courtDescription,
-        openingTime: user.openingTime,
-        closingTime: user.closingTime,
-        courtLocation: user.courtLocation,
-        images: user.images,
-        ownerPhoto: user.ownerPhoto,
-        ownerFullName: user.ownerFullName,
-        ownerPhoneNumber: user.ownerPhoneNumber,
-        ownerEmailAddress: user.ownerEmailAddress,
-        isOwner: user.isOwner,
-        isRegistered: user.isRegistered,
-      );
+          closingTime = TimeOfDay(
+            hour: int.parse(closingTimeParts[0]),
+            minute: int.parse(closingTimeParts[1]),
+          );
+        }
+
+        updateValues(
+          id: AuthenticationRepository().authUser!.uid,
+          courtName: user.courtName,
+          courtPhoneNumber: user.courtPhoneNumber,
+          courtEmailAddress: user.courtEmailAddress,
+          courtDescription: user.courtDescription,
+          openingTime: openingTime,
+          closingTime: closingTime,
+          courtLocation: user.courtLocation,
+          images: user.images,
+          ownerPhoto: user.ownerPhoto,
+          ownerFullName: user.ownerFullName,
+          ownerPhoneNumber: user.ownerPhoneNumber,
+          ownerEmailAddress: user.ownerEmailAddress,
+          isOwner: user.isOwner,
+          isRegistered: user.isRegistered,
+        );
+        log("user.courtPhoneNumber: ${user.courtPhoneNumber}");
+        log("user.courtName: ${user.courtName}");
+        log("getUserRecord ${courtName.value}");
+      }
     } catch (e) {
       log(e.toString());
     }
@@ -65,8 +121,8 @@ class UserController extends GetxController {
     String? courtPhoneNumber,
     String? courtEmailAddress,
     String? courtDescription,
-    String? openingTime,
-    String? closingTime,
+    TimeOfDay? openingTime,
+    TimeOfDay? closingTime,
     String? courtLocation,
     String? images,
     String? ownerPhoto,
@@ -84,8 +140,12 @@ class UserController extends GetxController {
         courtEmailAddress ?? this.courtEmailAddress.value;
     this.courtDescription.value =
         courtDescription ?? this.courtDescription.value;
-    this.openingTime.value = openingTime ?? this.openingTime.value;
-    this.closingTime.value = closingTime ?? this.closingTime.value;
+    this.openingTime.value = openingTime != null
+        ? '${openingTime.hour}:${openingTime.minute}'
+        : this.openingTime.value;
+    this.closingTime.value = closingTime != null
+        ? '${closingTime.hour}:${closingTime.minute}'
+        : this.closingTime.value;
     this.courtLocation.value = courtLocation ?? this.courtLocation.value;
     this.images.value = images ?? this.images.value;
     this.ownerPhoto.value = ownerPhoto ?? this.ownerPhoto.value;

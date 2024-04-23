@@ -12,6 +12,7 @@ class MyTextField extends StatelessWidget {
   final int? maxLength;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final String? initialValue;
   final TextInputAction? textInputAction;
   final bool obscureText;
   final String? Function(String?)? validator;
@@ -34,6 +35,7 @@ class MyTextField extends StatelessWidget {
     this.minLines,
     this.maxLength,
     this.buildCounter,
+    this.initialValue,
   });
 
   @override
@@ -51,6 +53,7 @@ class MyTextField extends StatelessWidget {
         minLines: minLines,
         maxLines: maxLines,
         buildCounter: buildCounter,
+        initialValue: initialValue,
         decoration: InputDecoration(
           labelText: labelText ?? hintText,
           hintText: hintText,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../../../model/controller/validator.dart';
 import '../../../../../utils/portion/textfield.dart';
 import '../../../../../view_model/Getx/signup_controller/a01signup_controller.dart';
@@ -21,6 +21,7 @@ class SignupTextFields extends StatelessWidget {
               InputValidators.validateEmpty('Court Name', value),
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
+          initialValue: controller.courtNameController.text,
         ),
         MyTextField(
           hintText: 'Eg: 9865327412',
@@ -29,6 +30,7 @@ class SignupTextFields extends StatelessWidget {
           controller: controller.courtPhoneNumberController,
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.next,
+          initialValue: controller.courtPhoneNumberController.text,
         ),
         MyTextField(
           hintText: 'Eg: lionsturf@gmail.com',
@@ -37,6 +39,7 @@ class SignupTextFields extends StatelessWidget {
           controller: controller.courtEmailAddressController,
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.done,
+          initialValue: controller.courtEmailAddressController.text,
         ),
       ],
     );
