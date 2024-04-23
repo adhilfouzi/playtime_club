@@ -13,7 +13,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userController = Get.put(UserController());
+    UserController userController = Get.find();
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(
@@ -28,7 +28,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               Obx(
                 () => Text(
-                  'Hello ${userController.ownerFullName}',
+                  'Hello ${userController.user.value.ownerFullName}',
                   style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,

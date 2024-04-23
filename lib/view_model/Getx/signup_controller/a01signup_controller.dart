@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../../view/onboarding/signup/a02/a02_signup_screen.dart';
 
 class A01SignupController extends GetxController {
+  static A01SignupController get instance => Get.find();
+
   final TextEditingController courtNameController = TextEditingController();
   final TextEditingController courtPhoneNumberController =
       TextEditingController();

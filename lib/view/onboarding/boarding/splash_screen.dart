@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/const/image_name.dart';
+import '../../../view_model/Getx/usermodel_controller.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -9,6 +11,8 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Inject repositories and controllers
+    Get.put(UserController());
     Future.delayed(
       const Duration(seconds: 2),
       () {

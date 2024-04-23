@@ -4,6 +4,8 @@ import '../../../utils/portion/snackbar.dart';
 import '../../../view/onboarding/signup/a03/a03_signup_screen.dart';
 
 class A02SignupController extends GetxController {
+  static A02SignupController get instance => Get.find();
+
   final TextEditingController descriptionAboutTurfTextEditingController =
       TextEditingController();
   TimeOfDay? openingTimeFetch;

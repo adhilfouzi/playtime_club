@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import '../../../data_model/user_request_model.dart';
+import '../authentication/firebase_authentication.dart';
 import '../authentication/firebase_exceptionhandler.dart';
 
-class UserRepository {
+class UserRepository extends GetxController {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  ///  function to save user data to Firestore
-  Future<void> saveUserRecord(UserModel user, id) async {
+  /// Save user data to Firestore
+  Future<void> saveUserRecord(UserModel user, String id) async {
     try {
       await _db.collection("Owner").doc(id).set(user.toJson());
     } catch (e) {
@@ -14,22 +16,57 @@ class UserRepository {
     }
   }
 
-  /// Function to fetch user data from Firestore by user ID
-  Future<UserModel> getUserById(String userId) async {
+  /// Fetch user data from Firestore by user ID
+  Future<UserModel> getUserById() async {
     try {
-      DocumentSnapshot userSnapshot =
-          await _db.collection("Owner").doc(userId).get();
-
-      if (userSnapshot.exists) {
-        Map<String, dynamic> userData =
-            userSnapshot.data() as Map<String, dynamic>;
-
-        return UserModel.fromJson(userData);
+      DocumentSnapshot snapshot = await _db
+          .collection("Owner")
+          .doc(AuthenticationRepository.instance.authUser!.uid)
+          .get();
+      if (snapshot.exists) {
+        return UserModel.fromSnapshot(snapshot);
       } else {
-        throw Exception('User not found');
+        return UserModel.emptyUserModel();
       }
     } catch (e) {
       throw ExceptionHandler.handleException(e);
     }
+  }
+
+  /// Update a specific field in a user's collection
+  Future<void> updateUserField(
+      {required String fieldName, required dynamic value}) async {
+    try {
+      await _db
+          .collection("Owner")
+          .doc(AuthenticationRepository.instance.authUser!.uid)
+          .update({
+        fieldName: value,
+      });
+    } catch (e) {
+      throw ExceptionHandler.handleException(e);
+    }
+  }
+
+  /// Remove user data from Firestore
+  Future<void> removeUserRecord() async {
+    try {
+      await _db
+          .collection("Owner")
+          .doc(AuthenticationRepository.instance.authUser!.uid)
+          .delete();
+    } catch (e) {
+      throw ExceptionHandler.handleException(e);
+    }
+  }
+
+  /// Upload a user profile
+  Future<void> uploadUserProfile(String id, String profileImagePath) async {
+    // Implement the logic to upload user profile image to storage and update user document with the image path
+  }
+
+  /// Upload a group of turf images
+  Future<void> uploadTurfImages(String id, List<String> imagePaths) async {
+    // Implement the logic to upload turf images to storage and update user document with the image paths
   }
 }

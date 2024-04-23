@@ -5,12 +5,12 @@ import 'package:owners_side_of_turf_booking/view_model/Getx/usermodel_controller
 import '../user/user_repositories.dart';
 import 'firebase_exceptionhandler.dart';
 
-class AuthenticationRepository {
+class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? get authUser => _auth.currentUser;
 
-  var userController = UserController.instance;
+  UserController userController = Get.find();
 
   Future<UserCredential> registerWithEmailAndPassword(String email) async {
     try {
@@ -25,28 +25,12 @@ class AuthenticationRepository {
 
   Future<bool> signInWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      final user = await UserRepository().getUserById(userCredential.user!.uid);
-
-      userController.updateValues(
-          id: userCredential.user!.uid,
-          closingTime: user.closingTime,
-          courtDescription: user.courtDescription,
-          courtEmailAddress: user.courtEmailAddress,
-          courtLocation: user.courtLocation,
-          courtName: user.courtName,
-          courtPhoneNumber: user.courtPhoneNumber,
-          images: user.images,
-          isOwner: user.isOwner,
-          isRegistered: user.isRegistered,
-          openingTime: user.openingTime,
-          ownerEmailAddress: user.ownerEmailAddress,
-          ownerFullName: user.ownerFullName,
-          ownerPhoneNumber: user.ownerPhoneNumber,
-          ownerPhoto: user.ownerPhoto);
+      UserRepository userRepository = Get.find();
+      final user = await userRepository.getUserById();
       return user.isOwner;
     } catch (e) {
       throw ExceptionHandler.handleException(e);

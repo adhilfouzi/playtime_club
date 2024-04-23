@@ -9,6 +9,8 @@ import '../../utils/portion/loadingpopup.dart';
 import '../../view/course/bottom_navigationbar_widget.dart';
 
 class SigninController extends GetxController {
+  static SigninController get instance => Get.find();
+
   final TextEditingController emailTextEditingController =
       TextEditingController();
   final TextEditingController passwordTextEditingController =

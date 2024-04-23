@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../controller/formater.dart';
 
 class UserModel {
@@ -49,6 +51,24 @@ class UserModel {
       ownerEmailAddress: json['ownerEmailAddress'] ?? '',
       isOwner: json['isOwner'] ?? false,
       isRegistered: json['isRegistered'] ?? false,
+    );
+  }
+  factory UserModel.emptyUserModel() {
+    return UserModel(
+      courtName: '',
+      courtPhoneNumber: '',
+      courtEmailAddress: '',
+      courtDescription: '',
+      openingTime: '',
+      closingTime: '',
+      courtLocation: '',
+      images: '',
+      ownerPhoto: '',
+      ownerFullName: '',
+      ownerPhoneNumber: '',
+      ownerEmailAddress: '',
+      isOwner: false,
+      isRegistered: false,
     );
   }
 
@@ -107,6 +127,26 @@ class UserModel {
       'isOwner': isOwner,
       'isRegistered': isRegistered,
     };
+  }
+
+  factory UserModel.fromSnapshot(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    return UserModel(
+      courtName: data['courtName'] ?? '',
+      courtPhoneNumber: data['courtPhoneNumber'] ?? '',
+      courtEmailAddress: data['courtEmailAddress'] ?? '',
+      courtDescription: data['courtDescription'] ?? '',
+      openingTime: data['openingTime'] ?? '',
+      closingTime: data['closingTime'] ?? '',
+      courtLocation: data['courtLocation'] ?? '',
+      images: data['images'] ?? '',
+      ownerPhoto: data['ownerPhoto'] ?? '',
+      ownerFullName: data['ownerFullName'] ?? '',
+      ownerPhoneNumber: data['ownerPhoneNumber'] ?? '',
+      ownerEmailAddress: data['ownerEmailAddress'] ?? '',
+      isOwner: data['isOwner'] ?? true,
+      isRegistered: data['isRegistered'] ?? false,
+    );
   }
 
   String get formattedOwnerPhoneNumber =>

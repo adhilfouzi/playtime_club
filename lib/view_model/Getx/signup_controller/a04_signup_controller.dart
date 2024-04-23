@@ -4,6 +4,7 @@ import '../../../../utils/portion/snackbar.dart';
 import '../../../../view/course/bottom_navigationbar_widget.dart';
 
 class A04SignupController extends GetxController {
+  static A04SignupController get instance => Get.find();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();

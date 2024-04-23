@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // Import GetX package
+import 'package:get/get.dart';
 import 'package:owners_side_of_turf_booking/utils/portion/snackbar.dart';
 import 'package:owners_side_of_turf_booking/view/onboarding/boarding/account_request_screen.dart';
 import '../../../model/controller/validator.dart';
