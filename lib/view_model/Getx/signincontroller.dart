@@ -6,7 +6,6 @@ import 'package:owners_side_of_turf_booking/utils/portion/snackbar.dart';
 
 import '../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../utils/portion/loadingpopup.dart';
-import '../../view/course/bottom_navigationbar_widget.dart';
 
 class SigninController extends GetxController {
   static SigninController get instance => Get.find();
@@ -24,16 +23,9 @@ class SigninController extends GetxController {
       var email = emailTextEditingController.text;
       var password = passwordTextEditingController.text;
 
-      Get.to(() => const LoadingPopup()); // Using Get.to to navigate
-      bool user = await AuthenticationRepository()
+      Get.to(const LoadingPopup());
+      await AuthenticationRepository()
           .signInWithEmailAndPassword(email, password);
-
-      if (user) {
-        Get.offAll(() => const MyBottomNavigationBar());
-      } else {
-        // Handle error
-        log("Some error happened");
-      }
     } catch (e) {
       // Handle error
       Get.back();

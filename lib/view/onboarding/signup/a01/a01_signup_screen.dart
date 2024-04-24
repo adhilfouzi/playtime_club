@@ -17,7 +17,7 @@ class A01SignupScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomBottomAppBar(),
+        appBar: const SignupAppBar(noLeading: true),
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.02, vertical: height * 0.025),

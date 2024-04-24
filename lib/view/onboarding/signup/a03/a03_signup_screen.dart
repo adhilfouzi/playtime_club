@@ -16,7 +16,9 @@ class A03SignupScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomBottomAppBar(),
+        appBar: const SignupAppBar(
+          noLeading: false,
+        ),
         body: Column(
           children: [
             const Text('Upload minimum 3 images of your Business'),

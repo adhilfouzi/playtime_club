@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../view_model/Getx/signup_controller/a02_signup_controller.dart';
 import '../const/colors.dart';
 
 class TimePicker extends StatefulWidget {
@@ -13,13 +15,23 @@ class TimePicker extends StatefulWidget {
 }
 
 class _TimePickerState extends State<TimePicker> {
-  TimeOfDay? openingTime;
-  TimeOfDay? closingTime;
+  A02SignupController controller = Get.find();
+  late TimeOfDay? openingTime;
+  late TimeOfDay? closingTime;
+
+  @override
+  void initState() {
+    super.initState();
+    openingTime = controller.openingTimeFetch;
+    closingTime = controller.closingTimeFetch;
+  }
 
   Future<void> _selectTime(bool isOpening) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: isOpening
+          ? openingTime ?? TimeOfDay.now()
+          : closingTime ?? TimeOfDay.now(),
     );
     if (picked != null && mounted) {
       setState(() {

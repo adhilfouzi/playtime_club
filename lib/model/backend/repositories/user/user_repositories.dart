@@ -16,7 +16,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  /// Fetch user data from Firestore by user ID
+  /// Fetch user data from Firestore without user ID
   Future<UserModel> getUserById() async {
     try {
       DocumentSnapshot snapshot = await _db
@@ -33,8 +33,22 @@ class UserRepository extends GetxController {
     }
   }
 
+  /// Fetch user data from Firestore by user ID
+  Future<UserModel> fetchUserdetails(String? id) async {
+    try {
+      DocumentSnapshot snapshot = await _db.collection("Owner").doc(id).get();
+      if (snapshot.exists) {
+        return UserModel.fromSnapshot(snapshot);
+      } else {
+        return UserModel.emptyUserModel();
+      }
+    } catch (e) {
+      throw ExceptionHandler.handleException(e);
+    }
+  }
+
   /// Update a specific field in a user's collection
-  Future<void> updateUserField(
+  Future<void> updateSpecificField(
       {required String fieldName, required dynamic value}) async {
     try {
       await _db
@@ -43,6 +57,17 @@ class UserRepository extends GetxController {
           .update({
         fieldName: value,
       });
+    } catch (e) {
+      throw ExceptionHandler.handleException(e);
+    }
+  }
+
+  Future<void> updateUserField({required UserModel userMdel}) async {
+    try {
+      await _db
+          .collection("Owner")
+          .doc(AuthenticationRepository.instance.authUser!.uid)
+          .update(userMdel.toJson());
     } catch (e) {
       throw ExceptionHandler.handleException(e);
     }

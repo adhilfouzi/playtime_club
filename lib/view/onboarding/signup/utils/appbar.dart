@@ -51,21 +51,22 @@ class IntroAppbar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class CustomBottomAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class SignupAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function()? leading;
-
-  const CustomBottomAppBar({super.key, this.leading});
+  final bool noLeading;
+  const SignupAppBar({super.key, this.leading, required this.noLeading});
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(Ionicons.chevron_back_outline),
-        onPressed: leading ?? () => Navigator.of(context).pop(),
-      ),
+      leading: noLeading
+          ? const SizedBox()
+          : IconButton(
+              icon: const Icon(Ionicons.chevron_back_outline),
+              onPressed: leading ?? () => Navigator.of(context).pop(),
+            ),
       title: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

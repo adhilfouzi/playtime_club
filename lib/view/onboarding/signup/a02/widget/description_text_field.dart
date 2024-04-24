@@ -34,7 +34,7 @@ class DescriptionTextField extends StatelessWidget {
       },
       hintText: "Description about turf",
       labelText: 'About Court',
-      controller: controller.descriptionAboutTurfTextEditingController,
+      controller: controller.descriptionController,
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
     );

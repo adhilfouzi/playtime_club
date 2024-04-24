@@ -20,7 +20,9 @@ class A02SignupScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomBottomAppBar(),
+        appBar: const SignupAppBar(
+          noLeading: false,
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: formKey,

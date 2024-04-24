@@ -3,20 +3,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controller/formater.dart';
 
 class UserModel {
-  final String courtName;
-  final String courtPhoneNumber;
-  final String courtEmailAddress;
-  final String courtDescription;
-  final String openingTime;
-  final String closingTime;
-  final String courtLocation;
-  final String images;
-  final String ownerPhoto;
-  final String ownerFullName;
-  final String ownerPhoneNumber;
-  final String ownerEmailAddress;
-  final bool isOwner;
-  final bool isRegistered;
+  String courtName;
+  String courtPhoneNumber;
+  String courtEmailAddress;
+  String courtDescription;
+  String openingTime;
+  String closingTime;
+  String courtLocation;
+  String images;
+  String ownerPhoto;
+  String ownerFullName;
+  String ownerPhoneNumber;
+  String ownerEmailAddress;
+  bool isOwner;
+  bool isRegistered;
 
   UserModel({
     required this.courtName,
