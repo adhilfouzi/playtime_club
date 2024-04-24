@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../model/controller/validator.dart';
 import '../../../../../utils/portion/textfield.dart';
 import '../../../../../view_model/Getx/signup_controller/a01signup_controller.dart';

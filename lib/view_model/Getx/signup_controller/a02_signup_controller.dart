@@ -42,7 +42,7 @@ class A02SignupController extends GetxController {
     return '${time.hour}:${time.minute}';
   }
 
-  void submit() {
+  void submit() async {
     if (openingTimeFetch == null && closingTimeFetch == null) {
       CustomSnackbar.showError('Please fill in all required fields.');
       return;

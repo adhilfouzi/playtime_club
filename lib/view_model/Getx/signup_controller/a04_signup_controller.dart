@@ -24,7 +24,7 @@ class A04SignupController extends GetxController {
     emailController.text = userController.user.value.ownerEmailAddress;
   }
 
-  void submit() {
+  void submit() async {
     if (formKey.currentState!.validate()) {
       if (!privacyPolicyChecked.value) {
         CustomSnackbar.showError("Need to accept the privacy & policy");
