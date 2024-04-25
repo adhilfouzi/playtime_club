@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../utils/const/image_name.dart';
 import 'utils/appbar.dart';
 import '../../../utils/portion/button.dart';
@@ -64,8 +65,7 @@ class A05SignupScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.05, vertical: height * 0.02),
           child: Button().mainButton('Verify', context, () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const SubmissionSuccessful()));
+            Get.to(const SubmissionSuccessful());
           }),
         ),
       ),

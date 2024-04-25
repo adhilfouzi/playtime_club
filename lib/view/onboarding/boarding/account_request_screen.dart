@@ -4,7 +4,7 @@ import '../../../model/controller/validator.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
-import '../../../view_model/Getx/accountrequest_controller.dart';
+import '../../../view_model/getx/accountrequest_controller.dart';
 
 class AccountRequestScreen extends StatelessWidget {
   AccountRequestScreen({super.key});
@@ -22,7 +22,7 @@ class AccountRequestScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Get.back(),
               child: const Text('Dismiss'),
             ),
           ],

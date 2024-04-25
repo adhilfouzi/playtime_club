@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/const/image_name.dart';
-import '../../../view_model/Getx/usermodel_controller.dart';
+import '../../../view_model/getx/usermodel_controller.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -16,10 +16,7 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
+        Get.off(() => LoginScreen());
       },
     );
 

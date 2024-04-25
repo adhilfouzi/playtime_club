@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/view/onboarding/signup/a04/widget/a04_textfiled.dart';
-import 'package:owners_side_of_turf_booking/view_model/Getx/signup_controller/a04_signup_controller.dart';
-import '../../../../utils/portion/button.dart';
-import '../utils/appbar.dart';
+import 'package:owners_side_of_turf_booking/view/onboarding/signup/screen/a04/widget/a04_textfiled.dart';
+import '../../../../../utils/portion/button.dart';
+import '../../../../../view_model/getx/signup_controller/a04_signup_controller.dart';
+import '../../utils/appbar.dart';
 import 'widget/owner_photo.dart';
 import 'widget/privacy_policy_checkbox.dart';
 

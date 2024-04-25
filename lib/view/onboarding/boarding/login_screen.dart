@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/utils/portion/snackbar.dart';
-import 'package:owners_side_of_turf_booking/view/onboarding/boarding/account_request_screen.dart';
 import '../../../model/controller/validator.dart';
 import '../../../utils/const/image_name.dart';
 import '../../../utils/portion/button.dart';
+import '../../../utils/portion/snackbar.dart';
 import '../../../utils/portion/textfield.dart';
-import '../../../view_model/Getx/signincontroller.dart';
+import '../../../view_model/getx/signincontroller.dart';
+import 'account_request_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final SigninController signinController =

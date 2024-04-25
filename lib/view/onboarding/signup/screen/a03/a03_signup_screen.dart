@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../view_model/Getx/signup_controller/a03_signup_controller.dart';
-import '../utils/appbar.dart';
-import '../../../../utils/portion/button.dart';
+import '../../../../../view_model/getx/signup_controller/a03_signup_controller.dart';
+import '../../utils/appbar.dart';
+import '../../../../../utils/portion/button.dart';
 
 class A03SignupScreen extends StatelessWidget {
   A03SignupScreen({

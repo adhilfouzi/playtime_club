@@ -1,9 +1,8 @@
 import 'dart:developer';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/model/backend/repositories/authentication/firebase_authentication.dart';
-import 'package:owners_side_of_turf_booking/model/data_model/user_request_model.dart';
-
+import '../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../model/backend/repositories/user/user_repositories.dart';
+import '../../model/data_model/user_request_model.dart';
 
 class UserController extends GetxController {
   // static UserController get instance => Get.find();

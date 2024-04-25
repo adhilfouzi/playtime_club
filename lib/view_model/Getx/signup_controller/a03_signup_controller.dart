@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../view/onboarding/signup/a04/a04_signup_screen.dart';
+import '../../../view/onboarding/signup/screen/a04/a04_signup_screen.dart';
 
 class A03SignupController extends GetxController {
   static A03SignupController get instance => Get.find();

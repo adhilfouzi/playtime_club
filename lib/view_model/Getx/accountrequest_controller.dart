@@ -1,13 +1,12 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/view/onboarding/boarding/login_screen.dart';
 import '../../../model/data_model/user_request_model.dart';
 import '../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../model/backend/repositories/user/user_repositories.dart';
 import '../../utils/portion/loadingpopup.dart';
 import '../../utils/portion/snackbar.dart';
+import '../../view/onboarding/boarding/login_screen.dart';
 
 class AccountRequestController extends GetxController {
   final nameOfUserTextEditingController = TextEditingController();

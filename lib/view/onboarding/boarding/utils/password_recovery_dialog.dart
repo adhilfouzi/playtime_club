@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AlertDialogClass {
   static Widget buildPasswordRecoveryDialog(BuildContext context) {
@@ -26,7 +27,7 @@ class AlertDialogClass {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           child: const Text('Close'),
         ),

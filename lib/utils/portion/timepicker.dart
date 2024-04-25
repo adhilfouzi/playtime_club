@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
-import '../../view_model/Getx/signup_controller/a02_signup_controller.dart';
+import '../../view_model/getx/signup_controller/a02_signup_controller.dart';
 import '../const/colors.dart';
 
 class TimePicker extends StatefulWidget {

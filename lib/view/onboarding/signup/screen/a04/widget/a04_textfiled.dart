@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
-
-import '../../../../../utils/portion/textfield.dart';
-import '../../../../../view_model/Getx/signup_controller/a04_signup_controller.dart';
+import '../../../../../../utils/portion/textfield.dart';
+import '../../../../../../view_model/getx/signup_controller/a04_signup_controller.dart';
 
 class SignupTextFields extends StatelessWidget {
   final A04SignupController controller;

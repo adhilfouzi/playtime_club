@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../utils/const/image_name.dart';
+import '../../../../../../utils/const/image_name.dart';
 
 class OwnerPhoto extends StatelessWidget {
   const OwnerPhoto({super.key});

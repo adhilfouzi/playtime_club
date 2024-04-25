@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../view/onboarding/signup/a02/a02_signup_screen.dart';
+import '../../../view/onboarding/signup/screen/a02/a02_signup_screen.dart';
 import '../usermodel_controller.dart';
 
 class A01SignupController extends GetxController {

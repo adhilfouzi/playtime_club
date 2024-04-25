@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../utils/portion/timepicker.dart';
-import '../../../../view_model/Getx/signup_controller/a02_signup_controller.dart';
-import '../utils/appbar.dart';
-import '../utils/fetch_location.dart';
+import '../../../../../utils/portion/timepicker.dart';
+import '../../../../../view_model/getx/signup_controller/a02_signup_controller.dart';
+import '../../utils/appbar.dart';
+import '../../utils/fetch_location.dart';
 import 'widget/a02_signup_bottom_navigation_bar.dart';
 import 'widget/description_text_field.dart';
 

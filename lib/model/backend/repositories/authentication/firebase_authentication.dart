@@ -2,10 +2,9 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/view_model/Getx/usermodel_controller.dart';
-
 import '../../../../view/course/bottom_navigationbar_widget.dart';
-import '../../../../view/onboarding/signup/a01/a01_signup_screen.dart';
+import '../../../../view/onboarding/signup/screen/a01/a01_signup_screen.dart';
+import '../../../../view_model/getx/usermodel_controller.dart';
 import '../user/user_repositories.dart';
 import 'firebase_exceptionhandler.dart';
 

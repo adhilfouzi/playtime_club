@@ -1,10 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/model/backend/repositories/user/user_repositories.dart';
 import '../../../../utils/portion/snackbar.dart';
 import '../../../../view/course/bottom_navigationbar_widget.dart';
+import '../../../model/backend/repositories/user/user_repositories.dart';
 import '../usermodel_controller.dart';
 
 class A04SignupController extends GetxController {
