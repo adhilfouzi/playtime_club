@@ -22,8 +22,13 @@ class SigninController extends GetxController {
       var password = passwordTextEditingController.text;
 
       Get.to(const LoadingPopup());
-      await AuthenticationRepository()
+      var isError = await AuthenticationRepository()
           .signInWithEmailAndPassword(email, password);
+      if (!isError) {
+        Get.back();
+        CustomSnackbar.showError(
+            "Your account has been deactivated. Please contact support for assistance.");
+      }
     } catch (e) {
       // Handle error
       Get.back();

@@ -26,7 +26,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<bool> signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential auth = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -44,9 +44,11 @@ class AuthenticationRepository extends GetxController {
         } else {
           Get.offAll(() => A01SignupScreen());
         }
+        return true;
       } else {
         // Handle error
         log("Some error happened");
+        return false;
       }
     } catch (e) {
       throw ExceptionHandler.handleException(e);

@@ -36,7 +36,7 @@ class AccountRequestController extends GetxController {
           ownerFullName: nameOfUserTextEditingController.text.trim(),
           ownerPhoneNumber: phoneNumberTextEditingController.text.trim(),
           ownerEmailAddress: "",
-          isOwner: true,
+          isOwner: false,
           isRegistered: false);
 
       // Implement signup logic here (using your preferred service layer)

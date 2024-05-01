@@ -5,6 +5,7 @@ import '../../../utils/const/colors.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
 import '../../../view_model/getx/accountrequest_controller.dart';
+import 'login_screen.dart';
 
 class AccountRequestScreen extends StatelessWidget {
   AccountRequestScreen({super.key});
@@ -22,7 +23,7 @@ class AccountRequestScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           actions: [
             TextButton(
-              onPressed: () => Get.back(),
+              onPressed: () => Get.off(LoginScreen()),
               child: const Text('Dismiss'),
             ),
           ],

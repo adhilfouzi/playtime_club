@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: height * 0.1),
                 TextButton(
                   onPressed: () {
-                    Get.to(AccountRequestScreen());
+                    Get.off(AccountRequestScreen());
                   },
                   child: const Text('Don’t have an account? '),
                 ),
