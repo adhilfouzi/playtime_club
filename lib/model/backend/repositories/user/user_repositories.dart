@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import '../../../data_model/user_request_model.dart';
+import '../../../data_model/owner_model.dart';
 import '../authentication/firebase_authentication.dart';
 import '../authentication/firebase_exceptionhandler.dart';
 
@@ -8,7 +8,7 @@ class UserRepository extends GetxController {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   /// Save user data to Firestore
-  Future<void> saveUserRecord(UserModel user, String id) async {
+  Future<void> saveUserRecord(OwnerModel user, String id) async {
     try {
       await _db.collection("Owner").doc(id).set(user.toJson());
     } catch (e) {
@@ -17,16 +17,16 @@ class UserRepository extends GetxController {
   }
 
   /// Fetch user data from Firestore without user ID
-  Future<UserModel> getUserById() async {
+  Future<OwnerModel> getUserById() async {
     try {
       DocumentSnapshot snapshot = await _db
           .collection("Owner")
           .doc(AuthenticationRepository.instance.authUser!.uid)
           .get();
       if (snapshot.exists) {
-        return UserModel.fromSnapshot(snapshot);
+        return OwnerModel.fromSnapshot(snapshot);
       } else {
-        return UserModel.emptyUserModel();
+        return OwnerModel.emptyOwnerModel();
       }
     } catch (e) {
       throw ExceptionHandler.handleException(e);
@@ -34,13 +34,13 @@ class UserRepository extends GetxController {
   }
 
   /// Fetch user data from Firestore by user ID
-  Future<UserModel> fetchUserdetails(String? id) async {
+  Future<OwnerModel> fetchUserdetails(String? id) async {
     try {
       DocumentSnapshot snapshot = await _db.collection("Owner").doc(id).get();
       if (snapshot.exists) {
-        return UserModel.fromSnapshot(snapshot);
+        return OwnerModel.fromSnapshot(snapshot);
       } else {
-        return UserModel.emptyUserModel();
+        return OwnerModel.emptyOwnerModel();
       }
     } catch (e) {
       throw ExceptionHandler.handleException(e);
@@ -62,7 +62,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> updateUserField({required UserModel userMdel}) async {
+  Future<void> updateUserField({required OwnerModel userMdel}) async {
     try {
       await _db
           .collection("Owner")

@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../model/data_model/user_request_model.dart';
 import '../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../model/backend/repositories/user/user_repositories.dart';
+import '../../model/data_model/owner_model.dart';
 import '../../utils/portion/loadingpopup.dart';
 import '../../utils/portion/snackbar.dart';
 import '../../view/onboarding/boarding/login_screen.dart';
@@ -23,7 +23,10 @@ class AccountRequestController extends GetxController {
     try {
       if (!signupFormKey.currentState!.validate()) return;
       Get.to(() => const LoadingPopup());
-      UserModel user = UserModel(
+      final ownerCredential = await AuthenticationRepository()
+          .registerWithEmailAndPassword(emailTextEditingController.text.trim());
+      OwnerModel owner = OwnerModel(
+          id: ownerCredential.user!.uid,
           courtName: courtNameTextEditingController.text.trim(),
           courtPhoneNumber: phoneNumberTextEditingController.text.trim(),
           courtEmailAddress: emailTextEditingController.text.trim(),
@@ -40,10 +43,9 @@ class AccountRequestController extends GetxController {
           isRegistered: false);
 
       // Implement signup logic here (using your preferred service layer)
-      final userCredential = await AuthenticationRepository()
-          .registerWithEmailAndPassword(user.courtEmailAddress);
+
       // ... Perform signup process (e.g., call an API)
-      await UserRepository().saveUserRecord(user, userCredential.user!.uid);
+      await UserRepository().saveUserRecord(owner, ownerCredential.user!.uid);
 
       // ...
       Get.off(LoginScreen());

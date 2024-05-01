@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import '../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../model/backend/repositories/user/user_repositories.dart';
-import '../../model/data_model/user_request_model.dart';
+import '../../model/data_model/owner_model.dart';
 
 class UserController extends GetxController {
   // static UserController get instance => Get.find();
-  Rx<UserModel> user = UserModel.emptyUserModel().obs;
+  Rx<OwnerModel> user = OwnerModel.emptyOwnerModel().obs;
 
   @override
   void onReady() {
@@ -26,7 +26,7 @@ class UserController extends GetxController {
         user(userd);
       }
     } catch (e) {
-      user(UserModel.emptyUserModel());
+      user(OwnerModel.emptyOwnerModel());
       log("getUserRecord failed");
       log(e.toString());
     }

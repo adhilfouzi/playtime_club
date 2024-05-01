@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../controller/formater.dart';
 
-class UserModel {
+class OwnerModel {
+  String id;
   String courtName;
   String courtPhoneNumber;
   String courtEmailAddress;
@@ -17,7 +19,8 @@ class UserModel {
   bool isOwner;
   bool isRegistered;
 
-  UserModel({
+  OwnerModel({
+    required this.id,
     required this.courtName,
     required this.courtPhoneNumber,
     required this.courtEmailAddress,
@@ -34,26 +37,28 @@ class UserModel {
     required this.isRegistered,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      courtName: json['courtName'] ?? '',
-      courtPhoneNumber: json['courtPhoneNumber'] ?? '',
-      courtEmailAddress: json['courtEmailAddress'] ?? '',
-      courtDescription: json['courtDescription'] ?? '',
-      openingTime: json['openingTime'] ?? '',
-      closingTime: json['closingTime'] ?? '',
-      courtLocation: json['courtLocation'] ?? '',
-      images: json['images'] ?? '',
-      ownerPhoto: json['ownerPhoto'] ?? '',
-      ownerFullName: json['ownerFullName'] ?? '',
-      ownerPhoneNumber: json['ownerPhoneNumber'] ?? '',
-      ownerEmailAddress: json['ownerEmailAddress'] ?? '',
+  factory OwnerModel.fromJson(Map<String, dynamic> json) {
+    return OwnerModel(
+      id: json['id'] ?? "N/A",
+      courtName: json['courtName'] ?? "N/A",
+      courtPhoneNumber: json['courtPhoneNumber'] ?? "N/A",
+      courtEmailAddress: json['courtEmailAddress'] ?? "N/A",
+      courtDescription: json['courtDescription'] ?? "N/A",
+      openingTime: json['openingTime'] ?? "N/A",
+      closingTime: json['closingTime'] ?? "N/A",
+      courtLocation: json['courtLocation'] ?? "N/A",
+      images: json['images'] ?? "N/A",
+      ownerPhoto: json['ownerPhoto'] ?? "N/A",
+      ownerFullName: json['ownerFullName'] ?? "N/A",
+      ownerPhoneNumber: json['ownerPhoneNumber'] ?? "N/A",
+      ownerEmailAddress: json['ownerEmailAddress'] ?? "N/A",
       isOwner: json['isOwner'] ?? false,
       isRegistered: json['isRegistered'] ?? false,
     );
   }
-  factory UserModel.emptyUserModel() {
-    return UserModel(
+  factory OwnerModel.emptyOwnerModel() {
+    return OwnerModel(
+      id: '',
       courtName: '',
       courtPhoneNumber: '',
       courtEmailAddress: '',
@@ -71,20 +76,21 @@ class UserModel {
     );
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      courtName: map['courtName'] ?? '',
-      courtPhoneNumber: map['courtPhoneNumber'] ?? '',
-      courtEmailAddress: map['courtEmailAddress'] ?? '',
-      courtDescription: map['courtDescription'] ?? '',
-      openingTime: map['openingTime'] ?? '',
-      closingTime: map['closingTime'] ?? '',
-      courtLocation: map['courtLocation'] ?? '',
-      images: map['images'] ?? '',
-      ownerPhoto: map['ownerPhoto'] ?? '',
-      ownerFullName: map['ownerFullName'] ?? '',
-      ownerPhoneNumber: map['ownerPhoneNumber'] ?? '',
-      ownerEmailAddress: map['ownerEmailAddress'] ?? '',
+  factory OwnerModel.fromMap(Map<String, dynamic> map) {
+    return OwnerModel(
+      id: map['id'] ?? "N/A",
+      courtName: map['courtName'] ?? "N/A",
+      courtPhoneNumber: map['courtPhoneNumber'] ?? "N/A",
+      courtEmailAddress: map['courtEmailAddress'] ?? "N/A",
+      courtDescription: map['courtDescription'] ?? "N/A",
+      openingTime: map['openingTime'] ?? "N/A",
+      closingTime: map['closingTime'] ?? "N/A",
+      courtLocation: map['courtLocation'] ?? "N/A",
+      images: map['images'] ?? "N/A",
+      ownerPhoto: map['ownerPhoto'] ?? "N/A",
+      ownerFullName: map['ownerFullName'] ?? "N/A",
+      ownerPhoneNumber: map['ownerPhoneNumber'] ?? "N/A",
+      ownerEmailAddress: map['ownerEmailAddress'] ?? "N/A",
       isOwner: map['isOwner'] ?? false,
       isRegistered: map['isRegistered'] ?? false,
     );
@@ -92,6 +98,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'courtName': courtName,
       'courtPhoneNumber': courtPhoneNumber,
       'courtEmailAddress': courtEmailAddress,
@@ -111,6 +118,7 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'courtName': courtName,
       'courtPhoneNumber': courtPhoneNumber,
       'courtEmailAddress': courtEmailAddress,
@@ -128,21 +136,22 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromSnapshot(DocumentSnapshot document) {
+  factory OwnerModel.fromSnapshot(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    return UserModel(
-      courtName: data['courtName'] ?? '',
-      courtPhoneNumber: data['courtPhoneNumber'] ?? '',
-      courtEmailAddress: data['courtEmailAddress'] ?? '',
-      courtDescription: data['courtDescription'] ?? '',
-      openingTime: data['openingTime'] ?? '',
-      closingTime: data['closingTime'] ?? '',
-      courtLocation: data['courtLocation'] ?? '',
-      images: data['images'] ?? '',
-      ownerPhoto: data['ownerPhoto'] ?? '',
-      ownerFullName: data['ownerFullName'] ?? '',
-      ownerPhoneNumber: data['ownerPhoneNumber'] ?? '',
-      ownerEmailAddress: data['ownerEmailAddress'] ?? '',
+    return OwnerModel(
+      id: data['id'] ?? "N/A",
+      courtName: data['courtName'] ?? "N/A",
+      courtPhoneNumber: data['courtPhoneNumber'] ?? "N/A",
+      courtEmailAddress: data['courtEmailAddress'] ?? "N/A",
+      courtDescription: data['courtDescription'] ?? "N/A",
+      openingTime: data['openingTime'] ?? "N/A",
+      closingTime: data['closingTime'] ?? "N/A",
+      courtLocation: data['courtLocation'] ?? "N/A",
+      images: data['images'] ?? "N/A",
+      ownerPhoto: data['ownerPhoto'] ?? "N/A",
+      ownerFullName: data['ownerFullName'] ?? "N/A",
+      ownerPhoneNumber: data['ownerPhoneNumber'] ?? "N/A",
+      ownerEmailAddress: data['ownerEmailAddress'] ?? "N/A",
       isOwner: data['isOwner'] ?? true,
       isRegistered: data['isRegistered'] ?? false,
     );
