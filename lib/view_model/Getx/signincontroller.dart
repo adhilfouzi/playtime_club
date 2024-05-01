@@ -27,7 +27,7 @@ class SigninController extends GetxController {
       if (!isError) {
         Get.back();
         CustomSnackbar.showError(
-            "Your account has been deactivated. Please contact support for assistance.");
+            "Your account has some issue. Please contact support for assistance.");
       }
     } catch (e) {
       // Handle error

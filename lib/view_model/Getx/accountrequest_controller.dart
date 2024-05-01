@@ -37,7 +37,7 @@ class AccountRequestController extends GetxController {
           images: '', // Implement image handling
           ownerPhoto: '', // Implement owner photo handling
           ownerFullName: nameOfUserTextEditingController.text.trim(),
-          ownerPhoneNumber: phoneNumberTextEditingController.text.trim(),
+          ownerPhoneNumber: '',
           ownerEmailAddress: "",
           isOwner: false,
           isRegistered: false);
