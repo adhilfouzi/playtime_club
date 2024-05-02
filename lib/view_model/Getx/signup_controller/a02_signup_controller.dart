@@ -8,9 +8,11 @@ import '../usermodel_controller.dart';
 class A02SignupController extends GetxController {
   static A02SignupController get instance => Get.find();
 
-  final TextEditingController descriptionController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final locationfindTextEditingController = TextEditingController();
   TimeOfDay? openingTimeFetch;
   TimeOfDay? closingTimeFetch;
+  var isOpen24Hours = false.obs;
 
   UserController userController = Get.find();
 
@@ -18,6 +20,9 @@ class A02SignupController extends GetxController {
   void onInit() {
     super.onInit();
     descriptionController.text = userController.user.value.courtDescription;
+    locationfindTextEditingController.text =
+        userController.user.value.courtLocation;
+    isOpen24Hours.value = userController.user.value.is24h;
     // Convert string to TimeOfDay
     openingTimeFetch =
         convertToTimeOfDay(userController.user.value.openingTime);
@@ -51,6 +56,7 @@ class A02SignupController extends GetxController {
         convertTimeOfDayToString(openingTimeFetch!);
     userController.user.value.closingTime =
         convertTimeOfDayToString(closingTimeFetch!);
+    userController.user.value.is24h = isOpen24Hours.value;
     Get.to(A03SignupScreen());
     log(userController.user.value.closingTime);
     log(userController.user.value.openingTime);

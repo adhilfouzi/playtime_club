@@ -16,6 +16,7 @@ class OwnerModel {
   String ownerFullName;
   String ownerPhoneNumber;
   String ownerEmailAddress;
+  bool is24h;
   bool isOwner;
   bool isRegistered;
 
@@ -33,6 +34,7 @@ class OwnerModel {
     required this.ownerFullName,
     required this.ownerPhoneNumber,
     required this.ownerEmailAddress,
+    required this.is24h,
     required this.isOwner,
     required this.isRegistered,
   });
@@ -52,6 +54,7 @@ class OwnerModel {
       ownerFullName: json['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: json['ownerPhoneNumber'] ?? "N/A",
       ownerEmailAddress: json['ownerEmailAddress'] ?? "N/A",
+      is24h: json['is24h'] ?? false,
       isOwner: json['isOwner'] ?? false,
       isRegistered: json['isRegistered'] ?? false,
     );
@@ -71,6 +74,7 @@ class OwnerModel {
       ownerFullName: '',
       ownerPhoneNumber: '',
       ownerEmailAddress: '',
+      is24h: false,
       isOwner: false,
       isRegistered: false,
     );
@@ -91,6 +95,7 @@ class OwnerModel {
       ownerFullName: map['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: map['ownerPhoneNumber'] ?? "N/A",
       ownerEmailAddress: map['ownerEmailAddress'] ?? "N/A",
+      is24h: map['is24h'] ?? false,
       isOwner: map['isOwner'] ?? false,
       isRegistered: map['isRegistered'] ?? false,
     );
@@ -111,6 +116,7 @@ class OwnerModel {
       'ownerFullName': ownerFullName,
       'ownerPhoneNumber': ownerPhoneNumber,
       'ownerEmailAddress': ownerEmailAddress,
+      'is24h': is24h,
       'isOwner': isOwner,
       'isRegistered': isRegistered,
     };
@@ -131,6 +137,7 @@ class OwnerModel {
       'ownerFullName': ownerFullName,
       'ownerPhoneNumber': ownerPhoneNumber,
       'ownerEmailAddress': ownerEmailAddress,
+      'is24h': is24h,
       'isOwner': isOwner,
       'isRegistered': isRegistered,
     };
@@ -152,7 +159,8 @@ class OwnerModel {
       ownerFullName: data['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: data['ownerPhoneNumber'] ?? "N/A",
       ownerEmailAddress: data['ownerEmailAddress'] ?? "N/A",
-      isOwner: data['isOwner'] ?? true,
+      is24h: data['is24h'] ?? false,
+      isOwner: data['isOwner'] ?? false,
       isRegistered: data['isRegistered'] ?? false,
     );
   }

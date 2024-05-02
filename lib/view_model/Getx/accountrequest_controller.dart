@@ -34,11 +34,12 @@ class AccountRequestController extends GetxController {
           openingTime: '',
           closingTime: '',
           courtLocation: locationTextEditingController.text.trim(),
-          images: '', // Implement image handling
-          ownerPhoto: '', // Implement owner photo handling
+          images: '',
+          ownerPhoto: '',
           ownerFullName: nameOfUserTextEditingController.text.trim(),
           ownerPhoneNumber: '',
           ownerEmailAddress: "",
+          is24h: false,
           isOwner: false,
           isRegistered: false);
 

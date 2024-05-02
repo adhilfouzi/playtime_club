@@ -5,7 +5,7 @@ import '../../view_model/getx/signup_controller/a02_signup_controller.dart';
 import '../const/colors.dart';
 
 class TimePicker extends StatefulWidget {
-  final void Function(TimeOfDay?, TimeOfDay?) onTimeSelected;
+  final void Function(TimeOfDay?, TimeOfDay?, bool) onTimeSelected;
 
   const TimePicker({super.key, required this.onTimeSelected});
 
@@ -17,12 +17,14 @@ class _TimePickerState extends State<TimePicker> {
   A02SignupController controller = Get.find();
   late TimeOfDay? openingTime;
   late TimeOfDay? closingTime;
+  bool isOpen24Hours = false;
 
   @override
   void initState() {
     super.initState();
     openingTime = controller.openingTimeFetch;
     closingTime = controller.closingTimeFetch;
+    isOpen24Hours = controller.isOpen24Hours.value;
   }
 
   Future<void> _selectTime(bool isOpening) async {
@@ -40,7 +42,7 @@ class _TimePickerState extends State<TimePicker> {
           closingTime = picked;
         }
       });
-      widget.onTimeSelected(openingTime, closingTime);
+      widget.onTimeSelected(openingTime, closingTime, isOpen24Hours);
     }
   }
 
@@ -48,34 +50,74 @@ class _TimePickerState extends State<TimePicker> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: width * 0.045, vertical: height * 0.002),
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(width: width * 0.02),
+            Checkbox(
+              value: isOpen24Hours,
+              onChanged: (value) {
+                setState(() {
+                  isOpen24Hours = value ?? false;
+                  if (isOpen24Hours) {
+                    openingTime = const TimeOfDay(hour: 0, minute: 0);
+                    closingTime = const TimeOfDay(hour: 0, minute: 0);
+                    widget.onTimeSelected(
+                        openingTime, closingTime, isOpen24Hours);
+                  }
+                });
+              },
+            ),
+            const Text(
+              'Open 24 Hours',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
-        color: CustomColor.secondarybackgroundColor,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildTimeSelector(
-                title: 'Opening:',
-                time: openingTime,
-                onPressed: () => _selectTime(true),
+        SizedBox(height: height * 0.002),
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: isOpen24Hours ? 0 : height * 0.1,
+          ),
+          child: AnimatedOpacity(
+            opacity: isOpen24Hours ? 0.0 : 1.0,
+            duration: const Duration(milliseconds: 300),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.045, vertical: height * 0.002),
+              child: Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                color: CustomColor.secondarybackgroundColor,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildTimeSelector(
+                        title: 'Opening:',
+                        time: openingTime,
+                        onPressed: () => _selectTime(true),
+                      ),
+                      _buildTimeSelector(
+                        title: 'Closing:',
+                        time: closingTime,
+                        onPressed: () => _selectTime(false),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              _buildTimeSelector(
-                title: 'Closing:',
-                time: closingTime,
-                onPressed: () => _selectTime(false),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -91,10 +133,7 @@ class _TimePickerState extends State<TimePicker> {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
           Row(
