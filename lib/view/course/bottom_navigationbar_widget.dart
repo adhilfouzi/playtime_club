@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../../utils/const/icons_image.dart';
-import 'bank/transaction.dart';
+import 'slot_request/slot_request_screen.dart';
 import 'home/home_screen.dart';
 import 'reserve/mybooking_screen.dart';
 import 'profile/userprofle_screen.dart';
@@ -19,7 +19,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const Transaction(),
+    const SlotRequest(),
     const MyBooking(),
     const UserProfile(),
   ];
