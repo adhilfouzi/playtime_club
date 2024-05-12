@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/const/icons_image.dart';
 import '../../../utils/const/image_name.dart';
+import '../../../view_model/course/slot_request_controller.dart';
 import '../../onboarding/signup/screen/a01/a01_signup_screen.dart';
 import '../portion/home_appbar.dart';
 
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    Get.put(SlotRequestController());
 
     return Scaffold(
       appBar: const HomeScreenAppBar(),
