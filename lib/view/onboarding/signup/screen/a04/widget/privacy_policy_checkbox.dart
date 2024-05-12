@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../../view_model/getx/signup_controller/a04_signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/a04_signup_controller.dart';
 
 class PrivacyPolicyCheckbox extends StatelessWidget {
   final A04SignupController controller;

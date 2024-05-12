@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../utils/portion/snackbar.dart';
 import '../../../../view/course/bottom_navigationbar_widget.dart';
 import '../../../model/backend/repositories/user/user_repositories.dart';
-import '../usermodel_controller.dart';
+import '../../course/usermodel_controller.dart';
 
 class A04SignupController extends GetxController {
   static A04SignupController get instance => Get.find();

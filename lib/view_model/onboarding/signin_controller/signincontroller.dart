@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../model/backend/repositories/authentication/firebase_authentication.dart';
-import '../../utils/portion/loadingpopup.dart';
-import '../../utils/portion/snackbar.dart';
+import '../../../model/backend/repositories/authentication/firebase_authentication.dart';
+import '../../../utils/portion/loadingpopup.dart';
+import '../../../utils/portion/snackbar.dart';
 
 class SigninController extends GetxController {
   static SigninController get instance => Get.find();

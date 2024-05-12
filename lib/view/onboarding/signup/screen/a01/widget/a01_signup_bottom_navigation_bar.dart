@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../../utils/portion/button.dart';
-import '../../../../../../view_model/getx/signup_controller/a01signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/a01signup_controller.dart';
 
 class A01SignupBottomNavigationBar extends StatelessWidget {
   final GlobalKey<FormState> formKey;

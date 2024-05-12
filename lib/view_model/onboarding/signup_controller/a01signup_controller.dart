@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../view/onboarding/signup/screen/a02/a02_signup_screen.dart';
-import '../usermodel_controller.dart';
+import '../../course/usermodel_controller.dart';
 
 class A01SignupController extends GetxController {
   static A01SignupController get instance => Get.find();

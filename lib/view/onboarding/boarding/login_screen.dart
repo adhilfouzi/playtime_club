@@ -5,7 +5,7 @@ import '../../../utils/const/image_name.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/snackbar.dart';
 import '../../../utils/portion/textfield.dart';
-import '../../../view_model/getx/signincontroller.dart';
+import '../../../view_model/onboarding/signin_controller/signincontroller.dart';
 import 'account_request_screen.dart';
 
 class LoginScreen extends StatelessWidget {

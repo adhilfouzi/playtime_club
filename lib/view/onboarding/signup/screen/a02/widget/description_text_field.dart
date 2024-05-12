@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../model/controller/validator.dart';
 import '../../../../../../utils/const/colors.dart';
 import '../../../../../../utils/portion/textfield.dart';
-import '../../../../../../view_model/getx/signup_controller/a02_signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/a02_signup_controller.dart';
 
 class DescriptionTextField extends StatelessWidget {
   final A02SignupController controller;

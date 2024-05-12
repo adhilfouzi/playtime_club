@@ -4,7 +4,7 @@ import '../../../model/controller/validator.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
-import '../../../view_model/getx/accountrequest_controller.dart';
+import '../../../view_model/onboarding/signin_controller/accountrequest_controller.dart';
 import 'login_screen.dart';
 
 class AccountRequestScreen extends StatelessWidget {

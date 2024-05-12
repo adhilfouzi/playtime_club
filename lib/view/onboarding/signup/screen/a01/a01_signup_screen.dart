@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../view_model/getx/signup_controller/a01signup_controller.dart';
+import '../../../../../view_model/onboarding/signup_controller/a01signup_controller.dart';
 import '../../utils/appbar.dart';
 import 'widget/a01_signup_bottom_navigation_bar.dart';
 import 'widget/signup_text_fields.dart';
