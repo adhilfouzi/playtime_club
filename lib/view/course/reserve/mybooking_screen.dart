@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../view_model/course/slot_request_controller.dart';
+import '../slot_request/view_booked_details.dart';
 
 class Reservation extends StatelessWidget {
   const Reservation({super.key});
@@ -71,6 +72,17 @@ class Reservation extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ListTile(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return ViewBookingDetails(
+                                          booking: controller
+                                              .approvedBookings[index],
+                                        ); // Show the booking details dialog
+                                      },
+                                    );
+                                  },
                                   leading: const CircleAvatar(
                                     radius: 30,
                                     backgroundImage:

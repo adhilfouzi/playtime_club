@@ -75,7 +75,7 @@ class SlotRequestController extends GetxController {
 
   String dateTimeToString(DateTime dateTime) {
     // Using the DateFormat class from the intl package to format the date and time
-    DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm a');
     String formattedDateTime = dateFormat.format(dateTime);
     return formattedDateTime;
   }
