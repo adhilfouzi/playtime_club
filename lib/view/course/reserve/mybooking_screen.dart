@@ -5,11 +5,15 @@ import 'package:intl/intl.dart';
 import '../../../view_model/course/slot_request_controller.dart';
 
 class Reservation extends StatelessWidget {
-  const Reservation({Key? key});
+  const Reservation({super.key});
 
   @override
   Widget build(BuildContext context) {
     final SlotRequestController controller = Get.find();
+    Future<void> refresh() async {
+      // Fetch booking requests again when refreshing
+      await controller.fetchBookingRequests();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -36,15 +40,20 @@ class Reservation extends StatelessWidget {
             } else {
               // Show list of booking requests
               if (controller.approvedBookings.isEmpty) {
-                return const Center(
-                  child: Text("No bookings available"),
+                return RefreshIndicator(
+                  onRefresh: refresh,
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height - 200,
+                      alignment: Alignment.center,
+                      child: Text("No bookings available"),
+                    ),
+                  ),
                 );
               } else {
                 return RefreshIndicator(
-                  onRefresh: () async {
-                    // Call the refresh function when the user pulls down to refresh
-                    await controller.fetchBookingRequests();
-                  },
+                  onRefresh: refresh,
                   child: ListView.builder(
                     itemCount: controller.approvedBookings.length,
                     itemBuilder: (context, index) {

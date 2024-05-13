@@ -36,8 +36,11 @@ class SlotRequestController extends GetxController {
       _requestedBookings.clear();
       // Fetch booking requests from the repository
       final bookings = await _bookingRepository.fetchBookingRequests();
+      DateTime now = DateTime.now();
+      DateTime currentDay = DateTime(now.year, now.month, now.day);
       for (var booking in bookings) {
-        if (booking.status == 'approved') {
+        if (booking.status == 'approved' &&
+            booking.startTime.isAfter(currentDay)) {
           _approvedBookings.add(booking);
         } else if (booking.status == 'pending') {
           _requestedBookings.add(booking);

@@ -4,11 +4,17 @@ import 'package:get/get.dart';
 import '../../../view_model/course/slot_request_controller.dart';
 
 class SlotRequest extends StatelessWidget {
-  const SlotRequest({Key? key}) : super(key: key);
+  const SlotRequest({super.key});
 
   @override
   Widget build(BuildContext context) {
     final SlotRequestController controller = Get.find();
+
+    Future<void> refresh() async {
+      // Fetch booking requests again when refreshing
+      await controller.fetchBookingRequests();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -60,93 +66,90 @@ class SlotRequest extends StatelessWidget {
                   } else {
                     // Show list of booking requests
                     if (controller.requestedBookings.isEmpty) {
-                      return const Center(
-                        child: Text("No bookings available"),
+                      return RefreshIndicator(
+                        onRefresh: refresh,
+                        child: SingleChildScrollView(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height - 200,
+                            alignment: Alignment.center,
+                            child: Text("No bookings available"),
+                          ),
+                        ),
                       );
                     } else {
-                      if (controller.requestedBookings.isEmpty) {
-                        return const Center(
-                          child: Text("no bookings are available"),
-                        );
-                      } else {
-                        return RefreshIndicator(
-                          onRefresh: () async {
-                            // Call the refresh function when the user pulls down to refresh
-                            await controller.fetchBookingRequests();
-                          },
-                          child: ListView.builder(
-                            itemCount: controller.requestedBookings.length,
-                            itemBuilder: (context, index) {
-                              final request =
-                                  controller.requestedBookings[index];
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(request.username,
-                                      style: const TextStyle(fontSize: 14)),
-                                  Text(
-                                      controller
-                                          .dateTimeToString(request.startTime),
-                                      style: const TextStyle(fontSize: 14)),
-                                  PopupMenuButton<String>(
-                                    icon: const Icon(
-                                      Icons.more_vert,
-                                    ),
-                                    itemBuilder: (BuildContext context) =>
-                                        <PopupMenuEntry<String>>[
-                                      const PopupMenuItem<String>(
-                                        value: 'approved',
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.done_all,
-                                              color: Colors.green,
-                                            ),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              'Approve',
-                                              style: TextStyle(fontSize: 13),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      const PopupMenuItem<String>(
-                                        value: 'canceled',
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.cancel_outlined,
-                                              color: Colors.red,
-                                            ),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              "Cancel",
-                                              style: TextStyle(fontSize: 13),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                    onSelected: (String value) {
-                                      switch (value) {
-                                        case 'approved':
-                                          controller.updateBookingStatus(
-                                              request.id!, "approved");
-                                          break;
-                                        case 'canceled':
-                                          controller.updateBookingStatus(
-                                              request.id!, "canceled");
-                                          break;
-                                      }
-                                    },
+                      return RefreshIndicator(
+                        onRefresh: refresh,
+                        child: ListView.builder(
+                          itemCount: controller.requestedBookings.length,
+                          itemBuilder: (context, index) {
+                            final request = controller.requestedBookings[index];
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(request.username,
+                                    style: const TextStyle(fontSize: 14)),
+                                Text(
+                                    controller
+                                        .dateTimeToString(request.startTime),
+                                    style: const TextStyle(fontSize: 14)),
+                                PopupMenuButton<String>(
+                                  icon: const Icon(
+                                    Icons.more_vert,
                                   ),
-                                ],
-                              );
-                            },
-                          ),
-                        );
-                      }
+                                  itemBuilder: (BuildContext context) =>
+                                      <PopupMenuEntry<String>>[
+                                    const PopupMenuItem<String>(
+                                      value: 'approved',
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.done_all,
+                                            color: Colors.green,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            'Approve',
+                                            style: TextStyle(fontSize: 13),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    const PopupMenuItem<String>(
+                                      value: 'canceled',
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.cancel_outlined,
+                                            color: Colors.red,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "Cancel",
+                                            style: TextStyle(fontSize: 13),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                  onSelected: (String value) {
+                                    switch (value) {
+                                      case 'approved':
+                                        controller.updateBookingStatus(
+                                            request.id!, "approved");
+                                        break;
+                                      case 'canceled':
+                                        controller.updateBookingStatus(
+                                            request.id!, "canceled");
+                                        break;
+                                    }
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      );
                     }
                   }
                 },
