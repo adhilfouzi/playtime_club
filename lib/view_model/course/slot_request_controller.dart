@@ -11,11 +11,13 @@ class SlotRequestController extends GetxController {
 
   // Private data members
   final _requestedBookings = <BookingModel>[].obs;
+  final _approvedBookings = <BookingModel>[].obs;
   final _isLoading = false.obs;
   final _errorMessage = RxString('');
 
   // Getters for private data
   List<BookingModel> get requestedBookings => _requestedBookings.toList();
+  List<BookingModel> get approvedBookings => _approvedBookings.toList();
   bool get isLoading => _isLoading.value;
   String get errorMessage => _errorMessage.value;
 
@@ -30,9 +32,17 @@ class SlotRequestController extends GetxController {
     try {
       _isLoading.value = true; // Set loading to true
       _errorMessage.value = ''; // Clear error message
+      _approvedBookings.clear();
+      _requestedBookings.clear();
       // Fetch booking requests from the repository
       final bookings = await _bookingRepository.fetchBookingRequests();
-      _requestedBookings.assignAll(bookings); // Update requested bookings
+      for (var booking in bookings) {
+        if (booking.status == 'approved') {
+          _approvedBookings.add(booking);
+        } else if (booking.status == 'pending') {
+          _requestedBookings.add(booking);
+        }
+      }
     } catch (e) {
       _errorMessage.value =
           'Error fetching booking requests: $e'; // Set error message
