@@ -18,6 +18,7 @@ class A04SignupController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    privacyPolicyChecked.value = userController.user.value.isRegistered;
     fullNameController.text = userController.user.value.ownerFullName;
     phoneNumberController.text = userController.user.value.ownerPhoneNumber;
     emailController.text = userController.user.value.ownerEmailAddress;

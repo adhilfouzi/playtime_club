@@ -5,7 +5,6 @@ import '../../../utils/const/colors.dart';
 import '../../../utils/const/icons_image.dart';
 import '../../../utils/const/image_name.dart';
 import '../../../view_model/course/slot_request_controller.dart';
-import '../../onboarding/signup/screen/a01/a01_signup_screen.dart';
 import '../portion/home_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -135,31 +134,31 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: height * 0.02),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Container(
-                color: CustomColor.mainColor,
-                width: width * 1,
-                height: height * 0.05,
-                child: InkWell(
-                  onTap: () {
-                    Get.to(A01SignupScreen());
-                  },
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text("Slot Allotting"),
-                      ),
-                      Icon(Icons.arrow_forward_ios),
-                      // SizedBox(width: width * 0.002),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(height: height * 0.02),
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(20.0),
+            //   child: Container(
+            //     color: CustomColor.mainColor,
+            //     width: width * 1,
+            //     height: height * 0.05,
+            //     child: InkWell(
+            //       onTap: () {
+            //         Get.to(A01SignupScreen());
+            //       },
+            //       child: const Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Padding(
+            //             padding: EdgeInsets.symmetric(horizontal: 16.0),
+            //             child: Text("Slot Allotting"),
+            //           ),
+            //           Icon(Icons.arrow_forward_ios),
+            //           // SizedBox(width: width * 0.002),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

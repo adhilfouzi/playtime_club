@@ -47,8 +47,7 @@ class SlotRequestController extends GetxController {
         }
       }
     } catch (e) {
-      _errorMessage.value =
-          'Error fetching booking requests: $e'; // Set error message
+      _errorMessage.value = 'Error: $e';
       log('Error fetching booking requests: $e'); // Log the error
     } finally {
       _isLoading.value = false; // Set loading to false

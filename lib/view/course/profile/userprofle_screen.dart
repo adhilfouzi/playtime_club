@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../view_model/course/usermodel_controller.dart';
 import '../../../../view_model/course/profile_controlller.dart';
+import '../../onboarding/signup/screen/a01/a01_signup_screen.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -52,11 +53,13 @@ class UserProfile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: screenHeight * 0.08),
+              _buildButton('Business Profile', screenWidth, screenHeight, () {
+                Get.to(A01SignupScreen());
+              }),
               _buildButton('Change Password', screenWidth, screenHeight, () {
                 ProfileController.changePassword(
                     controller.user.value.courtEmailAddress);
               }),
-              _buildButton('Notification', screenWidth, screenHeight, () {}),
               _buildButton('Help & FAQs', screenWidth, screenHeight, () {
                 ProfileController.helpAndFAQs();
               }),

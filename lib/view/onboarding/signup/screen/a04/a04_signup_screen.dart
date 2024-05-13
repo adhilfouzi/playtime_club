@@ -30,7 +30,11 @@ class A04SignupScreen extends StatelessWidget {
                 SizedBox(height: height * 0.1),
                 const OwnerPhoto(),
                 SignupTextFields(controller: controller),
-                PrivacyPolicyCheckbox(controller: controller),
+                SizedBox(
+                  child: controller.userController.user.value.isRegistered
+                      ? null
+                      : PrivacyPolicyCheckbox(controller: controller),
+                ),
               ],
             ),
           ),
