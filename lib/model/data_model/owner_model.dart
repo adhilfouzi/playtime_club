@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../controller/formater.dart';
 
@@ -8,8 +9,8 @@ class OwnerModel {
   String courtPhoneNumber;
   String courtEmailAddress;
   String courtDescription;
-  String openingTime;
-  String closingTime;
+  TimeOfDay openingTime;
+  TimeOfDay closingTime;
   String courtLocation;
   String images;
   String ownerPhoto;
@@ -66,8 +67,8 @@ class OwnerModel {
       courtPhoneNumber: '',
       courtEmailAddress: '',
       courtDescription: '',
-      openingTime: '',
-      closingTime: '',
+      openingTime: TimeOfDay.now(),
+      closingTime: TimeOfDay.now(),
       courtLocation: '',
       images: '',
       ownerPhoto: '',
@@ -81,14 +82,16 @@ class OwnerModel {
   }
 
   factory OwnerModel.fromMap(Map<String, dynamic> map) {
+    var openingTime = Formatter.timestampToTimeOfDay(map['openingTime']);
+    var closingTime = Formatter.timestampToTimeOfDay(map['closingTime']);
     return OwnerModel(
       id: map['id'] ?? "N/A",
       courtName: map['courtName'] ?? "N/A",
       courtPhoneNumber: map['courtPhoneNumber'] ?? "N/A",
       courtEmailAddress: map['courtEmailAddress'] ?? "N/A",
       courtDescription: map['courtDescription'] ?? "N/A",
-      openingTime: map['openingTime'] ?? "N/A",
-      closingTime: map['closingTime'] ?? "N/A",
+      openingTime: openingTime,
+      closingTime: closingTime,
       courtLocation: map['courtLocation'] ?? "N/A",
       images: map['images'] ?? "N/A",
       ownerPhoto: map['ownerPhoto'] ?? "N/A",
@@ -108,8 +111,8 @@ class OwnerModel {
       'courtPhoneNumber': courtPhoneNumber,
       'courtEmailAddress': courtEmailAddress,
       'courtDescription': courtDescription,
-      'openingTime': openingTime,
-      'closingTime': closingTime,
+      'openingTime': Formatter.timeOfDayToTimestamp(openingTime),
+      'closingTime': Formatter.timeOfDayToTimestamp(closingTime),
       'courtLocation': courtLocation,
       'images': images,
       'ownerPhoto': ownerPhoto,
@@ -145,14 +148,16 @@ class OwnerModel {
 
   factory OwnerModel.fromSnapshot(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    var openingTime = Formatter.timestampToTimeOfDay(data['openingTime']);
+    var closingTime = Formatter.timestampToTimeOfDay(data['closingTime']);
     return OwnerModel(
       id: data['id'] ?? "N/A",
       courtName: data['courtName'] ?? "N/A",
       courtPhoneNumber: data['courtPhoneNumber'] ?? "N/A",
       courtEmailAddress: data['courtEmailAddress'] ?? "N/A",
       courtDescription: data['courtDescription'] ?? "N/A",
-      openingTime: data['openingTime'] ?? "N/A",
-      closingTime: data['closingTime'] ?? "N/A",
+      openingTime: openingTime,
+      closingTime: closingTime,
       courtLocation: data['courtLocation'] ?? "N/A",
       images: data['images'] ?? "N/A",
       ownerPhoto: data['ownerPhoto'] ?? "N/A",

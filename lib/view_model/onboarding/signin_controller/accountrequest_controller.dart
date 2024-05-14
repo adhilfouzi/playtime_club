@@ -27,16 +27,18 @@ class AccountRequestController extends GetxController {
           .registerWithEmailAndPassword(emailTextEditingController.text.trim());
       OwnerModel owner = OwnerModel(
           id: ownerCredential.user!.uid,
-          courtName: courtNameTextEditingController.text.trim(),
+          courtName: courtNameTextEditingController.text.trim().toUpperCase(),
           courtPhoneNumber: phoneNumberTextEditingController.text.trim(),
-          courtEmailAddress: emailTextEditingController.text.trim(),
+          courtEmailAddress:
+              emailTextEditingController.text.trim().toLowerCase(),
           courtDescription: descriptionTextEditingController.text.trim(),
-          openingTime: '',
-          closingTime: '',
+          openingTime: const TimeOfDay(hour: 0, minute: 0),
+          closingTime: const TimeOfDay(hour: 0, minute: 0),
           courtLocation: locationTextEditingController.text.trim(),
           images: '',
           ownerPhoto: '',
-          ownerFullName: nameOfUserTextEditingController.text.trim(),
+          ownerFullName:
+              nameOfUserTextEditingController.text.trim().toUpperCase(),
           ownerPhoneNumber: '',
           ownerEmailAddress: "",
           is24h: false,

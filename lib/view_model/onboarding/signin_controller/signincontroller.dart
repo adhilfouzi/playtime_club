@@ -21,7 +21,7 @@ class SigninController extends GetxController {
       var email = emailTextEditingController.text;
       var password = passwordTextEditingController.text;
 
-      Get.to(const LoadingPopup());
+      Get.to(() => const LoadingPopup());
       var isError = await AuthenticationRepository()
           .signInWithEmailAndPassword(email, password);
       if (!isError) {

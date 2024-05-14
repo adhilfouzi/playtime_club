@@ -24,22 +24,8 @@ class A02SignupController extends GetxController {
         userController.user.value.courtLocation;
     isOpen24Hours.value = userController.user.value.is24h;
     // Convert string to TimeOfDay
-    openingTimeFetch =
-        convertToTimeOfDay(userController.user.value.openingTime);
-    closingTimeFetch =
-        convertToTimeOfDay(userController.user.value.closingTime);
-  }
-
-  TimeOfDay convertToTimeOfDay(String timeString) {
-    try {
-      List<String> parts = timeString.split(':');
-      return TimeOfDay(
-        hour: int.parse(parts[0]),
-        minute: int.parse(parts[1]),
-      );
-    } catch (e) {
-      return TimeOfDay.now();
-    }
+    openingTimeFetch = userController.user.value.openingTime;
+    closingTimeFetch = userController.user.value.closingTime;
   }
 
   String convertTimeOfDayToString(TimeOfDay time) {
@@ -52,14 +38,12 @@ class A02SignupController extends GetxController {
       return;
     }
     userController.user.value.courtDescription = descriptionController.text;
-    userController.user.value.openingTime =
-        convertTimeOfDayToString(openingTimeFetch!);
-    userController.user.value.closingTime =
-        convertTimeOfDayToString(closingTimeFetch!);
+    userController.user.value.openingTime = openingTimeFetch!;
+    userController.user.value.closingTime = closingTimeFetch!;
     userController.user.value.is24h = isOpen24Hours.value;
     Get.to(A03SignupScreen());
-    log(userController.user.value.closingTime);
-    log(userController.user.value.openingTime);
+    log(userController.user.value.closingTime.toString());
+    log(userController.user.value.openingTime.toString());
   }
 
   @override

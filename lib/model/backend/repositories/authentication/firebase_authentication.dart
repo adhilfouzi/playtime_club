@@ -36,7 +36,7 @@ class AuthenticationRepository extends GetxController {
         email: email,
         password: password,
       );
-
+      log(auth.user!.uid);
       UserRepository userRepository = Get.find();
       final user = await userRepository.fetchUserdetails(auth.user!.uid);
 
