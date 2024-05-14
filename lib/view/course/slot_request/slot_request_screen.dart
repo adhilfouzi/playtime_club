@@ -70,11 +70,11 @@ class SlotRequest extends StatelessWidget {
                       return RefreshIndicator(
                         onRefresh: refresh,
                         child: SingleChildScrollView(
-                          physics: AlwaysScrollableScrollPhysics(),
+                          physics: const AlwaysScrollableScrollPhysics(),
                           child: Container(
                             height: MediaQuery.of(context).size.height - 200,
                             alignment: Alignment.center,
-                            child: Text("No bookings available"),
+                            child: const Text("No request available"),
                           ),
                         ),
                       );

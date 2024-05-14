@@ -41,14 +41,16 @@ class OwnerModel {
   });
 
   factory OwnerModel.fromJson(Map<String, dynamic> json) {
+    var openingTime = Formatter.timestampToTimeOfDay(json['openingTime']);
+    var closingTime = Formatter.timestampToTimeOfDay(json['closingTime']);
     return OwnerModel(
       id: json['id'] ?? "N/A",
       courtName: json['courtName'] ?? "N/A",
       courtPhoneNumber: json['courtPhoneNumber'] ?? "N/A",
       courtEmailAddress: json['courtEmailAddress'] ?? "N/A",
       courtDescription: json['courtDescription'] ?? "N/A",
-      openingTime: json['openingTime'] ?? "N/A",
-      closingTime: json['closingTime'] ?? "N/A",
+      openingTime: openingTime,
+      closingTime: closingTime,
       courtLocation: json['courtLocation'] ?? "N/A",
       images: json['images'] ?? "N/A",
       ownerPhoto: json['ownerPhoto'] ?? "N/A",
@@ -132,8 +134,8 @@ class OwnerModel {
       'courtPhoneNumber': courtPhoneNumber,
       'courtEmailAddress': courtEmailAddress,
       'courtDescription': courtDescription,
-      'openingTime': openingTime,
-      'closingTime': closingTime,
+      'openingTime': Formatter.timeOfDayToTimestamp(openingTime),
+      'closingTime': Formatter.timeOfDayToTimestamp(closingTime),
       'courtLocation': courtLocation,
       'images': images,
       'ownerPhoto': ownerPhoto,

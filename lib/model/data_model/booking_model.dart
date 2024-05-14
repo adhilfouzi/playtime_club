@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../controller/formater.dart';
 import 'owner_model.dart';
 
 class BookingModel {
@@ -26,12 +27,14 @@ class BookingModel {
   });
 
   factory BookingModel.fromJson(Map<String, dynamic> json, String id) {
+    var end = Formatter.timestampToDateTime(json['endTime']);
+    var start = Formatter.timestampToDateTime(json['startTime']);
     return BookingModel(
       id: id,
       turf: OwnerModel.fromJson(json['turf'] ?? {}),
       userId: json['userId'] ?? "N/A",
-      startTime: DateTime.parse(json['startTime'] ?? ''),
-      endTime: DateTime.parse(json['endTime'] ?? ''),
+      startTime: start,
+      endTime: end,
       status: json['status'] ?? "N/A",
       username: json['username'] ?? "N/A",
       userEmail: json['userEmail'] ?? "N/A",
@@ -41,15 +44,13 @@ class BookingModel {
 
   factory BookingModel.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    var start = Formatter.timestampToDateTime(data['startTime']);
+    var end = Formatter.timestampToDateTime(data['endTime']);
     return BookingModel(
       turf: OwnerModel.fromJson(data['turf'] ?? {}),
       userId: data['userId'] ?? "N/A",
-      startTime: data['startTime'] != null
-          ? DateTime.parse(data['startTime'])
-          : DateTime.now(),
-      endTime: data['endTime'] != null
-          ? DateTime.parse(data['endTime'])
-          : DateTime.now(),
+      startTime: start,
+      endTime: end,
       status: data['status'] ?? "N/A",
       username: data['username'] ?? "N/A",
       userEmail: data['userEmail'] ?? "N/A",
@@ -62,8 +63,8 @@ class BookingModel {
       'id': id,
       'turf': turf.toJson(),
       'userId': userId,
-      'startTime': startTime.toIso8601String(),
-      'endTime': endTime.toIso8601String(),
+      'startTime': Formatter.dateTimeToTimestamp(startTime),
+      'endTime': Formatter.dateTimeToTimestamp(endTime),
       'status': status,
       'username': username,
       'userEmail': userEmail,
