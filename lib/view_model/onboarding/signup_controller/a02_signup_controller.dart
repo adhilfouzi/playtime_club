@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owners_side_of_turf_booking/model/controller/formater.dart';
 import '../../../utils/portion/snackbar.dart';
 import '../../../view/onboarding/signup/screen/a03/a03_signup_screen.dart';
 import '../../course/usermodel_controller.dart';
@@ -10,6 +11,7 @@ class A02SignupController extends GetxController {
 
   final descriptionController = TextEditingController();
   final locationfindTextEditingController = TextEditingController();
+  final courtPrice = TextEditingController();
   TimeOfDay? openingTimeFetch;
   TimeOfDay? closingTimeFetch;
   var isOpen24Hours = false.obs;
@@ -23,6 +25,7 @@ class A02SignupController extends GetxController {
     locationfindTextEditingController.text =
         userController.user.value.courtLocation;
     isOpen24Hours.value = userController.user.value.is24h;
+    courtPrice.text = userController.user.value.price.toString();
     // Convert string to TimeOfDay
     openingTimeFetch = userController.user.value.openingTime;
     closingTimeFetch = userController.user.value.closingTime;
@@ -41,6 +44,8 @@ class A02SignupController extends GetxController {
     userController.user.value.openingTime = openingTimeFetch!;
     userController.user.value.closingTime = closingTimeFetch!;
     userController.user.value.is24h = isOpen24Hours.value;
+    userController.user.value.price = double.parse(courtPrice.text);
+
     Get.to(A03SignupScreen());
     log(userController.user.value.closingTime.toString());
     log(userController.user.value.openingTime.toString());

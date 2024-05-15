@@ -79,7 +79,7 @@ class Reservation extends StatelessWidget {
                                         return ViewBookingDetails(
                                           booking: controller
                                               .approvedBookings[index],
-                                        ); // Show the booking details dialog
+                                        );
                                       },
                                     );
                                   },
@@ -111,7 +111,7 @@ class Reservation extends StatelessWidget {
                                             size: 16),
                                         const SizedBox(width: 4),
                                         Text(
-                                          DateFormat('dd-MMM-yyyy')
+                                          DateFormat('dd-MMM-yy')
                                               .format(request.startTime),
                                           style: const TextStyle(fontSize: 14),
                                         ),
@@ -122,7 +122,7 @@ class Reservation extends StatelessWidget {
                                         const Icon(Icons.access_time, size: 16),
                                         const SizedBox(width: 4),
                                         Text(
-                                          '${DateFormat('hh:mm a').format(request.startTime)} to ${DateFormat('hh:mm a').format(request.endTime)}',
+                                          '${DateFormat('hh:mm aa').format(request.startTime)} to ${DateFormat('hh:mm aa').format(request.endTime)}',
                                           style: const TextStyle(fontSize: 14),
                                         ),
                                       ],

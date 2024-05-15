@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../../model/data_model/booking_model.dart';
+import '../../../model/controller/formater.dart';
+import '../../../model/controller/url.dart';
 
 class ViewBookingDetails extends StatelessWidget {
   final BookingModel booking;
@@ -29,10 +29,13 @@ class ViewBookingDetails extends StatelessWidget {
             _buildDetailRow(title: 'Turf Name', value: booking.turf.courtName),
             _buildDetailRow(title: 'Place', value: booking.turf.courtLocation),
             _buildDetailRow(
-                title: 'Date', value: formatDate(booking.startTime)),
+                title: 'Date',
+                value: Formatter.dateTimetoString(booking.startTime)),
             _buildDetailRow(
                 title: 'Time',
-                value: formatTimeRange(booking.startTime, booking.endTime)),
+                value: Formatter.timeRange(booking.startTime, booking.endTime)),
+            _buildDetailRow(
+                title: 'Time', value: Formatter.formatCurrency(booking.price)),
             const SizedBox(height: 10),
             const Divider(),
             const SizedBox(height: 10),
@@ -53,7 +56,7 @@ class ViewBookingDetails extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             whiteButton('Call', context, () {
-              _makePhoneCall(booking.userNumber);
+              Url.makePhoneCall(booking.turf.courtPhoneNumber);
             }),
           ],
         ),
@@ -79,16 +82,6 @@ class ViewBookingDetails extends StatelessWidget {
       ),
       child: Text(text),
     );
-  }
-
-  // Function to make a phone call
-  Future<void> _makePhoneCall(String phoneNumber) async {
-    final url = 'tel:+91$phoneNumber';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 
   Widget _buildDetailRow({required String title, required String value}) {
@@ -118,15 +111,5 @@ class ViewBookingDetails extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String formatTimeRange(DateTime start, DateTime end) {
-    String startTime = DateFormat('hh:mm a').format(start);
-    String endTime = DateFormat('hh:mm a').format(end);
-    return '$startTime to $endTime';
-  }
-
-  String formatDate(DateTime date) {
-    return DateFormat('dd-MMM-yyyy').format(date);
   }
 }

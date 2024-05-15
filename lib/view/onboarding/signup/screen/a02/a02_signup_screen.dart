@@ -31,6 +31,15 @@ class A02SignupScreen extends StatelessWidget {
               children: [
                 SizedBox(height: height * 0.2),
                 DescriptionTextField(controller: controller),
+                MyTextField(
+                  textInputAction: TextInputAction.next,
+                  controller: controller.courtPrice,
+                  labelText: 'Court Price as per hour',
+                  validator: (value) =>
+                      InputValidators.validateEmpty('Location', value),
+                  hintText: "Eg: 1000",
+                  keyboardType: TextInputType.emailAddress,
+                ),
                 TimePicker(
                   onTimeSelected: (openingTime, closingTime, isOpen24Hours) {
                     controller.openingTimeFetch = openingTime;

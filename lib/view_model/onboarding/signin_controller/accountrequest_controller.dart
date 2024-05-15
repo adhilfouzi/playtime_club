@@ -35,6 +35,7 @@ class AccountRequestController extends GetxController {
           openingTime: const TimeOfDay(hour: 0, minute: 0),
           closingTime: const TimeOfDay(hour: 0, minute: 0),
           courtLocation: locationTextEditingController.text.trim(),
+          price:0,
           images: '',
           ownerPhoto: '',
           ownerFullName:
