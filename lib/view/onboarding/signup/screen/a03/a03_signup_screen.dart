@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../view_model/onboarding/signup_controller/a03_signup_controller.dart';
+import '../../../../../view_model/onboarding/signup_controller/image_controller.dart';
 import '../../utils/appbar.dart';
 import '../../../../../utils/portion/button.dart';
 
@@ -9,6 +10,7 @@ class A03SignupScreen extends StatelessWidget {
     super.key,
   });
   final controller = Get.put(A03SignupController());
+  final ImageController image = Get.find();
 
   @override
   Widget build(BuildContext context) {

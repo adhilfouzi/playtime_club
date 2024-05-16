@@ -28,7 +28,7 @@ class A04SignupScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: height * 0.1),
-                const OwnerPhoto(),
+                OwnerPhoto(controller: controller),
                 SignupTextFields(controller: controller),
                 SizedBox(
                   child: controller.userController.user.value.isRegistered

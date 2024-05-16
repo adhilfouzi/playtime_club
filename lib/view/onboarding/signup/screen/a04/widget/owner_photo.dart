@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../../../utils/const/image_name.dart';
+import '../../../../../../view_model/course/usermodel_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/a04_signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/image_controller.dart';
 
 class OwnerPhoto extends StatelessWidget {
-  const OwnerPhoto({super.key});
+  final A04SignupController controller;
+  const OwnerPhoto({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
+    final UserController userController = Get.find();
+    final ImageController image = Get.find();
     return Container(
       padding: EdgeInsets.symmetric(
           vertical: height * 0.02, horizontal: width * 0.05),
@@ -16,9 +22,18 @@ class OwnerPhoto extends StatelessWidget {
         children: [
           SizedBox(
             width: width * 0.32,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.asset(profile),
+            child: Obx(
+              () => GestureDetector(
+                onTap: () => image.openDialog(true),
+                child: CircleAvatar(
+                  backgroundImage:
+                      userController.user.value.ownerPhoto.isNotEmpty
+                          ? NetworkImage(userController.user.value.ownerPhoto)
+                          : const AssetImage(profile) as ImageProvider,
+                  radius: 64.0,
+                  backgroundColor: Colors.white,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 10),

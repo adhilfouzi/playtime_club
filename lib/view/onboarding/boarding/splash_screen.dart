@@ -7,6 +7,7 @@ import '../../../model/backend/repositories/authentication/firebase_authenticati
 import '../../../utils/const/colors.dart';
 import '../../../utils/const/image_name.dart';
 import '../../../view_model/course/usermodel_controller.dart';
+import '../../../view_model/onboarding/signup_controller/image_controller.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ImageController());
     return Scaffold(
       backgroundColor: CustomColor.mainColor,
       body: Center(

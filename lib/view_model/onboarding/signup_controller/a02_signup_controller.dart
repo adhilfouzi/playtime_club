@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/model/controller/formater.dart';
 import '../../../utils/portion/snackbar.dart';
 import '../../../view/onboarding/signup/screen/a03/a03_signup_screen.dart';
 import '../../course/usermodel_controller.dart';
