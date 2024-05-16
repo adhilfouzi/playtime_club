@@ -6,16 +6,23 @@ import 'package:firebase_storage/firebase_storage.dart';
 class ProfileRepository {
   // final _storage = FirebaseStorage.instance;
 
-  static Future<String> uploadOwnerprofile(File file) async {
+  static Future<String> uploadImages(File file, bool isProfile) async {
     try {
       final userId = FirebaseAuth.instance.currentUser!.displayName;
       final fileName = file.path.split("/").last;
       final time = DateTime.now().millisecondsSinceEpoch;
-      // Create a reference to the location you want to upload to in Firebase Storage
-      Reference reference = FirebaseStorage.instance
-          .ref()
-          .child('owner_profile/$userId/$time-$fileName');
-
+      // Create a reference to the location you want to upload to in Firebase
+      // Storage
+      late Reference reference;
+      if (isProfile) {
+        reference = FirebaseStorage.instance
+            .ref()
+            .child('owner_profile/$userId/$time-$fileName');
+      } else {
+        reference = FirebaseStorage.instance
+            .ref()
+            .child('turf_images/$userId/$time-$fileName');
+      }
       // Upload the file to Firebase Storage
       UploadTask uploadTask = reference.putFile(file);
 

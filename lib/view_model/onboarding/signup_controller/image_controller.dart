@@ -23,7 +23,7 @@ class ImageController extends GetxController {
       } else {
         if (isProfile) {
           imageProfile.value = File(image.path);
-          await uploadProfileImage();
+          await uploadProfileImage(isProfile);
           imagePath = Rx<String?>(image.path);
         } else {}
       }
@@ -32,16 +32,21 @@ class ImageController extends GetxController {
     }
   }
 
-  Future<void> uploadProfileImage() async {
+  Future<void> uploadProfileImage(bool isProfile) async {
     try {
       if (imageProfile.value != null) {
-        final imageUrl =
-            await ProfileRepository.uploadOwnerprofile(imageProfile.value!);
-        imagePath.value = imageUrl;
-        log(imageUrl);
-        await UserRepository()
-            .updateSpecificField(fieldName: 'ownerPhoto', value: imageUrl);
-        log("update Specific Field");
+        if (isProfile) {
+          final imageUrl = await ProfileRepository.uploadImages(
+              imageProfile.value!, isProfile);
+          imagePath.value = imageUrl;
+          log(imageUrl);
+          await UserRepository()
+              .updateSpecificField(fieldName: 'ownerPhoto', value: imageUrl);
+          log("update Specific Field");
+        } else {
+          //turf images
+        }
+
         await user.getUserRecord();
         CustomSnackbar.showSuccess('Profile image uploaded successfully');
       } else {

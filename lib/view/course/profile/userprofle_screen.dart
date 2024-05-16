@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../../../view_model/course/usermodel_controller.dart';
 import '../../../../view_model/course/profile_controlller.dart';
 import '../../../utils/const/image_name.dart';
-import '../../../view_model/onboarding/signup_controller/image_controller.dart';
 import '../../onboarding/signup/screen/a01/a01_signup_screen.dart';
 
 class UserProfile extends StatelessWidget {
@@ -15,7 +14,6 @@ class UserProfile extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     final UserController controller = Get.find();
-    final ImageController image = Get.find();
 
     return Scaffold(
       body: SafeArea(
@@ -28,15 +26,12 @@ class UserProfile extends StatelessWidget {
             children: [
               SizedBox(height: screenHeight * 0.05),
               Obx(
-                () => GestureDetector(
-                  onTap: () => image.openDialog(true),
-                  child: CircleAvatar(
-                    backgroundImage: controller.user.value.ownerPhoto.isNotEmpty
-                        ? NetworkImage(controller.user.value.ownerPhoto)
-                        : const AssetImage(profile) as ImageProvider,
-                    radius: 64.0,
-                    backgroundColor: Colors.white,
-                  ),
+                () => CircleAvatar(
+                  backgroundImage: controller.user.value.ownerPhoto.isNotEmpty
+                      ? NetworkImage(controller.user.value.ownerPhoto)
+                      : const AssetImage(profile) as ImageProvider,
+                  radius: 64.0,
+                  backgroundColor: Colors.white,
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),

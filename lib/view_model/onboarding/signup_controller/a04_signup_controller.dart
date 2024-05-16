@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/view_model/onboarding/signup_controller/image_controller.dart';
 import '../../../../utils/portion/snackbar.dart';
 import '../../../../view/course/bottom_navigationbar_widget.dart';
 import '../../../model/backend/repositories/user/user_repositories.dart';
@@ -9,7 +8,6 @@ import '../../course/usermodel_controller.dart';
 
 class A04SignupController extends GetxController {
   static A04SignupController get instance => Get.find();
-  final ImageController imageController = Get.find();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
