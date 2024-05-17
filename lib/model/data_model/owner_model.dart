@@ -13,7 +13,7 @@ class OwnerModel {
   TimeOfDay closingTime;
   String courtLocation;
   double price;
-  String images;
+  List<String> images;
   String ownerPhoto;
   String ownerFullName;
   String ownerPhoneNumber;
@@ -55,7 +55,7 @@ class OwnerModel {
       closingTime: closingTime,
       courtLocation: json['courtLocation'] ?? "N/A",
       price: Formatter.firebaseNumberToDouble(json['price']),
-      images: json['images'] ?? "N/A",
+      images: json['images'] ?? [],
       ownerPhoto: json['ownerPhoto'] ?? "N/A",
       ownerFullName: json['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: json['ownerPhoneNumber'] ?? "N/A",
@@ -76,7 +76,7 @@ class OwnerModel {
       closingTime: TimeOfDay.now(),
       courtLocation: '',
       price: 0,
-      images: '',
+      images: [],
       ownerPhoto: '',
       ownerFullName: '',
       ownerPhoneNumber: '',
@@ -100,7 +100,7 @@ class OwnerModel {
       closingTime: closingTime,
       courtLocation: map['courtLocation'] ?? "N/A",
       price: map['price'] ?? 0,
-      images: map['images'] ?? "N/A",
+      images: map['images'] ?? [],
       ownerPhoto: map['ownerPhoto'] ?? "N/A",
       ownerFullName: map['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: map['ownerPhoneNumber'] ?? "N/A",
@@ -159,6 +159,8 @@ class OwnerModel {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     var openingTime = Formatter.timestampToTimeOfDay(data['openingTime']);
     var closingTime = Formatter.timestampToTimeOfDay(data['closingTime']);
+    List<dynamic> imagesDynamic = data['images'];
+    List<String> images = imagesDynamic.cast<String>();
     return OwnerModel(
       id: data['id'] ?? "N/A",
       courtName: data['courtName'] ?? "N/A",
@@ -169,7 +171,7 @@ class OwnerModel {
       closingTime: closingTime,
       courtLocation: data['courtLocation'] ?? "N/A",
       price: Formatter.firebaseNumberToDouble(data['price']),
-      images: data['images'] ?? "N/A",
+      images: images,
       ownerPhoto: data['ownerPhoto'] ?? "N/A",
       ownerFullName: data['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: data['ownerPhoneNumber'] ?? "N/A",
