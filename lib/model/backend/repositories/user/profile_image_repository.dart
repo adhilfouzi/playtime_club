@@ -8,7 +8,7 @@ class ProfileRepository {
 
   static Future<String> uploadImages(File file, bool isProfile) async {
     try {
-      final userId = FirebaseAuth.instance.currentUser!.displayName;
+      final userId = FirebaseAuth.instance.currentUser!.email;
       final fileName = file.path.split("/").last;
       final time = DateTime.now().millisecondsSinceEpoch;
       // Create a reference to the location you want to upload to in Firebase

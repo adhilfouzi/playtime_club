@@ -2,13 +2,16 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../model/backend/repositories/user/profile_image_repository.dart';
 import '../../../model/backend/repositories/user/user_repositories.dart';
 import '../../../utils/portion/snackbar.dart';
 import '../../course/usermodel_controller.dart';
+import 'package:path/path.dart' as path;
 
 class ImageController extends GetxController {
   Rx<File?> imageProfile = Rx<File?>(null);
@@ -16,29 +19,49 @@ class ImageController extends GetxController {
 
   final UserController user = Get.find();
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   List<String> imageUrls = user.user.value.images;
-  //   turfImages.value = imageUrls.map((url) => File(url)).toList();
-  // }
-
   Future<void> getImage(ImageSource source, bool isProfile) async {
     try {
-      final image = await ImagePicker().pickImage(source: source);
+      final XFile? image = await ImagePicker().pickImage(source: source);
       if (image == null) {
         return;
+      }
+      var imageFile = File(image.path);
+      log('Original file size: ${imageFile.lengthSync()} bytes');
+      imageFile = await testCompressAndGetFile(imageFile);
+      log('Compressed file size: ${imageFile.lengthSync()} bytes');
+
+      if (isProfile) {
+        imageProfile.value = imageFile;
+        await uploadProfileImage(isProfile);
       } else {
-        if (isProfile) {
-          imageProfile.value = File(image.path);
-          await uploadProfileImage(isProfile);
-        } else {
-          turfImages.value = File(image.path);
-          await uploadTurfImages();
-        }
+        turfImages.value = imageFile;
+        await uploadTurfImages();
       }
     } catch (e) {
       log('Failed image picker: $e');
+      CustomSnackbar.showError('Failed to pick image');
+    }
+  }
+
+  Future<File> testCompressAndGetFile(File file) async {
+    try {
+      Directory tempDir = await getTemporaryDirectory();
+      String targetPath =
+          path.join(tempDir.path, 'compressed_${path.basename(file.path)}');
+      final XFile? compressedXFile =
+          await FlutterImageCompress.compressAndGetFile(
+        file.absolute.path,
+        targetPath,
+        quality: 20,
+      );
+      if (compressedXFile == null) {
+        throw Exception("Compression failed.");
+      }
+
+      return File(compressedXFile.path);
+    } catch (e) {
+      log("testCompressAndGetFile:$e");
+      rethrow;
     }
   }
 
@@ -84,7 +107,7 @@ class ImageController extends GetxController {
     }
   }
 
-  Future<void> deleteTurfImages(int index) async {
+  Future<void> deleteTurfImage(int index) async {
     try {
       List<String> images = user.user.value.images;
       log("Index: $index");
@@ -160,7 +183,7 @@ class ImageController extends GetxController {
             children: [
               TextButton(
                   onPressed: () {
-                    deleteTurfImages(index);
+                    deleteTurfImage(index);
                     Get.back();
                   },
                   child: const Text("Yes")),

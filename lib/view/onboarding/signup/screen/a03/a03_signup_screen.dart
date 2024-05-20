@@ -79,7 +79,7 @@ class ImagesGrid extends StatelessWidget {
                   var image = images[index];
                   return InkWell(
                     onTap: () {
-                      imageController.aDialogforDelete(index);
+                      imageController.deleteTurfImage(index);
                     },
                     child: Card(
                       elevation: 5,
