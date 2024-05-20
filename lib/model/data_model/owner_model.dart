@@ -43,8 +43,14 @@ class OwnerModel {
   });
 
   factory OwnerModel.fromJson(Map<String, dynamic> json) {
+    List<String> images = [];
+    if (json['images'] != null && json['images'] is List) {
+      images = List<String>.from(json['images']);
+    }
+
     var openingTime = Formatter.timestampToTimeOfDay(json['openingTime']);
     var closingTime = Formatter.timestampToTimeOfDay(json['closingTime']);
+
     return OwnerModel(
       id: json['id'] ?? "N/A",
       courtName: json['courtName'] ?? "N/A",
@@ -55,7 +61,7 @@ class OwnerModel {
       closingTime: closingTime,
       courtLocation: json['courtLocation'] ?? "N/A",
       price: Formatter.firebaseNumberToDouble(json['price']),
-      images: json['images'] ?? [],
+      images: images,
       ownerPhoto: json['ownerPhoto'] ?? "N/A",
       ownerFullName: json['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: json['ownerPhoneNumber'] ?? "N/A",
@@ -90,6 +96,8 @@ class OwnerModel {
   factory OwnerModel.fromMap(Map<String, dynamic> map) {
     var openingTime = Formatter.timestampToTimeOfDay(map['openingTime']);
     var closingTime = Formatter.timestampToTimeOfDay(map['closingTime']);
+    List<dynamic> imagesDynamic = map['images'];
+    List<String> images = imagesDynamic.cast<String>();
     return OwnerModel(
       id: map['id'] ?? "N/A",
       courtName: map['courtName'] ?? "N/A",
@@ -100,7 +108,7 @@ class OwnerModel {
       closingTime: closingTime,
       courtLocation: map['courtLocation'] ?? "N/A",
       price: map['price'] ?? 0,
-      images: map['images'] ?? [],
+      images: images,
       ownerPhoto: map['ownerPhoto'] ?? "N/A",
       ownerFullName: map['ownerFullName'] ?? "N/A",
       ownerPhoneNumber: map['ownerPhoneNumber'] ?? "N/A",
@@ -157,10 +165,13 @@ class OwnerModel {
 
   factory OwnerModel.fromSnapshot(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    List<String> images = [];
+    if (data['images'] != null && data['images'] is List) {
+      images = List<String>.from(data['images']);
+    }
     var openingTime = Formatter.timestampToTimeOfDay(data['openingTime']);
     var closingTime = Formatter.timestampToTimeOfDay(data['closingTime']);
-    List<dynamic> imagesDynamic = data['images'];
-    List<String> images = imagesDynamic.cast<String>();
+
     return OwnerModel(
       id: data['id'] ?? "N/A",
       courtName: data['courtName'] ?? "N/A",

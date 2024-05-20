@@ -85,7 +85,7 @@ class ImagesGrid extends StatelessWidget {
                       elevation: 5,
                       child: Image.network(
                         image,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   );
