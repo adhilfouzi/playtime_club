@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../view/course/bottom_navigationbar_widget.dart';
-import '../../../../view/onboarding/signup/screen/a01/a01_signup_screen.dart';
+import '../../../../view/onboarding/signup/screen/signup_court_details/a01_signup_screen.dart';
 import '../../../../view_model/course/usermodel_controller.dart';
 import '../user/user_repositories.dart';
 import 'firebase_exceptionhandler.dart';
@@ -47,7 +47,7 @@ class AuthenticationRepository extends GetxController {
           await prefs.setStringList(logs, <String>[email, password]);
           Get.offAll(() => const MyBottomNavigationBar());
         } else {
-          Get.offAll(() => A01SignupScreen());
+          Get.offAll(() => SignupCourtDetailsScreen());
         }
         return true;
       } else {

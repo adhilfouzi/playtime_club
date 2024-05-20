@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../model/controller/validator.dart';
 import '../../../../../../utils/portion/textfield.dart';
 import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import '../../signup_timing_price/widget/description_text_field.dart';
 
 class SignupTextFields extends StatelessWidget {
   final SignupController controller;
@@ -37,6 +38,7 @@ class SignupTextFields extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.done,
         ),
+        DescriptionTextField(controller: controller),
       ],
     );
   }

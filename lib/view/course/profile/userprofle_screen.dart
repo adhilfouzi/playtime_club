@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../view_model/course/usermodel_controller.dart';
 import '../../../../view_model/course/profile_controlller.dart';
 import '../../../utils/const/image_name.dart';
-import '../../onboarding/signup/screen/a01/a01_signup_screen.dart';
+import '../../onboarding/signup/screen/signup_court_details/a01_signup_screen.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -59,7 +59,7 @@ class UserProfile extends StatelessWidget {
               ),
               SizedBox(height: screenHeight * 0.08),
               _buildButton('Business Profile', screenWidth, screenHeight, () {
-                Get.to(A01SignupScreen());
+                Get.to(SignupCourtDetailsScreen());
               }),
               _buildButton('Change Password', screenWidth, screenHeight, () {
                 ProfileController.changePassword(

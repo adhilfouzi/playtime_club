@@ -5,20 +5,17 @@ import '../../../../../utils/portion/textfield.dart';
 import '../../../../../utils/portion/timepicker.dart';
 import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 import '../../utils/appbar.dart';
-import 'widget/a02_signup_bottom_navigation_bar.dart';
-import 'widget/description_text_field.dart';
+import 'widget/signup_bottom_navigation_bar.dart';
 
-class A02SignupScreen extends StatelessWidget {
-  A02SignupScreen({super.key});
+class SignupTimingAndPriceScreen extends StatelessWidget {
+  SignupTimingAndPriceScreen({super.key});
 
-  final SignupController controller = Get.find();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final SignupController controller = Get.find();
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Scaffold(
         appBar: const SignupAppBar(
@@ -29,16 +26,15 @@ class A02SignupScreen extends StatelessWidget {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(height: height * 0.2),
-                DescriptionTextField(controller: controller),
+                SizedBox(height: height * 0.1),
                 MyTextField(
                   textInputAction: TextInputAction.next,
                   controller: controller.courtPrice,
                   labelText: 'Court Price as per hour',
                   validator: (value) =>
-                      InputValidators.validateEmpty('Location', value),
+                      InputValidators.validateEmpty('Court Price', value),
                   hintText: "Eg: 1000",
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.number,
                 ),
                 TimePicker(
                   onTimeSelected: (openingTime, closingTime, isOpen24Hours) {
@@ -49,23 +45,23 @@ class A02SignupScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.02),
                 MyTextField(
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   controller: controller.location,
                   labelText: 'Court Location',
                   validator: (value) =>
                       InputValidators.validateEmpty('Location', value),
                   hintText: "Eg:  Malaparamba, Kozhikode, Kerala",
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.name,
                 ),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: A02SignupBottomNavigationBar(
-            formKey: formKey,
-            controller: controller,
-            height: height,
-            width: width),
+        bottomNavigationBar: SignupBottomNavigationBar(
+          formKey: formKey,
+          onSubmit: controller.submitA02,
+          buttonText: 'Next',
+        ),
       ),
     );
   }

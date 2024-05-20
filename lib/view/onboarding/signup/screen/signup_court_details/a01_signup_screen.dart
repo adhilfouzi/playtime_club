@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 import '../../utils/appbar.dart';
-import 'widget/a01_signup_bottom_navigation_bar.dart';
+import '../signup_timing_price/widget/signup_bottom_navigation_bar.dart';
 import 'widget/signup_text_fields.dart';
 
-class A01SignupScreen extends StatelessWidget {
-  A01SignupScreen({super.key});
+class SignupCourtDetailsScreen extends StatelessWidget {
+  SignupCourtDetailsScreen({super.key});
 
   final SignupController controller = Get.put(SignupController());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -25,17 +25,16 @@ class A01SignupScreen extends StatelessWidget {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(height: height * 0.2),
+                SizedBox(height: height * 0.05),
                 SignupTextFields(controller: controller),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: A01SignupBottomNavigationBar(
+        bottomNavigationBar: SignupBottomNavigationBar(
           formKey: formKey,
-          controller: controller,
-          height: height,
-          width: width,
+          onSubmit: controller.submitA01,
+          buttonText: 'Next',
         ),
       ),
     );

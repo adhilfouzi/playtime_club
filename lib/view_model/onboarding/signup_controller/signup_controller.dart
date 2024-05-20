@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import '../../../model/backend/repositories/user/user_repositories.dart';
 import '../../../utils/portion/snackbar.dart';
 import '../../../view/course/bottom_navigationbar_widget.dart';
-import '../../../view/onboarding/signup/screen/a02/a02_signup_screen.dart';
-import '../../../view/onboarding/signup/screen/a03/a03_signup_screen.dart';
-import '../../../view/onboarding/signup/screen/a04/a04_signup_screen.dart';
+import '../../../view/onboarding/signup/screen/turf_images/turf_images_screen.dart';
+import '../../../view/onboarding/signup/screen/signup_timing_price/signup_timing_price_screen.dart';
+import '../../../view/onboarding/signup/screen/signup_owner_details/signup_owner_details_screen.dart';
 import '../../course/usermodel_controller.dart';
 
 class SignupController extends GetxController {
@@ -30,7 +30,6 @@ class SignupController extends GetxController {
   final fullName = TextEditingController();
   final phoneNumber = TextEditingController();
   final email = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var privacyPolicyChecked = false.obs;
 
   final UserController userController = Get.find();
@@ -64,7 +63,7 @@ class SignupController extends GetxController {
     userController.user.value.courtName = courtName.text;
     userController.user.value.courtPhoneNumber = courtPhoneNumber.text;
     userController.user.value.courtEmailAddress = courtEmailAddress.text.trim();
-    Get.to(A02SignupScreen());
+    Get.to(SignupTimingAndPriceScreen());
     log(userController.user.value.courtPhoneNumber);
   }
 
@@ -84,8 +83,8 @@ class SignupController extends GetxController {
     userController.user.value.is24h = isOpen24Hours.value;
     userController.user.value.price = double.parse(courtPrice.text);
 
-    Get.to(A03SignupScreen());
-    log(userController.user.value.closingTime.toString());
+    Get.to(const SignupTurfImages());
+    log(userController.user.value.price.toString());
     log(userController.user.value.openingTime.toString());
   }
 
@@ -94,26 +93,24 @@ class SignupController extends GetxController {
     if (userController.user.value.images.length < 3) {
       CustomSnackbar.showError("Add at least 3 images of your Business");
     } else {
-      Get.to(A04SignupScreen());
+      Get.to(SignupOwnerDetailsScreen());
     }
   }
 
   // A04 Methods
   void submitA04() async {
-    if (formKey.currentState!.validate()) {
-      if (!privacyPolicyChecked.value) {
-        CustomSnackbar.showError("Need to accept the privacy & policy");
-        return;
-      }
-      userController.user.value.ownerFullName = fullName.text;
-      userController.user.value.ownerPhoneNumber = phoneNumber.text;
-      userController.user.value.ownerEmailAddress = email.text.trim();
-      Get.offAll(const MyBottomNavigationBar());
-      UserRepository userRepository = Get.find();
-      userController.user.value.isRegistered = true;
-      userRepository.updateUserField(userMdel: userController.user.value);
-      log(userController.user.value.ownerPhoneNumber);
+    if (!privacyPolicyChecked.value) {
+      CustomSnackbar.showError("Need to accept the privacy & policy");
+      return;
     }
+    userController.user.value.ownerFullName = fullName.text;
+    userController.user.value.ownerPhoneNumber = phoneNumber.text;
+    userController.user.value.ownerEmailAddress = email.text.trim();
+    Get.offAll(const MyBottomNavigationBar());
+    UserRepository userRepository = Get.find();
+    userController.user.value.isRegistered = true;
+    userRepository.updateUserField(userMdel: userController.user.value);
+    log(userController.user.value.ownerPhoneNumber);
   }
 
   @override

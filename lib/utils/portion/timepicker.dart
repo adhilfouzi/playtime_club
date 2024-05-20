@@ -80,7 +80,7 @@ class _TimePickerState extends State<TimePicker> {
         SizedBox(height: height * 0.002),
         ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: isOpen24Hours ? 0 : height * 0.1,
+            maxHeight: isOpen24Hours ? 0 : height * 0.15,
           ),
           child: AnimatedOpacity(
             opacity: isOpen24Hours ? 0.0 : 1.0,
