@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../../../model/controller/validator.dart';
 import '../../../../../../utils/portion/textfield.dart';
-import '../../../../../../view_model/onboarding/signup_controller/a01signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 
 class SignupTextFields extends StatelessWidget {
-  final A01SignupController controller;
+  final SignupController controller;
 
   const SignupTextFields({super.key, required this.controller});
 
@@ -15,7 +15,7 @@ class SignupTextFields extends StatelessWidget {
         MyTextField(
           hintText: "Eg: Lions Turf",
           labelText: 'Court Name',
-          controller: controller.courtNameController,
+          controller: controller.courtName,
           validator: (value) =>
               InputValidators.validateEmpty('Court Name', value),
           keyboardType: TextInputType.name,
@@ -25,7 +25,7 @@ class SignupTextFields extends StatelessWidget {
           hintText: 'Eg: 9865327412',
           labelText: 'Court Contact Number',
           validator: (value) => InputValidators.validatePhoneNumber(value),
-          controller: controller.courtPhoneNumberController,
+          controller: controller.courtPhoneNumber,
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.next,
         ),
@@ -33,7 +33,7 @@ class SignupTextFields extends StatelessWidget {
           hintText: 'Eg: lionsturf@gmail.com',
           labelText: 'Court Email Address',
           validator: (value) => InputValidators.validateEmail(value),
-          controller: controller.courtEmailAddressController,
+          controller: controller.courtEmailAddress,
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.done,
         ),

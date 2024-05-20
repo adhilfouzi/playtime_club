@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../../../utils/portion/button.dart';
-import '../../../../../../view_model/onboarding/signup_controller/a01signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 
 class A01SignupBottomNavigationBar extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final A01SignupController controller;
+  final SignupController controller;
   final double height;
   final double width;
 
@@ -25,7 +25,7 @@ class A01SignupBottomNavigationBar extends StatelessWidget {
       child: Button().mainButton('Next', context, () {
         if (!formKey.currentState!.validate()) return;
 
-        controller.submit();
+        controller.submitA01();
       }),
     );
   }

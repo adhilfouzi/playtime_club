@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:owners_side_of_turf_booking/view/onboarding/signup/screen/a04/widget/a04_textfiled.dart';
 import '../../../../../utils/portion/button.dart';
-import '../../../../../view_model/onboarding/signup_controller/a04_signup_controller.dart';
+import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 import '../../utils/appbar.dart';
 import 'widget/owner_photo.dart';
 import 'widget/privacy_policy_checkbox.dart';
@@ -10,7 +10,7 @@ import 'widget/privacy_policy_checkbox.dart';
 class A04SignupScreen extends StatelessWidget {
   A04SignupScreen({super.key});
 
-  final A04SignupController controller = Get.put(A04SignupController());
+  final SignupController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class A04SignupScreen extends StatelessWidget {
               horizontal: width * 0.05, vertical: height * 0.02),
           child: Button().mainButton('Submit', context, () {
             if (controller.formKey.currentState!.validate()) {
-              controller.submit();
+              controller.submitA04();
             }
           }),
         ),

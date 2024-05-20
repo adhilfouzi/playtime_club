@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import '../../../../../../utils/portion/textfield.dart';
-import '../../../../../../view_model/onboarding/signup_controller/a04_signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 
 class SignupTextFields extends StatelessWidget {
-  final A04SignupController controller;
+  final SignupController controller;
 
   const SignupTextFields({super.key, required this.controller});
 
@@ -15,7 +15,7 @@ class SignupTextFields extends StatelessWidget {
         MyTextField(
           hintText: "Full Name",
           labelText: "Owner Full Name",
-          controller: controller.fullNameController,
+          controller: controller.fullName,
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
           validator: (value) {
@@ -28,7 +28,7 @@ class SignupTextFields extends StatelessWidget {
         MyTextField(
           labelText: "Owner Phone Number",
           hintText: 'Phone Number',
-          controller: controller.phoneNumberController,
+          controller: controller.phoneNumber,
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.next,
           validator: (value) {
@@ -41,7 +41,7 @@ class SignupTextFields extends StatelessWidget {
         MyTextField(
           labelText: "Owner Email",
           hintText: 'Email Address',
-          controller: controller.emailController,
+          controller: controller.email,
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.done,
           validator: (value) {

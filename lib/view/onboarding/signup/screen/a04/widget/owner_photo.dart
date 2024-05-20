@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../utils/const/image_name.dart';
 import '../../../../../../view_model/course/usermodel_controller.dart';
-import '../../../../../../view_model/onboarding/signup_controller/a04_signup_controller.dart';
 import '../../../../../../view_model/onboarding/signup_controller/image_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 
 class OwnerPhoto extends StatelessWidget {
-  final A04SignupController controller;
+  final SignupController controller;
   const OwnerPhoto({super.key, required this.controller});
 
   @override

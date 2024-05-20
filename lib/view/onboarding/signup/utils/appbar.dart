@@ -72,7 +72,7 @@ class SignupAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: leading ?? () => Get.back(),
             ),
       title: controller.user.value.isRegistered
-          ? Text(
+          ? const Text(
               'Business Profile ',
               style: TextStyle(
                 fontSize: 20,

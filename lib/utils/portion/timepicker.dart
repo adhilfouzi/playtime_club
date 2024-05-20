@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../view_model/onboarding/signup_controller/a02_signup_controller.dart';
+import '../../view_model/onboarding/signup_controller/signup_controller.dart';
 import '../const/colors.dart';
 
 class TimePicker extends StatefulWidget {
@@ -14,7 +14,7 @@ class TimePicker extends StatefulWidget {
 }
 
 class _TimePickerState extends State<TimePicker> {
-  A02SignupController controller = Get.find();
+  SignupController controller = Get.find();
   late TimeOfDay? openingTime;
   late TimeOfDay? closingTime;
   bool isOpen24Hours = false;

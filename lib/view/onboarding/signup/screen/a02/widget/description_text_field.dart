@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../../../../model/controller/validator.dart';
 import '../../../../../../utils/const/colors.dart';
 import '../../../../../../utils/portion/textfield.dart';
-import '../../../../../../view_model/onboarding/signup_controller/a02_signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 
 class DescriptionTextField extends StatelessWidget {
-  final A02SignupController controller;
+  final SignupController controller;
 
   const DescriptionTextField({super.key, required this.controller});
 
@@ -34,7 +34,7 @@ class DescriptionTextField extends StatelessWidget {
       },
       hintText: "Description about turf",
       labelText: 'About Court',
-      controller: controller.descriptionController,
+      controller: controller.description,
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
     );

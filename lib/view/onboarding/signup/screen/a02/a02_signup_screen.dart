@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../../../model/controller/validator.dart';
 import '../../../../../utils/portion/textfield.dart';
 import '../../../../../utils/portion/timepicker.dart';
-import '../../../../../view_model/onboarding/signup_controller/a02_signup_controller.dart';
+import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 import '../../utils/appbar.dart';
 import 'widget/a02_signup_bottom_navigation_bar.dart';
 import 'widget/description_text_field.dart';
@@ -11,7 +11,7 @@ import 'widget/description_text_field.dart';
 class A02SignupScreen extends StatelessWidget {
   A02SignupScreen({super.key});
 
-  final A02SignupController controller = Get.put(A02SignupController());
+  final SignupController controller = Get.find();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -50,7 +50,7 @@ class A02SignupScreen extends StatelessWidget {
                 SizedBox(height: height * 0.02),
                 MyTextField(
                   textInputAction: TextInputAction.next,
-                  controller: controller.locationfindTextEditingController,
+                  controller: controller.location,
                   labelText: 'Court Location',
                   validator: (value) =>
                       InputValidators.validateEmpty('Location', value),

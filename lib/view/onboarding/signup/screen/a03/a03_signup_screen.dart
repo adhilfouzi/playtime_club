@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:owners_side_of_turf_booking/view_model/onboarding/signup_controller/image_controller.dart';
 
 import '../../../../../view_model/course/usermodel_controller.dart';
-import '../../../../../view_model/onboarding/signup_controller/a03_signup_controller.dart';
+import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
 import '../../utils/appbar.dart';
 import '../../../../../utils/portion/button.dart';
 
 class A03SignupScreen extends StatelessWidget {
   A03SignupScreen({super.key});
 
-  final controller = Get.put(A03SignupController());
+  final controller = Get.put(SignupController());
   final UserController userController = Get.find();
   final ImageController imageController = Get.find();
 
@@ -40,7 +39,7 @@ class A03SignupScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: width * 0.05, vertical: height * 0.02),
           child: Button().withAdd('Next', context, () {
-            controller.submit();
+            controller.submitA03();
           }, () {
             imageController.openDialog(false);
           }),
