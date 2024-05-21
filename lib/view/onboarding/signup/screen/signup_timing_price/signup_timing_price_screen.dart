@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../model/controller/validator.dart';
+import '../../../../../utils/portion/validator.dart';
 import '../../../../../utils/portion/textfield.dart';
 import '../../../../../utils/portion/timepicker.dart';
-import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import '../../../../../view_model/onboarding/signup/signup_controller.dart';
 import '../../utils/appbar.dart';
 import 'widget/signup_bottom_navigation_bar.dart';
 

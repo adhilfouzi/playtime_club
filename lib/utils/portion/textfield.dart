@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../model/controller/validator.dart';
+import 'validator.dart';
 import '../const/colors.dart';
 
 class MyTextField extends StatelessWidget {

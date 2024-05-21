@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import '../../../../../../utils/portion/textfield.dart';
-import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup/signup_controller.dart';
 
-class SignupTextFields extends StatelessWidget {
+class OwnerTextFields extends StatelessWidget {
   final SignupController controller;
 
-  const SignupTextFields({super.key, required this.controller});
+  const OwnerTextFields({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

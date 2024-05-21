@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import '../../../../../view_model/onboarding/signup/signup_controller.dart';
 import '../../utils/appbar.dart';
 import '../signup_timing_price/widget/signup_bottom_navigation_bar.dart';
 import 'widget/signup_text_fields.dart';
@@ -24,9 +24,10 @@ class SignupCourtDetailsScreen extends StatelessWidget {
           child: Form(
             key: formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: height * 0.05),
-                SignupTextFields(controller: controller),
+                // SizedBox(height: height * 0.05),
+                CourtDetailsTextFields(controller: controller),
               ],
             ),
           ),

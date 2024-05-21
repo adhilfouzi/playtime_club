@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:owners_side_of_turf_booking/view/onboarding/signup/screen/signup_timing_price/widget/signup_bottom_navigation_bar.dart';
-import 'package:owners_side_of_turf_booking/view/onboarding/signup/screen/signup_owner_details/widget/a04_textfiled.dart';
-import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import 'package:owners_side_of_turf_booking/view/onboarding/signup/screen/signup_owner_details/widget/owner_textfiled.dart';
+import '../../../../../view_model/onboarding/signup/signup_controller.dart';
 import '../../utils/appbar.dart';
 import 'widget/owner_photo.dart';
 import 'widget/privacy_policy_checkbox.dart';
@@ -29,7 +29,7 @@ class SignupOwnerDetailsScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: height * 0.1),
                   OwnerPhoto(controller: controller),
-                  SignupTextFields(controller: controller),
+                  OwnerTextFields(controller: controller),
                   SizedBox(
                     child: controller.userController.user.value.isRegistered
                         ? null

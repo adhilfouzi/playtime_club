@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../view_model/course/usermodel_controller.dart';
-import '../../../../../../view_model/onboarding/signup_controller/image_controller.dart';
+import '../../../../../../view_model/onboarding/signup/image_controller.dart';
 
 class ImagesGrid extends StatelessWidget {
   const ImagesGrid({

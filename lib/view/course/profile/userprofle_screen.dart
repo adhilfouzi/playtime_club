@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owners_side_of_turf_booking/view/course/profile/utils/profile_button.dart';
 
 import '../../../../view_model/course/usermodel_controller.dart';
 import '../../../../view_model/course/profile_controlller.dart';
 import '../../../utils/const/image_name.dart';
-import '../../onboarding/signup/screen/signup_court_details/a01_signup_screen.dart';
+import 'edit profile/edit_profile_screen.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -20,88 +21,75 @@ class UserProfile extends StatelessWidget {
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
               vertical: screenWidth * 0.02, horizontal: screenWidth * 0.0052),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: screenHeight * 0.05),
-              Obx(
-                () => CircleAvatar(
+          child: Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: screenHeight * 0.05),
+                CircleAvatar(
                   backgroundImage: controller.user.value.ownerPhoto.isNotEmpty
                       ? NetworkImage(controller.user.value.ownerPhoto)
                       : const AssetImage(profile) as ImageProvider,
                   radius: 64.0,
                   backgroundColor: Colors.white,
                 ),
-              ),
-              SizedBox(height: screenHeight * 0.02),
-              Text(
-                controller.user.value.courtName, // Replace with user's email
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                SizedBox(height: screenHeight * 0.02),
+                Text(
+                  controller.user.value.courtName,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      controller.user.value
-                          .courtEmailAddress, // Replace with user's email
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        controller.user.value.courtEmailAddress,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: screenHeight * 0.08),
-              _buildButton('Business Profile', screenWidth, screenHeight, () {
-                Get.to(SignupCourtDetailsScreen());
-              }),
-              _buildButton('Change Password', screenWidth, screenHeight, () {
-                ProfileController.changePassword(
-                    controller.user.value.courtEmailAddress);
-              }),
-              _buildButton('Help & FAQs', screenWidth, screenHeight, () {
-                ProfileController.helpAndFAQs();
-              }),
-              _buildButton('Privacy Policy', screenWidth, screenHeight, () {
-                ProfileController.privacyPolicy();
-              }),
-              _buildButton('Terms & Use', screenWidth, screenHeight, () {
-                ProfileController.termsUse();
-              }),
-              _buildButton('About Us', screenWidth, screenHeight, () {}),
-              _buildButton('Log Out', screenWidth, screenHeight, () {
-                ProfileController.logout();
-              }),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildButton(String text, double screenWidth, double screenHeight,
-      VoidCallback onPressed) {
-    return SizedBox(
-      width: double.infinity,
-      child: TextButton(
-        onPressed: onPressed,
-        style: TextButton.styleFrom(
-          foregroundColor: Colors.black,
-          alignment: Alignment.centerLeft, // Align text to left
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: screenWidth * 0.05, vertical: screenHeight * 0.012),
-          child: Text(
-            text,
-            textAlign: TextAlign.left,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                SizedBox(height: screenHeight * 0.08),
+                ProfileButton(
+                    text: 'Business Profile',
+                    onPressed: () {
+                      Get.to(const BusinessProfile());
+                    }),
+                ProfileButton(
+                    text: 'Change Password',
+                    onPressed: () {
+                      ProfileController.changePassword(
+                          controller.user.value.courtEmailAddress);
+                    }),
+                ProfileButton(
+                    text: 'Help & FAQs',
+                    onPressed: () {
+                      ProfileController.helpAndFAQs();
+                    }),
+                ProfileButton(
+                    text: 'Privacy Policy',
+                    onPressed: () {
+                      ProfileController.privacyPolicy();
+                    }),
+                ProfileButton(
+                    text: 'Terms & Use',
+                    onPressed: () {
+                      ProfileController.termsUse();
+                    }),
+                ProfileButton(
+                    text: 'Log Out',
+                    onPressed: () {
+                      ProfileController.logout();
+                    }),
+              ],
+            ),
           ),
         ),
       ),

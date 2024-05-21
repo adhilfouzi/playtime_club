@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../controller/formater.dart';
+import '../../utils/portion/formater.dart';
 import 'owner_model.dart';
 
 class BookingModel {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../model/controller/validator.dart';
+import '../../../utils/portion/validator.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/portion/button.dart';
 import '../../../utils/portion/textfield.dart';
-import '../../../view_model/onboarding/signin_controller/accountrequest_controller.dart';
+import '../../../view_model/onboarding/signin/accountrequest_controller.dart';
 import 'login_screen.dart';
 
 class AccountRequestScreen extends StatelessWidget {

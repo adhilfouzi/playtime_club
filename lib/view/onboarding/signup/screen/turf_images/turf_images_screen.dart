@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:owners_side_of_turf_booking/view_model/onboarding/signup_controller/image_controller.dart';
 
 import '../../../../../utils/portion/button.dart';
-import '../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import '../../../../../view_model/onboarding/signup/image_controller.dart';
+import '../../../../../view_model/onboarding/signup/signup_controller.dart';
 import '../../utils/appbar.dart';
 import 'widget/image_grid.dart';
 

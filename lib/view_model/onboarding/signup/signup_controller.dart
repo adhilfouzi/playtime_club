@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../model/backend/repositories/user/user_repositories.dart';
 import '../../../utils/portion/snackbar.dart';
-import '../../../view/course/bottom_navigationbar_widget.dart';
+import '../../../view/course/head/bottom_navigationbar_widget.dart';
 import '../../../view/onboarding/signup/screen/turf_images/turf_images_screen.dart';
 import '../../../view/onboarding/signup/screen/signup_timing_price/signup_timing_price_screen.dart';
 import '../../../view/onboarding/signup/screen/signup_owner_details/signup_owner_details_screen.dart';
@@ -63,6 +63,8 @@ class SignupController extends GetxController {
     userController.user.value.courtName = courtName.text;
     userController.user.value.courtPhoneNumber = courtPhoneNumber.text;
     userController.user.value.courtEmailAddress = courtEmailAddress.text.trim();
+    userController.user.value.courtDescription = description.text;
+
     Get.to(SignupTimingAndPriceScreen());
     log(userController.user.value.courtPhoneNumber);
   }
@@ -77,8 +79,9 @@ class SignupController extends GetxController {
       CustomSnackbar.showError('Please fill in all required fields.');
       return;
     }
-    userController.user.value.courtDescription = description.text;
+
     userController.user.value.openingTime = openingTimeFetch!;
+    userController.user.value.courtLocation = location.text;
     userController.user.value.closingTime = closingTimeFetch!;
     userController.user.value.is24h = isOpen24Hours.value;
     userController.user.value.price = double.parse(courtPrice.text);
@@ -111,6 +114,94 @@ class SignupController extends GetxController {
     userController.user.value.isRegistered = true;
     userRepository.updateUserField(userMdel: userController.user.value);
     log(userController.user.value.ownerPhoneNumber);
+  }
+
+  //court details
+  void submitCourt() async {
+    try {
+      userController.user.value.courtName = courtName.text;
+      userController.user.value.courtPhoneNumber = courtPhoneNumber.text;
+      userController.user.value.courtEmailAddress =
+          courtEmailAddress.text.toLowerCase().trim();
+      userController.user.value.courtDescription = description.text;
+
+      log(userController.user.value.courtPhoneNumber);
+      await UserRepository()
+          .updateUserField(userMdel: userController.user.value);
+      Get.back();
+    } catch (e) {
+      log("submit Court: $e");
+    }
+  }
+
+  //court proce as per hour
+  void submitPrice() async {
+    try {
+      userController.user.value.price = double.parse(courtPrice.text);
+      await UserRepository().updateSpecificField(
+          fieldName: 'price', value: userController.user.value.price);
+      Get.back();
+    } catch (e) {
+      log("submit Price:$e");
+    }
+  }
+
+  //Opening and closing time
+  void submitTime() async {
+    try {
+      if (openingTimeFetch == null && closingTimeFetch == null) {
+        CustomSnackbar.showError('Please fill in all required fields.');
+        return;
+      }
+      userController.user.value.openingTime = openingTimeFetch!;
+      userController.user.value.closingTime = closingTimeFetch!;
+      userController.user.value.is24h = isOpen24Hours.value;
+      await UserRepository()
+          .updateUserField(userMdel: userController.user.value);
+      Get.back();
+    } catch (e) {
+      log("submit Time:$e");
+    }
+  }
+
+  //court location
+  void submitLocation() async {
+    try {
+      userController.user.value.courtLocation = location.text;
+      await UserRepository().updateSpecificField(
+          fieldName: 'courtLocation',
+          value: userController.user.value.courtLocation);
+      Get.back();
+    } catch (e) {
+      log("submit Location:$e");
+    }
+  }
+
+  //turf image
+  void turfImages() async {
+    try {
+      if (userController.user.value.images.length < 3) {
+        CustomSnackbar.showError("Add at least 3 images of your Business");
+      } else {
+        Get.back();
+      }
+    } catch (e) {
+      log("turf Images:$e");
+    }
+  }
+
+  //owner Details
+  void submitOwner() async {
+    try {
+      userController.user.value.ownerFullName = fullName.text;
+      userController.user.value.ownerPhoneNumber = phoneNumber.text;
+      userController.user.value.ownerEmailAddress = email.text.trim();
+      Get.back();
+      UserRepository().updateUserField(userMdel: userController.user.value);
+      log(userController.user.value.ownerPhoneNumber);
+    } catch (e) {
+      log("submint Owner: $e");
+    }
   }
 
   @override

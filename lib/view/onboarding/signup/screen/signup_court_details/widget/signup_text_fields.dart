@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import '../../../../../../model/controller/validator.dart';
+import '../../../../../../utils/portion/validator.dart';
 import '../../../../../../utils/portion/textfield.dart';
-import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup/signup_controller.dart';
 import '../../signup_timing_price/widget/description_text_field.dart';
 
-class SignupTextFields extends StatelessWidget {
+class CourtDetailsTextFields extends StatelessWidget {
   final SignupController controller;
 
-  const SignupTextFields({super.key, required this.controller});
+  const CourtDetailsTextFields({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         MyTextField(
           hintText: "Eg: Lions Turf",
@@ -30,14 +31,14 @@ class SignupTextFields extends StatelessWidget {
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.next,
         ),
-        MyTextField(
-          hintText: 'Eg: lionsturf@gmail.com',
-          labelText: 'Court Email Address',
-          validator: (value) => InputValidators.validateEmail(value),
-          controller: controller.courtEmailAddress,
-          keyboardType: TextInputType.emailAddress,
-          textInputAction: TextInputAction.done,
-        ),
+        // MyTextField(
+        //   hintText: 'Eg: lionsturf@gmail.com',
+        //   labelText: 'Court Email Address',
+        //   validator: (value) => InputValidators.validateEmail(value),
+        //   controller: controller.courtEmailAddress,
+        //   keyboardType: TextInputType.emailAddress,
+        //   textInputAction: TextInputAction.done,
+        // ),
         DescriptionTextField(controller: controller),
       ],
     );

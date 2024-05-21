@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../../../data_model/owner_model.dart';
@@ -68,6 +70,7 @@ class UserRepository extends GetxController {
           .collection("Owner")
           .doc(AuthenticationRepository.instance.authUser!.uid)
           .update(userMdel.toJson());
+      log('updateUserField');
     } catch (e) {
       throw ExceptionHandler.handleException(e);
     }

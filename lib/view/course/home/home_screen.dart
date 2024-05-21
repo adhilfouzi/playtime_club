@@ -5,7 +5,7 @@ import '../../../utils/const/colors.dart';
 import '../../../utils/const/icons_image.dart';
 import '../../../utils/const/image_name.dart';
 import '../../../view_model/course/slot_request_controller.dart';
-import '../portion/home_appbar.dart';
+import 'home_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

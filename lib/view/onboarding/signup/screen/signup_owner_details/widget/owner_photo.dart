@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../utils/const/image_name.dart';
 import '../../../../../../view_model/course/usermodel_controller.dart';
-import '../../../../../../view_model/onboarding/signup_controller/image_controller.dart';
-import '../../../../../../view_model/onboarding/signup_controller/signup_controller.dart';
+import '../../../../../../view_model/onboarding/signup/image_controller.dart';
+import '../../../../../../view_model/onboarding/signup/signup_controller.dart';
 
 class OwnerPhoto extends StatelessWidget {
   final SignupController controller;

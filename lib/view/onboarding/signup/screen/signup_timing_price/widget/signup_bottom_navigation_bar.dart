@@ -23,6 +23,7 @@ class SignupBottomNavigationBar extends StatelessWidget {
           horizontal: width * 0.05, vertical: height * 0.025),
       child: Button().mainButton(buttonText, context, () {
         if (!formKey.currentState!.validate()) return;
+        FocusScope.of(context).unfocus();
         onSubmit();
       }),
     );
@@ -53,6 +54,31 @@ class SignupBottomNavigationBarWithOutFormKey extends StatelessWidget {
         onSubmit();
       }, () {
         onImageSubmit();
+      }),
+    );
+  }
+}
+
+class BottomNavigation extends StatelessWidget {
+  final String buttonText;
+  final VoidCallback onSubmit;
+  const BottomNavigation({
+    super.key,
+    required this.buttonText,
+    required this.onSubmit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+          horizontal: width * 0.05, vertical: height * 0.025),
+      child: Button().mainButton(buttonText, context, () {
+        FocusScope.of(context).unfocus();
+        onSubmit();
       }),
     );
   }

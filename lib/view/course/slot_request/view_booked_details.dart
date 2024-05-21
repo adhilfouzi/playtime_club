@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../model/data_model/booking_model.dart';
-import '../../../model/controller/formater.dart';
-import '../../../model/controller/url.dart';
+import '../../../utils/portion/formater.dart';
+import '../../../utils/portion/url.dart';
 
 class ViewBookingDetails extends StatelessWidget {
   final BookingModel booking;

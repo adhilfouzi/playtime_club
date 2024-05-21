@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../controller/formater.dart';
+import '../../utils/portion/formater.dart';
 
 class OwnerModel {
   String id;

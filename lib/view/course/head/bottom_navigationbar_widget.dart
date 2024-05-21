@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import '../../utils/const/icons_image.dart';
-import 'slot_request/slot_request_screen.dart';
-import 'home/home_screen.dart';
-import 'reserve/mybooking_screen.dart';
-import 'profile/userprofle_screen.dart';
+import '../../../utils/const/icons_image.dart';
+import '../slot_request/slot_request_screen.dart';
+import '../home/home_screen.dart';
+import '../reserve/mybooking_screen.dart';
+import '../profile/userprofle_screen.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({super.key});
