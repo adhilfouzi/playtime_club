@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../../../utils/const/colors.dart';
 import '../../../../../../utils/const/image_name.dart';
 import '../../../../../../view_model/course/usermodel_controller.dart';
 import '../../../../../../view_model/onboarding/signup/image_controller.dart';
@@ -30,8 +31,20 @@ class OwnerPhoto extends StatelessWidget {
                       userController.user.value.ownerPhoto.isNotEmpty
                           ? NetworkImage(userController.user.value.ownerPhoto)
                           : const AssetImage(profile) as ImageProvider,
-                  radius: 64.0,
-                  backgroundColor: Colors.white,
+                  radius: 80.0,
+                  backgroundColor: Colors.grey.shade200,
+                  child: const Align(
+                    alignment: Alignment.bottomRight,
+                    child: CircleAvatar(
+                      backgroundColor: CustomColor.mainColor,
+                      radius: 20.0,
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 15.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
