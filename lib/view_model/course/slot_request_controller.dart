@@ -13,12 +13,16 @@ class SlotRequestController extends GetxController {
   final _requestedBookings = <BookingModel>[].obs;
   final _approvedBookings = <BookingModel>[].obs;
   final _isLoading = false.obs;
+  final _totalBooking = 0.obs;
+  final _totalTransaction = 0.0.obs;
   final _errorMessage = RxString('');
 
   // Getters for private data
   List<BookingModel> get requestedBookings => _requestedBookings.toList();
   List<BookingModel> get approvedBookings => _approvedBookings.toList();
   bool get isLoading => _isLoading.value;
+  int get totalBooking => _totalBooking.value;
+  double get totalTransaction => _totalTransaction.value;
   String get errorMessage => _errorMessage.value;
 
   @override
@@ -36,9 +40,11 @@ class SlotRequestController extends GetxController {
       _requestedBookings.clear();
       // Fetch booking requests from the repository
       final bookings = await _bookingRepository.fetchBookingRequests();
+      _totalBooking.value = bookings.length;
       DateTime now = DateTime.now();
       DateTime currentDay = DateTime(now.year, now.month, now.day);
       for (var booking in bookings) {
+        _totalTransaction.value += booking.price;
         if (booking.status == 'approved' &&
             booking.startTime.isAfter(currentDay)) {
           _approvedBookings.add(booking);

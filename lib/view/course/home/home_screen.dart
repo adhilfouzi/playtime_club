@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../utils/const/colors.dart';
-import '../../../utils/const/icons_image.dart';
-import '../../../utils/const/image_name.dart';
 import '../../../view_model/course/slot_request_controller.dart';
 import 'home_appbar.dart';
+import 'utils/booking_stats_widget.dart';
+import 'utils/header_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,139 +24,10 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Container(
-                color: Colors.yellowAccent,
-                width: width * 1,
-                height: height * 0.2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: height * 0.06,
-                      width: width,
-                      child: Image.asset(logo),
-                    ),
-                    const Text(
-                      "Unleash Your Game, Secure Slot Reservation",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    const Text(
-                      "Your Premier Hub for Effortless Sports Reservations",
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            HeaderWidget(width: width, height: height),
             SizedBox(height: height * 0.02),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Container(
-                color: CustomColor.mainColor,
-                width: width * 1,
-                height: height * 0.1,
-                padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(width: width * 0.02),
-                        SvgPicture.asset(
-                          AppIcons.revenue,
-                          width: 24,
-                          height: 24,
-                          color: Colors.black,
-                        ),
-                        SizedBox(width: width * 0.05),
-                        const Text(
-                          "Total Booking",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(width: width * 0.28),
-                        const Text(
-                          "2.85K",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(width: width * 0.02),
-                      ],
-                    ),
-                    SizedBox(height: height * 0.01),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.,
-                      children: [
-                        SizedBox(width: width * 0.02),
-                        SvgPicture.asset(
-                          AppIcons.shoppingBag,
-                          width: 24,
-                          height: 24,
-                          color: Colors.black,
-                        ),
-                        SizedBox(width: width * 0.05),
-                        const Text(
-                          "Total Booking",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(width: width * 0.28),
-                        const Text(
-                          "2.85K",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(width: width * 0.02),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            // SizedBox(height: height * 0.02),
-            // ClipRRect(
-            //   borderRadius: BorderRadius.circular(20.0),
-            //   child: Container(
-            //     color: CustomColor.mainColor,
-            //     width: width * 1,
-            //     height: height * 0.05,
-            //     child: InkWell(
-            //       onTap: () {
-            //         Get.to(A01SignupScreen());
-            //       },
-            //       child: const Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         children: [
-            //           Padding(
-            //             padding: EdgeInsets.symmetric(horizontal: 16.0),
-            //             child: Text("Slot Allotting"),
-            //           ),
-            //           Icon(Icons.arrow_forward_ios),
-            //           // SizedBox(width: width * 0.002),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            BookingStatsWidget(width: width, height: height),
+            // Additional widgets can be added here
           ],
         ),
       ),
