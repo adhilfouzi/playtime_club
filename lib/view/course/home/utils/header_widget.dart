@@ -3,17 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../utils/const/image_name.dart';
 
 class HeaderWidget extends StatelessWidget {
-  final double width;
-  final double height;
-
-  const HeaderWidget({
-    Key? key,
-    required this.width,
-    required this.height,
-  }) : super(key: key);
+  const HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Container(

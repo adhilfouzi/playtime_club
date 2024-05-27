@@ -24,9 +24,9 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            HeaderWidget(width: width, height: height),
+            const HeaderWidget(),
             SizedBox(height: height * 0.02),
-            BookingStatsWidget(width: width, height: height),
+            const BookingStatsWidget(),
             // Additional widgets can be added here
           ],
         ),

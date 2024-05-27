@@ -7,17 +7,12 @@ import '../../../../utils/const/icons_image.dart';
 import '../../../../utils/portion/formater.dart';
 
 class BookingStatsWidget extends StatelessWidget {
-  final double width;
-  final double height;
-
-  const BookingStatsWidget({
-    super.key,
-    required this.width,
-    required this.height,
-  });
+  const BookingStatsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     final SlotRequestController booking = Get.find();
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
@@ -25,7 +20,6 @@ class BookingStatsWidget extends StatelessWidget {
         color: CustomColor.mainColor,
         width: width,
         height: height * 0.1,
-        padding: EdgeInsets.symmetric(horizontal: width * 0.05),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
