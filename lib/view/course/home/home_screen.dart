@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../view_model/course/slot_request_controller.dart';
-import 'home_appbar.dart';
+import 'utils/home_appbar.dart';
 import 'utils/booking_stats_widget.dart';
 import 'utils/header_widget.dart';
 

@@ -31,62 +31,78 @@ class BookingStatsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(width: width * 0.02),
-                SvgPicture.asset(
-                  AppIcons.revenue,
-                  width: 24,
-                  height: 24,
-                  color: Colors.black,
+                Row(
+                  children: [
+                    SizedBox(width: width * 0.02),
+                    SvgPicture.asset(
+                      AppIcons.revenue,
+                      width: 24,
+                      height: 24,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: width * 0.05),
+                    const Text(
+                      "Total Booking",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: width * 0.05),
-                const Text(
-                  "Total Booking",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      booking.totalBooking.toString(),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(width: width * 0.02),
+                  ],
                 ),
-                SizedBox(width: width * 0.28),
-                Text(
-                  booking.totalBooking.toString(),
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(width: width * 0.02),
               ],
             ),
             SizedBox(height: height * 0.01),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(width: width * 0.02),
-                SvgPicture.asset(
-                  AppIcons.shoppingBag,
-                  width: 24,
-                  height: 24,
-                  color: Colors.black,
+                Row(
+                  children: [
+                    SizedBox(width: width * 0.02),
+                    SvgPicture.asset(
+                      AppIcons.shoppingBag,
+                      width: 24,
+                      height: 24,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: width * 0.05),
+                    const Text(
+                      "Total Transaction",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: width * 0.05),
-                const Text(
-                  "Total Transaction",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      Formatter.formatCurrency(booking.totalTransaction),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        overflow: TextOverflow.ellipsis,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(width: width * 0.02),
+                  ],
                 ),
-                SizedBox(width: width * 0.21),
-                Text(
-                  Formatter.formatCurrency(booking.totalTransaction),
-                  style: const TextStyle(
-                    fontSize: 15,
-                    overflow: TextOverflow.ellipsis,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(width: width * 0.02),
               ],
             ),
           ],
