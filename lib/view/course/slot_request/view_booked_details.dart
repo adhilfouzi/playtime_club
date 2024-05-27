@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:owners_side_of_turf_booking/utils/portion/button.dart';
 
 import '../../../../../../model/data_model/booking_model.dart';
 import '../../../utils/portion/formater.dart';
@@ -55,32 +56,12 @@ class ViewBookingDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            whiteButton('Call', context, () {
+            Button().borderedWhiteButton('Call', context, () {
               Url.makePhoneCall(booking.turf.courtPhoneNumber);
             }),
           ],
         ),
       ),
-    );
-  }
-
-// Function to create white button with custom style
-  Widget whiteButton(
-      String text, BuildContext context, VoidCallback onPressed) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        foregroundColor: const Color(0xFF238C98),
-        backgroundColor: Colors.white, // Text color
-        minimumSize:
-            Size(MediaQuery.of(context).size.width * 0.4, 50), // Button width
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(999), // Button corner radius
-          side:
-              const BorderSide(color: Color(0xFF238C98)), // Button border color
-        ),
-      ),
-      child: Text(text),
     );
   }
 

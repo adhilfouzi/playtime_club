@@ -37,6 +37,38 @@ class Button {
     );
   }
 
+  Widget smallBlueButton(
+    String text,
+    BuildContext context,
+    VoidCallback onPressed,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(13),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFF238C98),
+          minimumSize:
+              Size(MediaQuery.of(context).size.width * 0.4, 50), // Button width
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(999), // Button corner radius
+          ),
+        ),
+        child: Text(text),
+      ),
+    );
+  }
+
   Widget withAdd(
     String text,
     BuildContext context,
@@ -81,41 +113,6 @@ class Button {
     );
   }
 
-  // Widget withAdd(
-  //   String text,
-  //   BuildContext context,
-  //   VoidCallback onMainPressed,
-  //   VoidCallback onAddPressed,
-  // ) {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: [
-  //       mainButton(text, context, onMainPressed),
-  //       SizedBox(
-  //         width: MediaQuery.of(context).size.width * 0.02,
-  //       ),
-  //       ElevatedButton(
-  //         onPressed: onAddPressed,
-  //         style: ElevatedButton.styleFrom(
-  //           foregroundColor: const Color(0xFF238C98),
-  //           backgroundColor: Colors.white, // Text (icon) color
-  //           minimumSize: Size(
-  //             MediaQuery.of(context).size.width * 0.1,
-  //             MediaQuery.of(context).size.height * 0.06,
-  //           ), // Button width
-  //           shape: RoundedRectangleBorder(
-  //             side: BorderSide(color: Colors.black), // Stroke color
-  //             borderRadius: BorderRadius.circular(13), // Button corner radius
-  //           ),
-  //         ),
-  //         child: Icon(
-  //           Icons.add,
-  //         ),
-  //       )
-  //     ],
-  //   );
-  // }
-
   Widget whiteButton(
     String text,
     BuildContext context,
@@ -130,6 +127,26 @@ class Button {
             MediaQuery.of(context).size.height * 0.044), // Button width
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(999), // Button corner radius
+        ),
+      ),
+      child: Text(text),
+    );
+  }
+
+// Function to create white button with custom style
+  Widget borderedWhiteButton(
+      String text, BuildContext context, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: const Color(0xFF238C98),
+        backgroundColor: Colors.white, // Text color
+        minimumSize:
+            Size(MediaQuery.of(context).size.width * 0.4, 50), // Button width
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(999), // Button corner radius
+          side:
+              const BorderSide(color: Color(0xFF238C98)), // Button border color
         ),
       ),
       child: Text(text),
