@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    Get.put(SlotRequestController());
+    Get.put(SlotReservationController());
 
     return Scaffold(
       appBar: const HomeScreenAppBar(),

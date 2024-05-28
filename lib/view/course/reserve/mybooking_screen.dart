@@ -10,7 +10,7 @@ class Reservation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SlotRequestController controller = Get.find();
+    final SlotReservationController controller = Get.find();
 
     Future<void> refresh() async {
       await controller.fetchBookingRequests();

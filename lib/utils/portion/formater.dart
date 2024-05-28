@@ -7,6 +7,10 @@ class Formatter {
     return DateFormat('dd MMMM yyyy').format(date);
   }
 
+  static String dateTimetoStringWithTime(DateTime date) {
+    return DateFormat('dd MMMM yyyy hh:mm a').format(date);
+  }
+
   static String formatCurrency(double amount) {
     final formatCurrency = NumberFormat.currency(locale: 'en_IN', symbol: '₹');
     return formatCurrency.format(amount);

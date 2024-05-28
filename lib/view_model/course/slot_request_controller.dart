@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import '../../model/backend/repositories/user/booking_repositories.dart';
 import '../../model/data_model/booking_model.dart';
 
-class SlotRequestController extends GetxController {
+class SlotReservationController extends GetxController {
   final BookingRepository _bookingRepository = BookingRepository();
 
   // Private data members

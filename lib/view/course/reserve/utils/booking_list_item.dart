@@ -10,7 +10,7 @@ class BookingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SlotRequestController controller = Get.find();
+    final SlotReservationController controller = Get.find();
     final request = controller.approvedBookings[index];
 
     return Padding(
