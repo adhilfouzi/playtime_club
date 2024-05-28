@@ -52,6 +52,8 @@ class SlotRequestController extends GetxController {
           _requestedBookings.add(booking);
         }
       }
+      _approvedBookings.sort((a, b) => a.startTime.compareTo(b.startTime));
+      _requestedBookings.sort((a, b) => a.startTime.compareTo(b.startTime));
     } catch (e) {
       _errorMessage.value = 'Error: $e';
       log('Error fetching booking requests: $e'); // Log the error

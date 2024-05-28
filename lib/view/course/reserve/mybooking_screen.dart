@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../view_model/course/slot_request_controller.dart';
+import 'package:intl/intl.dart';
+import '../../../../view_model/course/slot_request_controller.dart';
+import '../../../model/data_model/booking_model.dart';
 import 'utils/booking_list_item.dart';
 
 class Reservation extends StatelessWidget {
-  const Reservation({super.key});
+  const Reservation({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +46,44 @@ class Reservation extends StatelessWidget {
                   ),
                 );
               } else {
+                // Group bookings by date
+                Map<DateTime, List<BookingModel>> groupedBookings =
+                    groupBookingsByDate(controller.approvedBookings);
+
                 return RefreshIndicator(
                   onRefresh: refresh,
                   child: ListView.builder(
-                    itemCount: controller.approvedBookings.length,
+                    itemCount: groupedBookings.length,
                     itemBuilder: (context, index) {
-                      return BookingListItem(index: index);
+                      var date = groupedBookings.keys.toList()[index];
+                      var bookings = groupedBookings[date];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 16.0),
+                            child: Text(
+                              DateFormat('dd-MMM-yy').format(date),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: bookings!.length,
+                            itemBuilder: (context, index) {
+                              return BookingListItem(
+                                index: index,
+                              );
+                            },
+                          ),
+                          const Divider(),
+                        ],
+                      );
                     },
                   ),
                 );
@@ -59,5 +93,21 @@ class Reservation extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Function to group bookings by date
+  Map<DateTime, List<BookingModel>> groupBookingsByDate(
+      List<BookingModel> bookings) {
+    Map<DateTime, List<BookingModel>> groupedBookings = {};
+    for (var booking in bookings) {
+      DateTime date = DateTime(booking.startTime.year, booking.startTime.month,
+          booking.startTime.day);
+      if (groupedBookings.containsKey(date)) {
+        groupedBookings[date]!.add(booking);
+      } else {
+        groupedBookings[date] = [booking];
+      }
+    }
+    return groupedBookings;
   }
 }
