@@ -27,14 +27,20 @@ class TransactionController extends GetxController {
     _isLoading.value = true; // Set loading to true
     _errorMessage.value = ''; // Clear error message
     _transaction.clear();
+    try {
+      final transaction = await TransactionRepository().fetchTransaction();
+      for (var element in transaction) {
+        log('fetch Transaction in Transaction Controller');
+        _totalAmount.value += element.amount;
+        _transaction.add(element);
+      }
 
-    final transaction = await TransactionRepository().fetchTransaction();
-    for (var element in transaction) {
-      log('fetchTransaction in Transaction Controller');
-      _totalAmount.value += element.amount;
-      _transaction.add(element);
+      _transaction
+          .sort((a, b) => a.transactionDate.compareTo(b.transactionDate));
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      _isLoading.value = false;
     }
-
-    _transaction.sort((a, b) => a.transactionDate.compareTo(b.transactionDate));
   }
 }

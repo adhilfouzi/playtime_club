@@ -22,6 +22,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 30,
             width: 30,
           ),
+          const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

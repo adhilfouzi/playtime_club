@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../utils/const/colors.dart';
 import '../../../../utils/const/icons_image.dart';
@@ -13,93 +13,88 @@ class BookingStatsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final TransactionController booking = Get.put(TransactionController());
+    final TransactionController booking = Get.find();
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Container(
         color: CustomColor.mainColor,
         width: width,
-        height: height * 0.1,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(width: width * 0.02),
-                    SvgPicture.asset(
-                      AppIcons.revenue,
-                      width: 24,
-                      height: 24,
+        height: height * 0.13,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              vertical: height * 0.02, horizontal: width * 0.04),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        AppIcons.revenue,
+                        width: 24,
+                        height: 24,
+                        color: Colors.black,
+                      ),
+                      SizedBox(width: width * 0.02),
+                      const Text(
+                        "Total Booking",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    booking.transaction.length.toString(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
-                    SizedBox(width: width * 0.05),
-                    const Text(
-                      "Total Booking",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                  ),
+                ],
+              ),
+              SizedBox(height: height * 0.01),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        AppIcons.shoppingBag,
+                        width: 24,
+                        height: 24,
+                        color: Colors.black,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      booking.transaction.length.toString(),
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                      SizedBox(width: width * 0.02),
+                      const Text(
+                        "Total Transaction",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: width * 0.02),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: height * 0.01),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(width: width * 0.02),
-                    SvgPicture.asset(
-                      AppIcons.shoppingBag,
-                      width: 24,
-                      height: 24,
+                    ],
+                  ),
+                  Text(
+                    Formatter.formatCurrency(booking.totalAmount),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
-                    SizedBox(width: width * 0.05),
-                    const Text(
-                      "Total Transaction",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      Formatter.formatCurrency(booking.totalAmount),
-                      style: const TextStyle(
-                        fontSize: 15,
-                        overflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(width: width * 0.02),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
