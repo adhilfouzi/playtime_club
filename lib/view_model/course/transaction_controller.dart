@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:owners_side_of_turf_booking/model/backend/repositories/user/transaction_repositories.dart';
 import 'package:owners_side_of_turf_booking/model/data_model/transaction_model.dart';
 
@@ -17,9 +17,10 @@ class TransactionController extends GetxController {
   List<TransactionModel> get transaction => _transaction.toList();
   String get errorMessage => _errorMessage.value;
   double get totalAmount => _totalAmount.value;
-  Rx<DateTime> get startDate => _startDate;
-  Rx<DateTime> get endDate => _endDate;
+  DateTime get startDate => _startDate.value;
+  DateTime get endDate => _endDate.value;
   double get revenueAsPerDay => _revenueAsPerDay.value;
+  Map<String, List<TransactionModel>> get bookingsByDate => _bookingsByDate();
 
   @override
   void onInit() {
@@ -39,13 +40,73 @@ class TransactionController extends GetxController {
         _totalAmount.value += element.amount;
         _transaction.add(element);
       }
-      _revenueAsPerDay.value = _totalAmount.value;
       _transaction
           .sort((a, b) => a.transactionDate.compareTo(b.transactionDate));
+      _calculateRevenue();
     } catch (e) {
       _errorMessage.value = e.toString();
     } finally {
       _isLoading.value = false;
     }
   }
+
+  void updateDateRange(DateTime start, DateTime end) {
+    _startDate.value = start;
+    _endDate.value = end;
+    log(start.toIso8601String());
+    log(end.toIso8601String());
+    _calculateRevenue();
+  }
+
+  void _calculateRevenue() {
+    _revenueAsPerDay.value = 0.0;
+    for (var booking in _transaction) {
+      if (booking.transactionDate.isAfter(_startDate.value) &&
+          booking.transactionDate
+              .isBefore(_endDate.value.add(const Duration(days: 1)))) {
+        _revenueAsPerDay.value += booking.amount;
+      }
+    }
+  }
+
+  Map<String, List<TransactionModel>> _bookingsByDate() {
+    Map<String, List<TransactionModel>> bookingsByDate = {};
+    for (var booking in _transaction) {
+      if (booking.transactionDate.isAfter(_startDate.value) &&
+          booking.transactionDate
+              .isBefore(_endDate.value.add(const Duration(days: 1)))) {
+        final dates = booking.transactionDate;
+        String date = DateFormat('yyyy-MM-dd').format(dates);
+        if (!bookingsByDate.containsKey(date)) {
+          bookingsByDate[date] = [];
+        }
+        bookingsByDate[date]!.add(booking);
+      }
+    }
+    return bookingsByDate;
+  }
+
+  // // Group bookings by date
+  // Map<String, List<dynamic>> bookingsByDate = {};
+  // revenueAsPerDay = 0; // Reset the revenue for the selected period
+
+  // final bookings = controller.transaction.where((booking) {
+  //   if (_startDate != null && _endDate != null) {
+  //     return booking.transactionDate.isAfter(_startDate!) &&
+  //         booking.transactionDate
+  //             .isBefore(_endDate!.add(const Duration(days: 1)));
+  //   }
+  //   return true;
+  // }).toList();
+
+  // for (var booking in bookings) {
+  //   final dates = booking.transactionDate;
+  //   String date = DateFormat('yyyy-MM-dd')
+  //       .format(dates); // Changed to just yyyy-MM-dd for key
+  //   if (!bookingsByDate.containsKey(date)) {
+  //     bookingsByDate[date] = [];
+  //   }
+  //   bookingsByDate[date]!.add(booking);
+  //   revenueAsPerDay += booking.amount;
+  // }
 }
