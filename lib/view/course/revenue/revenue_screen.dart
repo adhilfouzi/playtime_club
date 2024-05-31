@@ -1,37 +1,53 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:owners_side_of_turf_booking/utils/portion/formater.dart';
 
 import '../../../view_model/course/transaction_controller.dart';
+import 'utils/date_filter.dart';
+import 'utils/total_revenue_section.dart';
+import 'utils/transaction_list.dart';
 
-class Revenue extends StatelessWidget {
+class Revenue extends StatefulWidget {
   const Revenue({super.key});
+
+  @override
+  State<Revenue> createState() => _RevenueState();
+}
+
+class _RevenueState extends State<Revenue> {
+  DateTime? _startDate;
+  DateTime? _endDate;
+  double revenueAsPerDay = 0;
 
   @override
   Widget build(BuildContext context) {
     final TransactionController controller = Get.find();
-    final bookings = controller.transaction;
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
 
     // Group bookings by date
-
     Map<String, List<dynamic>> bookingsByDate = {};
+    revenueAsPerDay = 0; // Reset the revenue for the selected period
+
+    final bookings = controller.transaction.where((booking) {
+      if (_startDate != null && _endDate != null) {
+        return booking.transactionDate.isAfter(_startDate!) &&
+            booking.transactionDate
+                .isBefore(_endDate!.add(const Duration(days: 1)));
+      }
+      return true;
+    }).toList();
+
     for (var booking in bookings) {
       final dates = booking.transactionDate;
-      String date = DateFormat('yyyy-MM-dd').format(dates);
-      log("Revenue Screen");
+      String date = DateFormat('yyyy-MM-dd')
+          .format(dates); // Changed to just yyyy-MM-dd for key
       if (!bookingsByDate.containsKey(date)) {
         bookingsByDate[date] = [];
       }
       bookingsByDate[date]!.add(booking);
+      revenueAsPerDay += booking.amount;
     }
-    // String date = DateTime(booking.startTime.year, booking.startTime.month,
-    //         booking.startTime.day)
-    //     .toIso8601String();
 
     return Scaffold(
       appBar: AppBar(
@@ -46,109 +62,35 @@ class Revenue extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: width * 0.05, vertical: height * 0.002),
+            horizontal: width * 0.05, vertical: height * 0.01),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text("Total Revenue:"),
-                Text(
-                  Formatter.formatCurrency(controller.totalAmount),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
-                ),
-              ],
+            TotalRevenueSection(
+              revenueAsPerDay: revenueAsPerDay,
+              totalAmount: controller.totalAmount,
+            ),
+            SizedBox(height: height * 0.02),
+            DateFilter(
+              startDate: _startDate,
+              endDate: _endDate,
+              onDateRangeSelected: (DateTimeRange? picked) {
+                if (picked != null) {
+                  setState(() {
+                    _startDate = picked.start;
+                    _endDate = picked.end;
+                    revenueAsPerDay =
+                        0; // Reset revenue when date range is changed
+                  });
+                }
+              },
             ),
             SizedBox(height: height * 0.02),
             Expanded(
               child: bookingsByDate.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: bookingsByDate.keys.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String date = bookingsByDate.keys.elementAt(index);
-                        List<dynamic> dailyBookings = bookingsByDate[date]!;
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Text(
-                                DateFormat('dd-MM-yy')
-                                    .format(DateTime.parse(date)),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Column(
-                              children: dailyBookings.map((booking) {
-                                return Card(
-                                  elevation: 3,
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 8),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              Formatter.formatCurrency(
-                                                  booking.amount),
-                                              style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 4),
-                                            Text(
-                                              booking.username,
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.grey,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text(
-                                              Formatter.dateTimetoString(
-                                                  booking.transactionDate),
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.grey,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        );
-                      },
-                    )
+                  ? TransactionList(bookingsByDate: bookingsByDate)
                   : const Center(
-                      child: Text("No Transaction Available"),
+                      child: Text("No Transactions Available"),
                     ),
             ),
           ],
