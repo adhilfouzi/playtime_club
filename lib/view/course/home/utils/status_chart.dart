@@ -11,8 +11,7 @@ class StatusChart extends StatefulWidget {
 }
 
 class _StatusChartState extends State<StatusChart> {
-  final TransactionController transactionController =
-      Get.put(TransactionController());
+  final TransactionController transactionController = Get.find();
 
   @override
   Widget build(BuildContext context) {

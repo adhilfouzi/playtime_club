@@ -6,6 +6,7 @@ import 'package:owners_side_of_turf_booking/model/data_model/transaction_model.d
 
 class TransactionController extends GetxController {
   final _isLoading = false.obs;
+  final _isLoadingHome = false.obs;
   final _transaction = <TransactionModel>[].obs;
   final _errorMessage = RxString('');
   final _totalAmount = 0.0.obs;
@@ -14,6 +15,7 @@ class TransactionController extends GetxController {
   final _revenueAsPerDay = 0.0.obs;
 
   bool get isLoading => _isLoading.value;
+  bool get isHomeLoading => _isLoadingHome.value;
   List<TransactionModel> get transaction => _transaction.toList();
   String get errorMessage => _errorMessage.value;
   double get totalAmount => _totalAmount.value;
@@ -26,6 +28,29 @@ class TransactionController extends GetxController {
   void onInit() {
     super.onInit();
     fetchTransaction();
+  }
+
+  Future<void> refreshHomescreen() async {
+    try {
+      _isLoadingHome.value = true;
+
+      final transaction = await TransactionRepository().fetchTransaction();
+
+      for (var element in transaction) {
+        log('fetch Transaction in Transaction Controller');
+        _totalAmount.value += element.amount;
+        _transaction.add(element);
+      }
+
+      _transaction
+          .sort((a, b) => a.transactionDate.compareTo(b.transactionDate));
+
+      _calculateRevenue();
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      _isLoadingHome.value = false;
+    }
   }
 
   Future<void> fetchTransaction() async {

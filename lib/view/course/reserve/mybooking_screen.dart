@@ -6,7 +6,7 @@ import '../../../model/data_model/booking_model.dart';
 import 'utils/booking_list_item.dart';
 
 class Reservation extends StatelessWidget {
-  const Reservation({Key? key});
+  const Reservation({super.key});
 
   @override
   Widget build(BuildContext context) {
