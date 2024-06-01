@@ -47,6 +47,7 @@ class Revenue extends StatelessWidget {
               SizedBox(height: height * 0.02),
               // Observe date filter
               DateFilter(
+                isRevenue: true,
                 startDate: controller.startDate,
                 endDate: controller.endDate,
                 onDateRangeSelected: (DateTimeRange? picked) {

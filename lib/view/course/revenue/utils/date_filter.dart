@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateFilter extends StatelessWidget {
+  final bool isRevenue;
   final DateTime? startDate;
   final DateTime? endDate;
   final Function(DateTimeRange?) onDateRangeSelected;
@@ -11,6 +12,7 @@ class DateFilter extends StatelessWidget {
     required this.startDate,
     required this.endDate,
     required this.onDateRangeSelected,
+    required this.isRevenue,
   });
 
   @override
@@ -25,7 +27,10 @@ class DateFilter extends StatelessWidget {
             final DateTimeRange? picked = await showDateRangePicker(
               context: context,
               firstDate: DateTime(2000),
-              lastDate: DateTime.now(),
+              lastDate: isRevenue ? DateTime.now() : DateTime(2101),
+              initialDateRange: isRevenue
+                  ? null
+                  : DateTimeRange(start: startDate!, end: endDate!),
               builder: (BuildContext context, Widget? child) {
                 return Theme(
                   data: ThemeData.light().copyWith(
