@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../../../view_model/course/slot_request_controller.dart';
+import '../../../../model/data_model/booking_model.dart';
 import 'view_booking_screen.dart';
 
 class BookingListItem extends StatelessWidget {
-  final int index;
-  const BookingListItem({super.key, required this.index});
+  final BookingModel booking;
+  const BookingListItem({super.key, required this.booking});
 
   @override
   Widget build(BuildContext context) {
-    final SlotReservationController controller = Get.find();
-    final request = controller.approvedBookings[index];
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Card(
@@ -27,21 +24,21 @@ class BookingListItem extends StatelessWidget {
             children: [
               ListTile(
                 onTap: () {
-                  Get.to(() => ViewBookingDetailsScreen(booking: request));
+                  Get.to(() => ViewBookingDetailsScreen(booking: booking));
                 },
                 leading: const CircleAvatar(
                   radius: 30,
                   backgroundImage: AssetImage('assets/image/profile.png'),
                 ),
                 title: Text(
-                  request.username,
+                  booking.username,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 subtitle: Text(
-                  "Phone: ${request.userNumber}",
+                  "Phone: ${booking.userNumber}",
                   style: const TextStyle(fontSize: 14),
                 ),
               ),
@@ -54,7 +51,7 @@ class BookingListItem extends StatelessWidget {
                       const Icon(Icons.calendar_today, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        DateFormat('dd-MMM-yy').format(request.startTime),
+                        DateFormat('dd-MMM-yy').format(booking.startTime),
                         style: const TextStyle(fontSize: 14),
                       ),
                     ],
@@ -64,7 +61,7 @@ class BookingListItem extends StatelessWidget {
                       const Icon(Icons.access_time, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        '${DateFormat('hh:mm aa').format(request.startTime)} to ${DateFormat('hh:mm aa').format(request.endTime)}',
+                        '${DateFormat('hh:mm aa').format(booking.startTime)} to ${DateFormat('hh:mm aa').format(booking.endTime)}',
                         style: const TextStyle(fontSize: 14),
                       ),
                     ],

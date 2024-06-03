@@ -30,9 +30,9 @@ class TotalRevenueSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Revenue on Filter:",
+                      "Revenue on Filter",
                       style: TextStyle(
-                        fontSize: width * 0.045,
+                        fontSize: width * 0.038,
                         overflow: TextOverflow.ellipsis,
                         fontWeight: FontWeight.w500,
                       ),
@@ -50,16 +50,16 @@ class TotalRevenueSection extends StatelessWidget {
                 VerticalDivider(
                   width: width * 0.02,
                   thickness: 2,
-                  color: Colors.black,
+                  color: Colors.yellow,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Total Revenue:",
+                      "Total Revenue",
                       style: TextStyle(
-                        fontSize: width * 0.045,
+                        fontSize: width * 0.038,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

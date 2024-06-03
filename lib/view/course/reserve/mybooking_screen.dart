@@ -89,7 +89,9 @@ class Reservation extends StatelessWidget {
                                           const NeverScrollableScrollPhysics(),
                                       itemCount: bookings.length,
                                       itemBuilder: (context, index) {
-                                        return BookingListItem(index: index);
+                                        var booking = bookings[index];
+                                        return BookingListItem(
+                                            booking: booking);
                                       },
                                     ),
                                     const Divider(),
