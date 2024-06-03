@@ -65,7 +65,7 @@ class TotalRevenueSection extends StatelessWidget {
                     ),
                     SizedBox(height: height * 0.01),
                     Text(
-                      Formatter.formatCurrency(totalAmount),
+                      Formatter.formatCurrencyK(totalAmount),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: width * 0.06,

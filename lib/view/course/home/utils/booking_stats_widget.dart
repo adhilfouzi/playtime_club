@@ -84,7 +84,7 @@ class BookingStatsWidget extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    Formatter.formatCurrency(booking.totalAmount),
+                    Formatter.formatCurrencyK(booking.totalAmount),
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,

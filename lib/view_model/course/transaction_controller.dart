@@ -34,14 +34,7 @@ class TransactionController extends GetxController {
     try {
       _isLoadingHome.value = true;
 
-      final transaction = await TransactionRepository().fetchTransaction();
-
-      for (var element in transaction) {
-        log('fetch Transaction in Transaction Controller');
-        _totalAmount.value += element.amount;
-        _transaction.add(element);
-      }
-
+      await TransactionRepository().fetchTransaction();
       _transaction
           .sort((a, b) => a.transactionDate.compareTo(b.transactionDate));
 

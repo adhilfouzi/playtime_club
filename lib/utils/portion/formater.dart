@@ -16,6 +16,16 @@ class Formatter {
     return formatCurrency.format(amount);
   }
 
+  static String formatCurrencyK(double amount) {
+    if (amount >= 1000000) {
+      return '₹${(amount / 1000000).toStringAsFixed(2)}M';
+    } else if (amount >= 1000) {
+      return '₹${(amount / 1000).toStringAsFixed(1)}K';
+    } else {
+      return amount.toStringAsFixed(0);
+    }
+  }
+
   static String timeRange(DateTime start, DateTime end) {
     String startTime = DateFormat('hh:mm a').format(start);
     String endTime = DateFormat('hh:mm a').format(end);
