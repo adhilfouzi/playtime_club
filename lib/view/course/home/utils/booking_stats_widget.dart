@@ -50,14 +50,14 @@ class BookingStatsWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    booking.transaction.length.toString(),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
+                  Obx(() => Text(
+                        booking.transaction.length.toString(),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      )),
                 ],
               ),
               SizedBox(height: height * 0.01),
@@ -83,14 +83,14 @@ class BookingStatsWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    Formatter.formatCurrencyK(booking.totalAmount),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
+                  Obx(() => Text(
+                        Formatter.formatCurrencyK(booking.totalAmount),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      )),
                 ],
               ),
             ],
