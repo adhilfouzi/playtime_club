@@ -25,11 +25,21 @@ class _StatusChartState extends State<StatusChart> {
           } else if (transactionController.errorMessage.isNotEmpty) {
             return Center(child: Text(transactionController.errorMessage));
           } else {
-            List<_SalesData> data = transactionController.transaction
-                .map((transaction) => _SalesData(
-                      Formatter.dateTimetoString(transaction.transactionDate),
-                      transaction.amount,
-                    ))
+            // Group transactions by date and sum the amounts for each date
+            final Map<String, double> groupedData = {};
+            for (var transaction in transactionController.transaction) {
+              String date =
+                  Formatter.dateTimetoString(transaction.transactionDate);
+              if (groupedData.containsKey(date)) {
+                groupedData[date] = groupedData[date]! + transaction.amount;
+              } else {
+                groupedData[date] = transaction.amount;
+              }
+            }
+
+            // Convert the map to a list of _SalesData
+            List<_SalesData> data = groupedData.entries
+                .map((entry) => _SalesData(entry.key, entry.value))
                 .toList();
 
             return Column(
@@ -55,8 +65,8 @@ class _StatusChartState extends State<StatusChart> {
                       // Change the type here
                       LineSeries<_SalesData, String>(
                         dataSource: data,
-                        xValueMapper: (_SalesData sales, _) => sales.year,
-                        yValueMapper: (_SalesData sales, _) => sales.sales,
+                        xValueMapper: (_SalesData sales, _) => sales.date,
+                        yValueMapper: (_SalesData sales, _) => sales.amount,
                         name: 'Amount',
                         // Enable data label
                         dataLabelSettings:
@@ -75,8 +85,8 @@ class _StatusChartState extends State<StatusChart> {
 }
 
 class _SalesData {
-  _SalesData(this.year, this.sales);
+  _SalesData(this.date, this.amount);
 
-  final String year;
-  final double sales;
+  final String date;
+  final double amount;
 }
