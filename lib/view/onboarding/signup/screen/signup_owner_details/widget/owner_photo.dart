@@ -59,7 +59,7 @@ class OwnerPhoto extends StatelessWidget {
                   ),
                   errorWidget: (context, url, error) => CircleAvatar(
                     radius: 80.0,
-                    backgroundImage: const AssetImage(profile),
+                    backgroundImage: const AssetImage(ImagePath.profile),
                     backgroundColor: Colors.grey.shade200,
                     child: const Align(
                       alignment: Alignment.bottomRight,

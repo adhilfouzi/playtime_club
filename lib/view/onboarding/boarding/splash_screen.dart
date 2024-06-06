@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/const/image_name.dart';
@@ -28,19 +30,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     Get.put(ImageController());
+    var height = MediaQuery.of(context).size.height * 0.2;
     return Scaffold(
       backgroundColor: CustomColor.mainColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Your logo widget
-            Image.asset(logo),
-
-            // Circular progress indicator
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
-            ),
+            SizedBox(height: height),
+            Image.asset(ImagePath.logo),
+            SizedBox(height: height),
             const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),

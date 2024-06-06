@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../const/colors.dart';
+import '../const/image_name.dart';
 
 class Button {
   Widget mainButton(
@@ -176,7 +177,7 @@ class Button {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            'assets/image/google_logo.svg', // Replace with your Google logo asset
+            ImagePath.googleLogo,
             height: 40,
             width: 40,
           ),

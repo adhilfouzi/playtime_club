@@ -6,8 +6,6 @@ import '../../../../utils/const/colors.dart';
 import '../../../../view_model/course/usermodel_controller.dart';
 
 class IntroAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final Function()? leading;
-  final bool needLeading;
   final List<Widget> actions;
   final String titleText;
   final Color? backgroundColor;
@@ -21,22 +19,16 @@ class IntroAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.textcolor,
     this.bottom,
-    this.leading,
-    required this.needLeading,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      automaticallyImplyLeading: needLeading,
+      automaticallyImplyLeading: false,
       centerTitle: true,
       foregroundColor: textcolor ?? Colors.black,
       backgroundColor: Colors.transparent,
-      leading: IconButton(
-        icon: const Icon(Ionicons.chevron_back_outline),
-        onPressed: leading ?? () => Get.back(),
-      ),
       title: Text(
         titleText,
         style: const TextStyle(

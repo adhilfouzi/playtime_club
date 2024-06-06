@@ -6,6 +6,7 @@ import '../../../utils/portion/button.dart';
 import '../../../utils/portion/snackbar.dart';
 import '../../../utils/portion/textfield.dart';
 import '../../../view_model/onboarding/signin/signincontroller.dart';
+import '../signup/utils/appbar.dart';
 import 'account_request_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -21,18 +22,23 @@ class LoginScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        appBar: const IntroAppbar(
+          actions: [],
+          titleText: 'Log in',
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: signinController.loginKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                SizedBox(height: height * 0.025),
                 SizedBox(
                   height: height * 0.3,
                   width: width,
-                  child: Image.asset(logo),
+                  child: Image.asset(ImagePath.logo),
                 ),
-                SizedBox(height: height * 0.05),
+                SizedBox(height: height * 0.025),
                 MyTextField(
                   textInputAction: TextInputAction.next,
                   controller: signinController.emailTextEditingController,

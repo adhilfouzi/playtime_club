@@ -34,7 +34,6 @@ class TitleOnlyAppBar extends StatelessWidget implements PreferredSizeWidget {
               FocusScope.of(context).unfocus();
             },
           ),
-      backgroundColor: Colors.white, // Customize as needed
       elevation: 0, // Customize as needed
     );
   }

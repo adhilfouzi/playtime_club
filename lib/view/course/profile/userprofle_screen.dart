@@ -7,6 +7,7 @@ import '../../../../view_model/course/usermodel_controller.dart';
 import '../../../../view_model/course/profile_controlller.dart';
 import '../../../utils/const/image_name.dart';
 import 'edit profile/edit_profile_screen.dart';
+import 'utils/about_screen.dart';
 import 'utils/profile_button.dart';
 
 class UserProfile extends StatelessWidget {
@@ -46,7 +47,7 @@ class UserProfile extends StatelessWidget {
                   ),
                   errorWidget: (context, url, error) => const CircleAvatar(
                     radius: 64.0,
-                    backgroundImage: AssetImage(profile),
+                    backgroundImage: AssetImage(ImagePath.profile),
                     backgroundColor: Colors.white,
                   ),
                 ),
@@ -99,6 +100,12 @@ class UserProfile extends StatelessWidget {
                     onPressed: () {
                       ProfileController.termsUse();
                     }),
+                ProfileButton(
+                  text: 'About Us',
+                  onPressed: () {
+                    Get.to(() => const AboutUsScreen());
+                  },
+                ),
                 ProfileButton(
                     text: 'Log Out',
                     onPressed: () {
