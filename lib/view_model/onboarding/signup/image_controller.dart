@@ -52,7 +52,7 @@ class ImageController extends GetxController {
           await FlutterImageCompress.compressAndGetFile(
         file.absolute.path,
         targetPath,
-        quality: 20,
+        quality: 90,
       );
       if (compressedXFile == null) {
         throw Exception("Compression failed.");

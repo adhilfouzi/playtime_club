@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:owners_side_of_turf_booking/utils/const/colors.dart';
 
 import '../../../../utils/const/image_name.dart';
 
@@ -12,7 +13,7 @@ class HeaderWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Container(
-        color: Colors.yellowAccent,
+        color: CustomColor.slotavailable,
         width: width,
         height: height * 0.2,
         child: Column(
