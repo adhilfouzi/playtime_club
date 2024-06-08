@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:owners_side_of_turf_booking/utils/appbar/titleonly_appbar.dart';
 import 'package:owners_side_of_turf_booking/utils/portion/url.dart';
-import '../../../../model/data_model/booking_model.dart';
-import '../../../../utils/portion/button.dart';
-import 'detail_item.dart';
+import '../../../model/data_model/booking_model.dart';
+import '../../../utils/portion/button.dart';
+import '../reserve/utils/detail_item.dart';
 
 class ViewBookingDetailsScreen extends StatelessWidget {
   final BookingModel booking;

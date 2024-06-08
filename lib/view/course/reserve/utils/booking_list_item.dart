@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../../model/data_model/booking_model.dart';
-import 'view_booking_screen.dart';
+import '../../view_booking_details_screen/view_booking_screen.dart';
 
 class BookingListItem extends StatelessWidget {
   final BookingModel booking;
