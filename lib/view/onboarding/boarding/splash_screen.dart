@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../model/backend/repositories/authentication/firebase_authentication.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/const/image_name.dart';
+import '../../../view_model/course/slot_request_controller.dart';
+import '../../../view_model/course/transaction_controller.dart';
 import '../../../view_model/course/usermodel_controller.dart';
 import '../../../view_model/onboarding/signup/image_controller.dart';
 import 'login_screen.dart';
@@ -25,6 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     checkUserLoggedIn();
     Get.put(UserController());
+    Get.put(SlotReservationController(), permanent: true);
+    Get.put(TransactionController(), permanent: true);
   }
 
   @override

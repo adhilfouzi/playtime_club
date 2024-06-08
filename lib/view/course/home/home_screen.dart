@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:owners_side_of_turf_booking/view/course/home/utils/status_chart.dart';
-import '../../../view_model/course/slot_request_controller.dart';
 import '../../../view_model/course/transaction_controller.dart';
 import 'utils/home_appbar.dart';
 import 'utils/booking_stats_widget.dart';
@@ -16,8 +15,8 @@ class HomeScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     // Ensure only one instance is created and used
-    Get.put(SlotReservationController(), permanent: true);
-    final controller = Get.put(TransactionController(), permanent: true);
+
+    final controller = Get.find<TransactionController>();
 
     Future<void> refresh() async {
       await controller.refreshHomescreen();
