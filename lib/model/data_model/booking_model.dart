@@ -1,22 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../utils/portion/formater.dart';
 import 'owner_model.dart';
 
 class BookingModel {
   final String? id;
   final OwnerModel turf;
-
   final String userId;
   final String userProfile;
   final String username;
   final String userEmail;
   final String userNumber;
-
   final DateTime startTime;
   final DateTime endTime;
   final DateTime bookedDate;
-
   final String status;
   final double price;
   final double paid;
@@ -41,6 +37,7 @@ class BookingModel {
     required this.userProfile,
   });
 
+  /// Create a [BookingModel] instance from a JSON map
   factory BookingModel.fromJson(Map<String, dynamic> json, String id) {
     return BookingModel(
       id: id,
@@ -61,6 +58,7 @@ class BookingModel {
     );
   }
 
+  /// Create a [BookingModel] instance from a Firestore document snapshot
   factory BookingModel.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return BookingModel(
@@ -82,6 +80,7 @@ class BookingModel {
     );
   }
 
+  /// Convert a [BookingModel] instance to a JSON map
   Map<String, dynamic> toJson() {
     return {
       'turf': turf.toJson(),

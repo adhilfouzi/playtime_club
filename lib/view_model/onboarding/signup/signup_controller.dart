@@ -112,7 +112,7 @@ class SignupController extends GetxController {
     Get.offAll(const MyBottomNavigationBar());
     UserRepository userRepository = Get.find();
     userController.user.value.isRegistered = true;
-    userRepository.updateUserField(userMdel: userController.user.value);
+    userRepository.updateUserField(userModel: userController.user.value);
     log(userController.user.value.ownerPhoneNumber);
   }
 
@@ -127,7 +127,7 @@ class SignupController extends GetxController {
 
       log(userController.user.value.courtPhoneNumber);
       await UserRepository()
-          .updateUserField(userMdel: userController.user.value);
+          .updateUserField(userModel: userController.user.value);
       Get.back();
     } catch (e) {
       log("submit Court: $e");
@@ -157,7 +157,7 @@ class SignupController extends GetxController {
       userController.user.value.closingTime = closingTimeFetch!;
       userController.user.value.is24h = isOpen24Hours.value;
       await UserRepository()
-          .updateUserField(userMdel: userController.user.value);
+          .updateUserField(userModel: userController.user.value);
       Get.back();
     } catch (e) {
       log("submit Time:$e");
@@ -197,7 +197,7 @@ class SignupController extends GetxController {
       userController.user.value.ownerPhoneNumber = phoneNumber.text;
       userController.user.value.ownerEmailAddress = email.text.trim();
       Get.back();
-      UserRepository().updateUserField(userMdel: userController.user.value);
+      UserRepository().updateUserField(userModel: userController.user.value);
       log(userController.user.value.ownerPhoneNumber);
     } catch (e) {
       log("submint Owner: $e");

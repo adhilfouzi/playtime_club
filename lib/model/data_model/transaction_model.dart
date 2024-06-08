@@ -26,6 +26,7 @@ class TransactionModel {
     required this.paymentMethod,
   });
 
+  /// Create a [TransactionModel] instance from a JSON map
   factory TransactionModel.fromJson(Map<String, dynamic> json, String id) {
     return TransactionModel(
       id: id,
@@ -41,6 +42,7 @@ class TransactionModel {
     );
   }
 
+  /// Create a [TransactionModel] instance from a Firestore document snapshot
   factory TransactionModel.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return TransactionModel(
@@ -57,6 +59,7 @@ class TransactionModel {
     );
   }
 
+  /// Convert a [TransactionModel] instance to a JSON map
   Map<String, dynamic> toJson() {
     return {
       'bookingId': bookingId,
@@ -93,9 +96,9 @@ extension PaymentMethodExtension on PaymentMethod {
   String get value {
     switch (this) {
       case PaymentMethod.cash:
-        return 'pending';
+        return 'cash';
       case PaymentMethod.online:
-        return 'completed';
+        return 'online';
     }
   }
 }

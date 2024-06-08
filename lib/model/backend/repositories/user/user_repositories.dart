@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
 import '../../../data_model/owner_model.dart';
 import '../authentication/firebase_authentication.dart';
 import '../authentication/firebase_exceptionhandler.dart';
@@ -18,13 +19,16 @@ class UserRepository extends GetxController {
     }
   }
 
-  /// Fetch user data from Firestore without user ID
+  /// Fetch user data from Firestore by current authenticated user ID
   Future<OwnerModel> getUserById() async {
     try {
-      DocumentSnapshot snapshot = await _db
-          .collection("Owner")
-          .doc(AuthenticationRepository.instance.authUser!.uid)
-          .get();
+      final authUser = AuthenticationRepository.instance.authUser;
+      if (authUser == null) {
+        throw Exception('User not authenticated');
+      }
+
+      DocumentSnapshot snapshot =
+          await _db.collection("Owner").doc(authUser.uid).get();
       if (snapshot.exists) {
         return OwnerModel.fromSnapshot(snapshot);
       } else {
@@ -36,7 +40,7 @@ class UserRepository extends GetxController {
   }
 
   /// Fetch user data from Firestore by user ID
-  Future<OwnerModel> fetchUserdetails(String? id) async {
+  Future<OwnerModel> fetchUserDetails(String? id) async {
     try {
       DocumentSnapshot snapshot = await _db.collection("Owner").doc(id).get();
       if (snapshot.exists) {
@@ -49,14 +53,16 @@ class UserRepository extends GetxController {
     }
   }
 
-  /// Update a specific field in a user's collection
+  /// Update a specific field in a user's document
   Future<void> updateSpecificField(
       {required String fieldName, required dynamic value}) async {
     try {
-      await _db
-          .collection("Owner")
-          .doc(AuthenticationRepository.instance.authUser!.uid)
-          .update({
+      final authUser = AuthenticationRepository.instance.authUser;
+      if (authUser == null) {
+        throw Exception('User not authenticated');
+      }
+
+      await _db.collection("Owner").doc(authUser.uid).update({
         fieldName: value,
       });
     } catch (e) {
@@ -64,12 +70,18 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> updateUserField({required OwnerModel userMdel}) async {
+  /// Update user fields in Firestore
+  Future<void> updateUserField({required OwnerModel userModel}) async {
     try {
+      final authUser = AuthenticationRepository.instance.authUser;
+      if (authUser == null) {
+        throw Exception('User not authenticated');
+      }
+
       await _db
           .collection("Owner")
-          .doc(AuthenticationRepository.instance.authUser!.uid)
-          .update(userMdel.toJson());
+          .doc(authUser.uid)
+          .update(userModel.toJson());
       log('updateUserField');
     } catch (e) {
       throw ExceptionHandler.handleException(e);
@@ -79,10 +91,12 @@ class UserRepository extends GetxController {
   /// Remove user data from Firestore
   Future<void> removeUserRecord() async {
     try {
-      await _db
-          .collection("Owner")
-          .doc(AuthenticationRepository.instance.authUser!.uid)
-          .delete();
+      final authUser = AuthenticationRepository.instance.authUser;
+      if (authUser == null) {
+        throw Exception('User not authenticated');
+      }
+
+      await _db.collection("Owner").doc(authUser.uid).delete();
     } catch (e) {
       throw ExceptionHandler.handleException(e);
     }

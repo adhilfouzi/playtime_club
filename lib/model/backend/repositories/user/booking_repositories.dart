@@ -9,6 +9,7 @@ import '../authentication/firebase_exceptionhandler.dart';
 class BookingRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  /// Fetch booking requests from Firestore
   Future<List<BookingModel>> fetchBookingRequests() async {
     try {
       var bookingSnapshot = await _db
@@ -17,14 +18,13 @@ class BookingRepository {
           .collection('bookings')
           .get();
 
-      List<BookingModel> bookingList = [];
-      for (var doc in bookingSnapshot.docs) {
+      List<BookingModel> bookingList = bookingSnapshot.docs.map((doc) {
         Map<String, dynamic> turfData = doc.data();
         String bookingId = doc.id; // Retrieve the document ID
-        bookingList.add(BookingModel.fromJson(turfData, bookingId));
-      }
+        return BookingModel.fromJson(turfData, bookingId);
+      }).toList();
 
-      log("Total booking Request: ${bookingList.length}");
+      log("Total booking Requests: ${bookingList.length}");
       return bookingList;
     } catch (e) {
       throw ExceptionHandler.handleException(e);
@@ -53,7 +53,7 @@ class BookingRepository {
           .collection('bookings')
           .doc(bookingId)
           .update({'status': newStatus});
-      log("Booking status updated successfully: $newStatus"); // Log success
+      log("Booking status updated successfully: $newStatus");
     } catch (e) {
       throw ExceptionHandler.handleException(e);
     }

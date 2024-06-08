@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../../data_model/transaction_model.dart';
 import '../authentication/firebase_authentication.dart';
 import '../authentication/firebase_exceptionhandler.dart';
@@ -8,6 +9,9 @@ import '../authentication/firebase_exceptionhandler.dart';
 class TransactionRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  /// Fetch transactions from Firestore
+  ///
+  /// Returns a list of [TransactionModel] instances.
   Future<List<TransactionModel>> fetchTransaction() async {
     try {
       final authUser = AuthenticationRepository().authUser;
@@ -33,7 +37,9 @@ class TransactionRepository {
     }
   }
 
-  /// Save Transaction data to Firestore
+  /// Save a transaction record to Firestore
+  ///
+  /// [transaction]: The transaction to save.
   Future<void> saveTransactionRecord(TransactionModel transaction) async {
     try {
       final authUser = AuthenticationRepository().authUser;
@@ -54,7 +60,10 @@ class TransactionRepository {
     }
   }
 
-  /// Update Transaction status in Firestore
+  /// Update the status of a transaction in Firestore
+  ///
+  /// [transactionId]: The ID of the transaction to update.
+  /// [newStatus]: The new status to set.
   Future<void> updateTransactionStatus(
       String transactionId, String newStatus) async {
     try {

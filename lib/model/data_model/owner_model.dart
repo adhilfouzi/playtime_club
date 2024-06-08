@@ -42,6 +42,7 @@ class OwnerModel {
     required this.isRegistered,
   });
 
+  /// Create an [OwnerModel] instance from a JSON map
   factory OwnerModel.fromJson(Map<String, dynamic> json) {
     List<String> images = [];
     if (json['images'] != null && json['images'] is List) {
@@ -71,6 +72,8 @@ class OwnerModel {
       isRegistered: json['isRegistered'] ?? false,
     );
   }
+
+  /// Create an empty [OwnerModel] instance
   factory OwnerModel.emptyOwnerModel() {
     return OwnerModel(
       id: '',
@@ -93,82 +96,14 @@ class OwnerModel {
     );
   }
 
-  factory OwnerModel.fromMap(Map<String, dynamic> map) {
-    var openingTime = Formatter.timestampToTimeOfDay(map['openingTime']);
-    var closingTime = Formatter.timestampToTimeOfDay(map['closingTime']);
-    List<dynamic> imagesDynamic = map['images'];
-    List<String> images = imagesDynamic.cast<String>();
-    return OwnerModel(
-      id: map['id'] ?? "N/A",
-      courtName: map['courtName'] ?? "N/A",
-      courtPhoneNumber: map['courtPhoneNumber'] ?? "N/A",
-      courtEmailAddress: map['courtEmailAddress'] ?? "N/A",
-      courtDescription: map['courtDescription'] ?? "N/A",
-      openingTime: openingTime,
-      closingTime: closingTime,
-      courtLocation: map['courtLocation'] ?? "N/A",
-      price: map['price'] ?? 0,
-      images: images,
-      ownerPhoto: map['ownerPhoto'] ?? "N/A",
-      ownerFullName: map['ownerFullName'] ?? "N/A",
-      ownerPhoneNumber: map['ownerPhoneNumber'] ?? "N/A",
-      ownerEmailAddress: map['ownerEmailAddress'] ?? "N/A",
-      is24h: map['is24h'] ?? false,
-      isOwner: map['isOwner'] ?? false,
-      isRegistered: map['isRegistered'] ?? false,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'courtName': courtName,
-      'courtPhoneNumber': courtPhoneNumber,
-      'courtEmailAddress': courtEmailAddress,
-      'courtDescription': courtDescription,
-      'openingTime': Formatter.timeOfDayToTimestamp(openingTime),
-      'closingTime': Formatter.timeOfDayToTimestamp(closingTime),
-      'courtLocation': courtLocation,
-      'price': price,
-      'images': images,
-      'ownerPhoto': ownerPhoto,
-      'ownerFullName': ownerFullName,
-      'ownerPhoneNumber': ownerPhoneNumber,
-      'ownerEmailAddress': ownerEmailAddress,
-      'is24h': is24h,
-      'isOwner': isOwner,
-      'isRegistered': isRegistered,
-    };
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'courtName': courtName,
-      'courtPhoneNumber': courtPhoneNumber,
-      'courtEmailAddress': courtEmailAddress,
-      'courtDescription': courtDescription,
-      'openingTime': Formatter.timeOfDayToTimestamp(openingTime),
-      'closingTime': Formatter.timeOfDayToTimestamp(closingTime),
-      'courtLocation': courtLocation,
-      'price': price,
-      'images': images,
-      'ownerPhoto': ownerPhoto,
-      'ownerFullName': ownerFullName,
-      'ownerPhoneNumber': ownerPhoneNumber,
-      'ownerEmailAddress': ownerEmailAddress,
-      'is24h': is24h,
-      'isOwner': isOwner,
-      'isRegistered': isRegistered,
-    };
-  }
-
+  /// Create an [OwnerModel] instance from a Firestore document snapshot
   factory OwnerModel.fromSnapshot(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     List<String> images = [];
     if (data['images'] != null && data['images'] is List) {
       images = List<String>.from(data['images']);
     }
+
     var openingTime = Formatter.timestampToTimeOfDay(data['openingTime']);
     var closingTime = Formatter.timestampToTimeOfDay(data['closingTime']);
 
@@ -191,6 +126,52 @@ class OwnerModel {
       isOwner: data['isOwner'] ?? false,
       isRegistered: data['isRegistered'] ?? false,
     );
+  }
+
+  /// Convert an [OwnerModel] instance to a JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'courtName': courtName,
+      'courtPhoneNumber': courtPhoneNumber,
+      'courtEmailAddress': courtEmailAddress,
+      'courtDescription': courtDescription,
+      'openingTime': Formatter.timeOfDayToTimestamp(openingTime),
+      'closingTime': Formatter.timeOfDayToTimestamp(closingTime),
+      'courtLocation': courtLocation,
+      'price': price,
+      'images': images,
+      'ownerPhoto': ownerPhoto,
+      'ownerFullName': ownerFullName,
+      'ownerPhoneNumber': ownerPhoneNumber,
+      'ownerEmailAddress': ownerEmailAddress,
+      'is24h': is24h,
+      'isOwner': isOwner,
+      'isRegistered': isRegistered,
+    };
+  }
+
+  /// Convert an [OwnerModel] instance to a map
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'courtName': courtName,
+      'courtPhoneNumber': courtPhoneNumber,
+      'courtEmailAddress': courtEmailAddress,
+      'courtDescription': courtDescription,
+      'openingTime': Formatter.timeOfDayToTimestamp(openingTime),
+      'closingTime': Formatter.timeOfDayToTimestamp(closingTime),
+      'courtLocation': courtLocation,
+      'price': price,
+      'images': images,
+      'ownerPhoto': ownerPhoto,
+      'ownerFullName': ownerFullName,
+      'ownerPhoneNumber': ownerPhoneNumber,
+      'ownerEmailAddress': ownerEmailAddress,
+      'is24h': is24h,
+      'isOwner': isOwner,
+      'isRegistered': isRegistered,
+    };
   }
 
   String get formattedOwnerPhoneNumber =>
