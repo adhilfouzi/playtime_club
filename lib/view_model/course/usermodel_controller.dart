@@ -19,7 +19,7 @@ class UserController extends GetxController {
       var authenticationRepository = Get.put(AuthenticationRepository());
 
       final authUser = authenticationRepository.authUser;
-      var userRepository = Get.put(UserRepository());
+      var userRepository = Get.find<UserRepository>();
 
       if (authUser != null) {
         final userd = await userRepository.getUserById();

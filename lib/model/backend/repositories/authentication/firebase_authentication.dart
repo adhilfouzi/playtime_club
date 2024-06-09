@@ -2,18 +2,14 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../view/course/head/bottom_navigationbar_widget.dart';
 import '../../../../view/onboarding/signup/screen/signup_court_details/signup_court_details_screen.dart';
 import '../../../../view_model/course/slot_request_controller.dart';
 import '../../../../view_model/course/transaction_controller.dart';
 import '../../../../view_model/course/usermodel_controller.dart';
-import '../../../../view_model/onboarding/signup/signup_controller.dart';
 import '../user/user_repositories.dart';
 import 'firebase_exceptionhandler.dart';
-
-const logs = 'action';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -37,17 +33,24 @@ class AuthenticationRepository extends GetxController {
   }
 
   // Sign in with email and password
-  Future<bool> signInWithEmailAndPassword(String email, String password) async {
+  Future<bool> signInWithEmailAndPassword(
+      String email, String password, bool isLogin) async {
     try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      UserCredential auth = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      log(auth.user!.uid);
+      late User? userAuth;
+
+      if (isLogin) {
+        userAuth = FirebaseAuth.instance.currentUser;
+      } else {
+        UserCredential auth = await _auth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        userAuth = auth.user;
+        log(auth.user!.uid);
+      }
 
       UserRepository userRepository = Get.find();
-      final user = await userRepository.fetchUserDetails(auth.user!.uid);
+      final user = await userRepository.fetchUserDetails(userAuth!.uid);
 
       UserController userController = Get.find();
       userController.user(user);
@@ -59,9 +62,7 @@ class AuthenticationRepository extends GetxController {
       reservation.fetchBookingRequests();
 
       if (user.isOwner) {
-        Get.put(SignupController());
         if (user.isRegistered) {
-          await prefs.setStringList(logs, <String>[email, password]);
           Get.offAll(() => const MyBottomNavigationBar());
         } else {
           Get.offAll(() => SignupCourtDetailsScreen());

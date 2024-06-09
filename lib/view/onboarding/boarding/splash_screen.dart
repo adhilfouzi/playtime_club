@@ -1,17 +1,19 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/backend/repositories/authentication/firebase_authentication.dart';
+import '../../../model/backend/repositories/user/user_repositories.dart';
 import '../../../utils/const/colors.dart';
 import '../../../utils/const/image_name.dart';
 import '../../../view_model/course/slot_request_controller.dart';
 import '../../../view_model/course/transaction_controller.dart';
 import '../../../view_model/course/usermodel_controller.dart';
 import '../../../view_model/onboarding/signup/image_controller.dart';
+import '../../../view_model/onboarding/signup/signup_controller.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,10 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    checkUserLoggedIn();
+    Get.put(UserRepository());
     Get.put(UserController());
     Get.put(SlotReservationController(), permanent: true);
     Get.put(TransactionController(), permanent: true);
+    Get.put(SignupController());
+
+    checkUserLoggedIn();
   }
 
   @override
@@ -56,16 +61,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
 Future<void> checkUserLoggedIn() async {
   try {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final items = prefs.getStringList(logs);
-    if (items == null) {
+    User? user = FirebaseAuth.instance.currentUser;
+    log("checkUserLoggedIn");
+    if (user == null) {
+      log("LoginScreen");
       await Future.delayed(const Duration(seconds: 2));
       Get.off(() => LoginScreen());
-      log("LoginScreen");
     } else {
-      await AuthenticationRepository()
-          .signInWithEmailAndPassword(items[0], items[1]);
       log("signInWithEmailAndPassword");
+      await AuthenticationRepository()
+          .signInWithEmailAndPassword('email', 'password', true);
     }
   } catch (e) {
     log('Error querying the database: $e');

@@ -23,7 +23,7 @@ class SigninController extends GetxController {
 
       Get.to(() => const LoadingPopup());
       var isError = await AuthenticationRepository()
-          .signInWithEmailAndPassword(email, password);
+          .signInWithEmailAndPassword(email, password, false);
       if (!isError) {
         Get.back();
         CustomSnackbar.showError(
