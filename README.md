@@ -28,10 +28,10 @@ To clone and run this application, you'll need Git and Flutter installed on your
 
 ```bash
 # Clone this repository
-git clone https://github.com/adhilfouzi/owners_side_of_turf_booking.git
+git clone https://github.com/adhilfouzi/playtime_club.git
 
 # Go into the repository
-cd owners_side_of_turf_booking
+cd playtime_club
 
 # Install dependencies
 flutter pub get
